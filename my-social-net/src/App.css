@@ -1,10 +1,15 @@
+a {
+  color: #000;
+  text-decoration: none;
+}
+
 .SNsite {
   margin: 0 300px;
   display: grid;
   grid-template-columns: 2fr 10fr;
   grid-template-areas: 
-  'header header header'
-  'menu main main';
+  'header header '
+  'menu main';
 }
 
 
@@ -40,15 +45,20 @@
   list-style-type: none;
   margin:0px;
 }
+.menu li {
+  padding-top: 10px;
+}
 
 .main {
   grid-area: main;
 }
 .main__topImg {
-  max-width: 100%;
+  width: 100%;
 }
 .user {
   display: flex;
+  padding-top: 15px;
+  padding-left: 20px;
 }
 .user__avatar {
   height: 150px;
@@ -61,6 +71,10 @@
 }
 .user__info span {
   font-weight: 600;
+}
+
+.side {
+  padding-left: 20px;
 }
 .side__text {
   width: 100%;
@@ -77,15 +91,17 @@
   margin-top: 10px;
   float: right;
 }
-
-.side__allMessages {
-  display: flex;
+.side__allMessages{
   margin-top: 70px;
+}
+.side__messages {
+  display: flex;
+  margin-top: 20px;
 }
 .side__avatar {
   height: 50px;
   border-radius: 30px; 
 }
-.side__allMessages p {
+.side__messages p {
   padding-left: 20px;
 }
