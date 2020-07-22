@@ -1,0 +1,9 @@
+.menu {
+  grid-area: menu;
+  background-color: #DAF2FA;
+  list-style-type: none;
+  margin:0px;
+}
+.menu li {
+  padding-top: 10px;
+}
