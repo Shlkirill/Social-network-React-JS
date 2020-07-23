@@ -1,0 +1,11 @@
+  .post {
+    display: flex;
+    margin-top: 20px;
+  }
+  .post p {
+    padding-left: 20px;
+  }
+  .avatar {
+    height: 50px;
+    border-radius: 30px; 
+  }
