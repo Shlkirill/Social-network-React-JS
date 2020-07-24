@@ -11,8 +11,8 @@ function Posts() {
         <input type='submit' className={styles.inputSubmit}/>
       </div>
       <div className={styles.posts}>
-          <Post text='Hello! How are you?'/>
-          <Post text ='My name is Kirill!'/>
+          <Post text='Hello! How are you?' likes='3'/>
+          <Post text='My name is Kirill!' likes='9'/>
       </div>
     </div>
   )
