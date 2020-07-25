@@ -1,0 +1,16 @@
+.dialog {
+    display: flex;
+    margin: 30px 0;
+}
+.name, .message {
+    margin: 0px;
+    margin-left: 15px;   
+}
+.name {
+    font-weight: 900;
+    font-size: 12px;
+}
+.avatar {
+    height: 50px;
+    border-radius: 25px;
+}
