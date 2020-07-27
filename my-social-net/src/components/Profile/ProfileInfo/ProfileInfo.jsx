@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ProfileInfo.module.css'
 
-function ProfileInfo() {
+const ProfileInfo = () => {
   return(
     <div>
       <img src='http://dgdesign.ru/uploads/posts/2018-05/1525700405_shapka-sayta-tehnologii-2114654127851.jpg' className={styles.image}/>

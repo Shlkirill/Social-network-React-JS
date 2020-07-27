@@ -3,7 +3,13 @@
   background-color: #DAF2FA;
   list-style-type: none;
   margin:0px;
+  padding: 0px;
 }
-.menu li {
-  padding-top: 10px;
+.menu a {
+  padding: 10px 20px 10px 20px;
+  display: block;
+}
+.active {
+  background-color: #cee4eb;
+  font-weight: 600;
 }

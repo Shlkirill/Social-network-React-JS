@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from'./Post.module.css'
 
-function Post(props) {
+const Post = (props) => {
   return(
     <div className={styles.post}> 
       <img src='https://clraik.com/forum/customavatars/avatar14341_15.gif' className={styles.avatar}/>

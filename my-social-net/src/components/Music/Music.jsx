@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Music.module';
 
-function Music() {
+const Music = () => {
     return(
       <div>
         Music

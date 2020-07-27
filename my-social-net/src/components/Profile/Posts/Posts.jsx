@@ -2,7 +2,14 @@ import React from 'react';
 import styles from './Posts.module.css';
 import Post from './Post/Post';
 
-function Posts() {
+const Posts = () => {
+  let postsData = [
+    {id: 1, text: 'Hello! How are you?', likes: 3 },
+    {id: 2, text: 'My name is Kirill!', likes: 8 }
+  ]
+
+
+
   return( 
     <div className={styles.side}>
       <div className={styles.createPost}>
@@ -11,8 +18,8 @@ function Posts() {
         <input type='submit' className={styles.inputSubmit}/>
       </div>
       <div className={styles.posts}>
-          <Post text='Hello! How are you?' likes='3'/>
-          <Post text='My name is Kirill!' likes='9'/>
+          <Post text={postsData[0].text} likes={postsData[0].likes}/>
+          <Post text={postsData[1].text} likes={postsData[1].likes}/>
       </div>
     </div>
   )

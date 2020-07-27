@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './News.module';
 
-function News() {
+const News = () => {
     return(
       <div>
         News

@@ -1,0 +1,23 @@
+.allMessages {
+    flex:3;
+    margin: 0 30px;
+}
+
+.chatInput {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.chatInput textarea {
+    flex: 1;
+    height: 30px;
+    resize: none;
+}
+.chatInput button {
+    background: none;
+    border: none;
+    width: none;
+}
+.chatInput button i {
+    font-size: 25px;
+}
