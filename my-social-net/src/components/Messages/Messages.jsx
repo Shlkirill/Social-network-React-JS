@@ -1,11 +1,10 @@
 import React from 'react';
 import styles from './Messages.module.css';
-import MessegesAndrey from './MessegesAndrey/MessegesAndrey';
+import DialogueWindow from './DialogueWindow/DialogueWindow';
 import { NavLink } from 'react-router-dom';
 import { Route, BrowserRouter } from 'react-router-dom';
-import MessegesShaha from './MessegesShaha/MessegesShaha';
 
-const DialogItem = (props) => {
+const DialogName = (props) => {
   return (
   <li><NavLink activeClassName={styles.active} to={'/messages/'+ props.id}>{props.name}</NavLink></li>
   )
@@ -20,21 +19,22 @@ const Messages = () => {
     { id: 3, name: 'Denis'},
     { id: 4, name: 'Vlad'},
     { id: 5, name: 'Oleg'},
+    { id: 6, name: 'Lera'}
   ]; 
-  
+
+  let interlocutorName = dialogsData.map((item) => {
+    return <DialogName name={item.name} id={item.id}/>
+  });
+
   return (
       <div>
         <h4 className={styles.headline}>Messages</h4>
         <div className={styles.messages}>
             <ul className={styles.dialogs}>
-              <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
-              <DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>
-              <DialogItem name='Denis' id='3'/>
-              <DialogItem name='Vlad' id='4'/>
-              <DialogItem name='Oleg' id='5'/>
+                {interlocutorName}
             </ul>
-            <Route path='/messages/1' component={MessegesAndrey}/>
-            <Route path='/messages/2' component={MessegesShaha}/>
+            <Route path='/messages/1' component={DialogueWindow}/>
+            <Route path='/messages/2' component={DialogueWindow}/>
         </div>
       </div>
     )
