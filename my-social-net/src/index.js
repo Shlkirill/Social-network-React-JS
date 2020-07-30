@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import SocialNetworkSite from './App';
 import * as serviceWorker from './serviceWorker';
+import {state} from './state';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SocialNetworkSite />
+    <SocialNetworkSite data={state}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

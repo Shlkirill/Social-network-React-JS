@@ -2,14 +2,9 @@ import React from 'react';
 import styles from './Posts.module.css';
 import Post from './Post/Post';
 
-const Posts = () => {
-  
-  let postsData = [
-    {id: 1, text: 'Hello! How are you?', likes: 3 },
-    {id: 2, text: 'My name is Kirill!', likes: 8 }
-  ]
+const Posts = (props) => {
 
-  let result = postsData.map(item => <Post text={item.text} likes={item.likes}/>);
+  let result = props.postsData.map(item => <Post text={item.text} likes={item.likes}/>);
 
   return( 
     <div className={styles.side}>

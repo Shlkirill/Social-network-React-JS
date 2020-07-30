@@ -11,20 +11,9 @@ const DialogName = (props) => {
 
 }
 
-const Messages = () => {
+const Messages = (props) => {
   
-  let dialogsData = [
-    { id: 1, name: 'Andrey'},
-    { id: 2, name: 'Shaha'},
-    { id: 3, name: 'Denis'},
-    { id: 4, name: 'Vlad'},
-    { id: 5, name: 'Oleg'},
-    { id: 6, name: 'Lera'}
-  ]; 
-
-  let interlocutorName = dialogsData.map((item) => {
-    return <DialogName name={item.name} id={item.id}/>
-  });
+  let interlocutorName = props.dialogs.map(item => <DialogName name={item.name} id={item.id}/>);
 
   return (
       <div>

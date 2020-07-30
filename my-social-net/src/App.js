@@ -9,17 +9,18 @@ import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 
-const SocialNetworkSite = () => {
+const SocialNetworkSite = (props) => {
+
   return (
     <BrowserRouter>
       <div className='SNsite'>
         <Header />
         <LeftMenu/>
-        <Route path='/profile' component={Profile}/>
-        <Route path='/messages'component={Messages}/>
-        <Route path='/news'component={News}/>
-        <Route path='/music'component={Music}/>
-        <Route path='/settings'component={Settings}/>
+        <Route path='/profile'><Profile posts={props.data.posts}/></Route>
+        <Route path='/messages'><Messages dialogs={props.data.dialogs}/></Route>
+        <Route path='/news'><News/></Route>
+        <Route path='/music'><Music/></Route>
+        <Route path='/settings'><Settings/></Route>
       </div>
     </BrowserRouter>  
   );
