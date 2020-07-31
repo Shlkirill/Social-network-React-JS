@@ -7,7 +7,7 @@ import {state} from './state';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SocialNetworkSite data={state}/>
+    <SocialNetworkSite state={state}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

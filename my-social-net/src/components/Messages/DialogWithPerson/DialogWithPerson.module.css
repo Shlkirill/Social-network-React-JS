@@ -1,0 +1,15 @@
+.person {
+    display: flex;
+    align-items: center;
+}
+.avatar {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    margin-right: 15px;
+}
+
+.active {
+    background-color: rgb(233, 233, 233);
+    font-weight: 600;
+}

@@ -3,17 +3,10 @@ import styles from './DialogueWindow.module.css';
 import Dialog from '../Dialog/Dialog';
 import DialogMe from '../DialogMe/DialogMe';
 
-const DialogueWindow = () => {
-       
-    let dialogData = [
-        {id: 1, name: 'Andrey', text: 'Hello!'},
-        {id: 2, name: 'Me', text: 'Hi!'},
-        {id: 3, name: 'Andrey', text: 'How are you?'},
-        {id: 4, name: 'Me', text: 'I`m ok, and you?'},
-        {id: 5, name: 'Andrey', text: 'I`m fine!'},
-    ];
+const DialogueWindow = (props) => {
 
-    let dialog = dialogData.map(item => {
+    
+    let dialog = props.messages.map(item => {
         return (item.name !== 'Me') ? 
         <Dialog name={item.name} text={item.text}/> : <DialogMe name={item.name} text={item.text}/>
         });

@@ -1,19 +1,13 @@
 import React from 'react';
 import styles from './Messages.module.css';
 import DialogueWindow from './DialogueWindow/DialogueWindow';
-import { NavLink } from 'react-router-dom';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import DialogWithPerson from './DialogWithPerson/DialogWithPerson';
 
-const DialogName = (props) => {
-  return (
-  <li><NavLink activeClassName={styles.active} to={'/messages/'+ props.id}>{props.name}</NavLink></li>
-  )
-
-}
 
 const Messages = (props) => {
-  
-  let interlocutorName = props.dialogs.map(item => <DialogName name={item.name} id={item.id}/>);
+
+  let interlocutorName = props.messagesPage.dialogs.map(item => <DialogWithPerson name={item.name} id={item.id} img={item.avatar}/>);
 
   return (
       <div>
@@ -22,8 +16,8 @@ const Messages = (props) => {
             <ul className={styles.dialogs}>
                 {interlocutorName}
             </ul>
-            <Route path='/messages/1' component={DialogueWindow}/>
-            <Route path='/messages/2' component={DialogueWindow}/>
+            <Route path='/messages/1'><DialogueWindow messages={props.messagesPage.messages}/></Route>
+            <Route path='/messages/2'><DialogueWindow messages={props.messagesPage.messages}/></Route>
         </div>
       </div>
     )
