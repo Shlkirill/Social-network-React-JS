@@ -1,0 +1,25 @@
+.friendsList {
+  margin: 0 10px;
+}
+.friendsWindow {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  
+  justify-items: center;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #000;
+  box-sizing: border-box;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  
+}
+.friendsWindow p {
+  margin: 0px;
+  font-size: 14px;
+  font-weight: 600;
+}
