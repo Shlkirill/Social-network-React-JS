@@ -4,12 +4,13 @@
 .friendsWindow {
   display: grid;
   grid-template-columns: auto auto auto;
-  
+  grid-gap: 5px;
   justify-items: center;
   width: 100%;
   height: 100%;
   border: 2px solid #000;
   box-sizing: border-box;
+  padding: 5px;
 }
 
 .avatar {
@@ -22,4 +23,5 @@
   margin: 0px;
   font-size: 14px;
   font-weight: 600;
+  text-align: center;
 }

@@ -11,13 +11,20 @@ const DialogueWindow = (props) => {
         <Dialog name={item.name} text={item.text}/> : <DialogMe name={item.name} text={item.text}/>
         });
 
-    
+    let addMessage = () => {
+        let text = newMessageElement.current.value;
+        alert(text);
+    } 
+     
+    let newMessageElement = React.createRef();
+
+    console.log(newMessageElement)
     return(
         <div className={styles.allMessages}> 
             {dialog}
             <div className={styles.chatInput}>
-                <textarea placeholder='new message'></textarea>
-                <button><i class="far fa-arrow-alt-circle-right"></i></button>
+                <textarea ref={newMessageElement} placeholder='new message'></textarea>
+                <button onClick={addMessage}><i class="far fa-arrow-alt-circle-right"></i></button>
             </div>
         </div>   
     )

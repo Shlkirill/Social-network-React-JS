@@ -10,8 +10,8 @@ let state = {
     ],
   },
 
-  messagesPage : {
-    dialogs: [ 
+  friendsPage : {
+    friends: [ 
       { id: 1, name: 'Andrey', avatar: 'https://www.meme-arsenal.com/memes/005754c81977199be7a2fb68c8f48107.jpg'},
       { id: 2, name: 'Shaha', avatar: 'https://plastok.com.ua/images/reviews/1579759589_inbound5909117393130304794.jpg'},
       { id: 3, name: 'Denis', avatar: 'http://discord-me.ru/wp-content/uploads/2017/12/Logotip-Diskorda.png'},

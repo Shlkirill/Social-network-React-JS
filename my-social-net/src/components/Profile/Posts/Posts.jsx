@@ -6,12 +6,19 @@ const Posts = (props) => {
 
   let result = props.postsData.map(item => <Post text={item.text} likes={item.likes}/>);
 
+  let addPost = () => {
+    let text = newPostElement.current.value
+    alert(text);
+  } 
+  
+  let newPostElement = React.createRef();
+
   return( 
     <div className={styles.side}>
       <div className={styles.createPost}>
         <h3> My posts</h3>
-        <textarea className={styles.inputText} placeholder='How are you?'></textarea>
-        <button className={styles.inputSubmit}>Send</button>
+        <textarea ref={newPostElement} className={styles.inputText} placeholder='How are you?'></textarea>
+        <button className={styles.inputSubmit} onClick = {addPost}>Send</button>
       </div>
       <div className={styles.posts}>
           {result}

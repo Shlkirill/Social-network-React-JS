@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import FriendList from './FriendList/FriendList';
 
 
-const LeftMenu = () => {
+const LeftMenu = (props) => {
   return (
     <div className={styles.leftMenu}> 
       <ul className={styles.menu}>
@@ -14,7 +14,7 @@ const LeftMenu = () => {
         <li><NavLink to='/music' activeClassName={styles.active}>Music</NavLink></li>
         <li><NavLink to='/settings' activeClassName={styles.active}>Settings</NavLink></li>
       </ul>
-      <FriendList />
+      <FriendList friends={props.friendsPage.friends}/>
     </div>
   )
 }

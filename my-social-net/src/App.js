@@ -15,9 +15,9 @@ const SocialNetworkSite = (props) => {
     <BrowserRouter>
       <div className='SNsite'>
         <Header />
-        <LeftMenu/>
+        <LeftMenu friendsPage={props.state.friendsPage}/>
         <Route path='/profile'><Profile profilePage={props.state.profilePage}/></Route>
-        <Route path='/messages'><Messages messagesPage={props.state.messagesPage}/></Route>
+        <Route path='/messages'><Messages friendsPage={props.state.friendsPage}/></Route>
         <Route path='/news'><News/></Route>
         <Route path='/music'><Music/></Route>
         <Route path='/settings'><Settings/></Route>

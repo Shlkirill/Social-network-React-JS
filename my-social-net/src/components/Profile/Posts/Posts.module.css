@@ -18,6 +18,10 @@
     margin-top: 10px;
     float: right;
   }
+  .inputSubmit:hover{
+    cursor: pointer;
+    opacity: 0.7;
+  }
   .posts{
     margin-top: 70px;
   }

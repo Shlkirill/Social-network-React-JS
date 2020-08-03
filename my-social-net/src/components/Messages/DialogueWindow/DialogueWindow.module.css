@@ -21,3 +21,8 @@
 .chatInput button i {
     font-size: 25px;
 }
+
+.chatInput button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
