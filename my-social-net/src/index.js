@@ -3,14 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import SocialNetworkSite from './App';
 import * as serviceWorker from './serviceWorker';
-import {state} from './state';
+import {state, addPost} from './state';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <SocialNetworkSite state={state}/>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+
+let rerenderAll = () => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <SocialNetworkSite state={state} addPost={addPost}/>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+}
+
+rerenderAll();
 
 
 // If you want your app to work offline and load faster, you can change

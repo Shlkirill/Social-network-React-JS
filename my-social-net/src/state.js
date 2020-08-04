@@ -32,4 +32,21 @@ let state = {
 
   }
 
-export {state}; 
+
+
+
+
+  let addPost = (postText) => {
+    let newId = state.profilePage.posts.length+1;
+    let newLikes = 0;
+    let newPost = { 
+      id: newId,
+      text: postText,
+      likes: newLikes
+    };
+
+    state.profilePage.posts.push(newPost)
+    console.log(state.profilePage.posts);
+  }
+
+export {state, addPost};
