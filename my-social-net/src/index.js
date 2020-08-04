@@ -1,21 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import SocialNetworkSite from './App';
+import {rerenderAll} from './render'
 import * as serviceWorker from './serviceWorker';
-import {state, addPost} from './state';
+import { state } from './state';
 
 
-let rerenderAll = () => {
-  ReactDOM.render(
-    <React.StrictMode>
-      <SocialNetworkSite state={state} addPost={addPost}/>
-    </React.StrictMode>,
-    document.getElementById('root')
-  );
-}
-
-rerenderAll();
+rerenderAll(state);
 
 
 // If you want your app to work offline and load faster, you can change
