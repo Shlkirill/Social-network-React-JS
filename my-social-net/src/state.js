@@ -1,13 +1,16 @@
 import React from 'react';
-import { rerenderAll } from './render';
+
+let rerenderAll = () =>{
+  console.log('Rerender');
+} 
 
 let state = {
   
   profilePage : {
     posts: [ 
-      {id: 1, text: 'Hello! How are you?', likes: 3 },
-      {id: 2, text: 'My name is Kirill!', likes: 8 },
-      {id: 3, text: 'Good life', likes: 5 } 
+      {id: 1, text: 'Hello! How are you?', likes: 3, likeClick: 0},
+      {id: 2, text: 'My name is Kirill!', likes: 8, likeClick: 0},
+      {id: 3, text: 'Good life', likes: 5, likeClick: 0} 
     ],
   },
 
@@ -33,17 +36,38 @@ let state = {
 
   }
 
-  let addPost = (postText) => {
-    let newId = state.profilePage.posts.length+1;
-    let newLikes = 0;
-    let newPost = { 
-      id: newId,
-      text: postText,
-      likes: newLikes
-    };
+let addPost = (postText) => {
+  let newId = state.profilePage.posts.length+1;
+  let newLikes = 0;
+  let newPost = { 
+    id: newId,
+    text: postText,
+    likes: newLikes,
+    likeClick: 0
+  };
 
-    state.profilePage.posts.push(newPost)
-    rerenderAll(state);
+  state.profilePage.posts.push(newPost)
+  rerenderAll(state);
+}
+
+let addLike = (props) => {
+  for(let k of state.profilePage.posts) {
+
+    if (k.text == props.text) {
+      if (k.likeClick == 0) {
+        k.likes+=1;
+        k.likeClick = 1;
+      } else {
+        k.likes-=1;
+        k.likeClick = 0;
+      }
+      rerenderAll(state);
+    }
   }
+}
 
-export {state, addPost};
+let observer = (rerender) => {
+  rerenderAll = rerender;
+}
+
+export {state, addPost, addLike, observer};
