@@ -10,7 +10,7 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 
 const SocialNetworkSite = (props) => {
-
+console.log(props);
   return (
     <BrowserRouter>
       <div className='SNsite'>
