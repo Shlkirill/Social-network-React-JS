@@ -9,7 +9,7 @@ import {store} from './state';
 let rerenderAll = (state) => {
   ReactDOM.render(
     <React.StrictMode>
-      <SocialNetworkSite state={state} addPost={store.addPost.bind(store)} addLike={store.addLike.bind(store)}/>
+      <SocialNetworkSite state={state} dispatch={store.dispatch.bind(store)} />
     </React.StrictMode>,
     document.getElementById('root')
   );

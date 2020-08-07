@@ -119,7 +119,7 @@ let store = {
   },
   addLike(props) {
     for (let k of this._state.profilePage.posts) {
-  
+
       if (k.text == props.text) {
         if (k.likeClick == 0) {
           k.likes += 1;
@@ -138,9 +138,37 @@ let store = {
   observer(rerender) {
     this._rerenderAll = rerender;
   },
-  dispath(action) {
+  dispatch(action) {
+
+    if (action.type === "ADD-POST") {
+      let newId = this._state.profilePage.posts.length + 1;
+      let newLikes = 0;
+      let newPost = {
+        id: newId,
+        text: action.newText,
+        likes: newLikes,
+        likeClick: 0
+      };
+      this._state.profilePage.posts.push(newPost);
+      this._rerenderAll(this._state);
+    } else if (action.type === "ADD-LIKE") {
+      for (let k of this._state.profilePage.posts) {
+
+        if (k.text == action.text) {
+          if (k.likeClick == 0) {
+            k.likes += 1;
+            k.likeClick = 1;
+          } else {
+            k.likes -= 1;
+            k.likeClick = 0;
+          }
+          this._rerenderAll(this._state);
+        }
+      }
+    }
+
 
   }
 }
 
-export {store};
+export { store };

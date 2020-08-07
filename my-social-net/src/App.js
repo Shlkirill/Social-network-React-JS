@@ -10,13 +10,12 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 
 const SocialNetworkSite = (props) => {
-console.log(props);
   return (
     <BrowserRouter>
       <div className='SNsite'>
         <Header />
         <LeftMenu friendsPage={props.state.friendsPage}/>
-        <Route path='/profile'><Profile profilePage={props.state.profilePage} addPost={props.addPost} addLike={props.addLike}/></Route>
+        <Route path='/profile'><Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/></Route>
         <Route path='/messages'><Messages friendsPage={props.state.friendsPage}/></Route>
         <Route path='/news'><News/></Route>
         <Route path='/music'><Music/></Route>
