@@ -1,14 +1,16 @@
 import React from 'react';
 import styles from './Posts.module.css';
 import Post from './Post/Post';
+import { addPostActionCreator } from '../../../state';
 
 const Posts = (props) => {
   console.log(props);
-  let result = props.postsData.map(item => <Post text={item.text} likes={item.likes} addLike={props.addLike}/>);
+
+  let result = props.postsData.map(item => <Post text={item.text} likes={item.likes} dispatch={props.dispatch}/>);
 
   let addPost = () => {
     let text = newPostElement.current.value
-    props.addPost(text);
+    props.dispatch(addPostActionCreator(text));
     newPostElement.current.value = '';
   } 
   

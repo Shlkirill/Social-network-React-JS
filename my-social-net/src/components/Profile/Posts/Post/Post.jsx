@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from'./Post.module.css'
+import { addLikeActionCreator } from '../../../../state';
 
 const Post = (props) => {
-  
   let addLike = () => {
-    props.addLike(props);
+    props.dispatch(addLikeActionCreator(props));
   }
       
   return(
