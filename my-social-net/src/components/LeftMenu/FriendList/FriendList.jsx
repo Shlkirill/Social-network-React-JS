@@ -1,20 +1,30 @@
 import React from 'react';
 import styles from './FriendList.module.css'
-import { NavLink } from 'react-router-dom';
 import Friend from './Friend/Friend';
+import Slider from "react-slick";
 
 const FriendList = (props) => {
    
   let friends = props.friends.map( (item) => {
     return <Friend avatar={item.avatar} name={item.name} />
-  })
-    
+  });
+
+  let settings = {
+    infinite: true,
+    speed: 500,
+    autoplay: false,
+    autoplaySpeed: 3000,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    rows: 2
+  };  
+
   return (
     <div className={styles.friendsList}>
       <p>Friend</p>
-        <div className={styles.friendsWindow}>
+        <Slider className={styles.friendsWindow} {...settings}>
           {friends}
-        </div>
+        </Slider>
     </div>
   )
 }

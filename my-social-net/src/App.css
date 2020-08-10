@@ -14,8 +14,16 @@ button::-moz-focus-inner {
 .SNsite {
   margin: 0 300px;
   display: grid;
-  grid-template-columns: 2fr 10fr;
+  grid-template-columns: 20% 80%;
   grid-template-areas: 
   'header header '
   'menu main';
+}
+.slick-prev{
+  z-index: 999;
+  left: 2px;
+}
+.slick-next {
+  z-index: 999;
+  right: 2px;
 }
