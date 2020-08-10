@@ -2,23 +2,23 @@ import React from 'react';
 import styles from './DialogueWindow.module.css';
 import Dialog from '../Dialog/Dialog';
 import DialogMe from '../DialogMe/DialogMe';
+import { addMessageActionCreator } from '../../../state';
 
-const DialogueWindow = (props) => {
-
-    
-    let dialog = props.messages.map(item => {
+const DialogueWindow = (props) => {;
+    let dialog = props.messages[props.id].map(item => {
         return (item.name !== 'Me') ? 
-        <Dialog name={item.name} text={item.text}/> : <DialogMe name={item.name} text={item.text}/>
+        <Dialog name={item.name} text={item.text} img={props.img}/> : <DialogMe name={item.name} text={item.text}/>
         });
 
     let addMessage = () => {
         let text = newMessageElement.current.value;
-        alert(text);
+        let id = props.id;
+        props.dispatch(addMessageActionCreator(text,id));
+        newMessageElement.current.value = '';
     } 
      
     let newMessageElement = React.createRef();
 
-    console.log(newMessageElement)
     return(
         <div className={styles.allMessages}> 
             {dialog}

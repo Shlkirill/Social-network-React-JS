@@ -21,13 +21,33 @@ let store = {
         { id: 7, name: 'Inna', avatar: 'https://image.freepik.com/free-vector/_1284-1932.jpg' }
       ],
 
-      messages: [
-        { id: 1, name: 'Andrey', text: 'Hello!' },
-        { id: 2, name: 'Me', text: 'Hi!' },
-        { id: 3, name: 'Andrey', text: 'How are you?' },
-        { id: 4, name: 'Me', text: 'I`m ok, and you?' },
-        { id: 5, name: 'Andrey', text: 'I`m fine!' }
-      ],
+      messages: {
+        1: [
+          { id: 1, name: 'Andrey', text: 'Hello!' },
+          { id: 2, name: 'Me', text: 'Hi!' },
+          { id: 3, name: 'Andrey', text: 'How are you?' },
+          { id: 4, name: 'Me', text: 'I`m ok, and you?' },
+          { id: 5, name: 'Andrey', text: 'I`m fine!' }
+        ],
+        2: [
+          { id: 1, name: 'Shasha', text: 'Hello!' },
+        ],
+        3: [
+
+        ],
+        4: [
+
+        ],
+        5: [
+
+        ],
+        6: [
+
+        ],
+        7: [
+
+        ],
+      }
     }
 
   },
@@ -66,6 +86,15 @@ let store = {
           this._rerenderAll(this._state);
         }
       }
+    } else if (action.type === "ADD-MESSAGE") {
+      let newId = this._state.friendsPage.messages[action.id].length + 1;
+      let newMessage = {
+        id: newId, 
+        name: 'Me', 
+        text: action.newMessage,
+      };
+      this._state.friendsPage.messages[action.id].push(newMessage);
+      this._rerenderAll(this._state);
     }
 
 
@@ -74,15 +103,23 @@ let store = {
 
 export const addPostActionCreator = (text) => {
   return {
-    type: "ADD-POST", 
+    type: "ADD-POST",
     newText: text,
   }
 }
 
 export const addLikeActionCreator = (props) => {
   return {
-    type:"ADD-LIKE", 
+    type: "ADD-LIKE",
     clickPost: props
+  }
+}
+
+export const addMessageActionCreator = (text,id) => {
+  return {
+    type: "ADD-MESSAGE",
+    newMessage: text,
+    id: id
   }
 }
 

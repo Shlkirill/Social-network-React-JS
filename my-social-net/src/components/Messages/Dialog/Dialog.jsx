@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 const Dialog = (props) => {
     return (
       <div className={styles.dialog}>
-        <img src='https://www.meme-arsenal.com/memes/005754c81977199be7a2fb68c8f48107.jpg' className={styles.avatar}/>
+        <img src={props.img} className={styles.avatar}/>
         <div>
           <p className={styles.name}>{props.name}</p>
           <p className={styles.message}>{props.text}</p>

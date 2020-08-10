@@ -8,6 +8,10 @@ import DialogWithPerson from './DialogWithPerson/DialogWithPerson';
 const Messages = (props) => {
 
   let interlocutorName = props.friendsPage.friends.map(item => <DialogWithPerson name={item.name} id={item.id} img={item.avatar}/>);
+  
+  let dialogWindowName = interlocutorName.map((item) => {
+    return <Route path={`/messages/${item.props.id}`}><DialogueWindow messages={props.friendsPage.messages} id={item.props.id} img={item.props.img} dispatch={props.dispatch}/></Route>
+  });
 
   return (
       <div>
@@ -16,8 +20,7 @@ const Messages = (props) => {
             <ul className={styles.dialogs}>
                 {interlocutorName}
             </ul>
-            <Route path='/messages/1'><DialogueWindow messages={props.friendsPage.messages}/></Route>
-            <Route path='/messages/2'><DialogueWindow messages={props.friendsPage.messages}/></Route>
+            {dialogWindowName}
         </div>
       </div>
     )
