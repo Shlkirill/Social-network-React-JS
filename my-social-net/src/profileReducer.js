@@ -12,7 +12,15 @@ export const addLikeActionCreator = (props) => {
     }
   }
 
-const profileReducer = (state, action) => {
+let initialState = {
+    posts: [
+      { id: 1, text: 'Hello! How are you?', likes: 3, likeClick: 0 },
+      { id: 2, text: 'My name is Kirill!', likes: 8, likeClick: 0 },
+      { id: 3, text: 'Good life', likes: 5, likeClick: 0 }
+    ],
+  };
+
+const profileReducer = (state = initialState, action) => {
     if (action.type === "ADD-POST") {
         let newId = state.posts.length + 1;
         let newLikes = 0;

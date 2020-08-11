@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import SocialNetworkSite from './App';
 import * as serviceWorker from './serviceWorker';
-import {store} from './state';
+import store from './redux/reduxStore';
+
 
 
 let rerenderAll = (state) => {
@@ -16,8 +17,10 @@ let rerenderAll = (state) => {
 }
 
 rerenderAll(store.getState());
-store.observer(rerenderAll);
-
+store.subscribe(() => {
+  let state = store.getState();
+  rerenderAll(state);
+});
 
 
 serviceWorker.unregister();
