@@ -12,7 +12,7 @@ const FriendList = (props) => {
   let settings = {
     infinite: true,
     speed: 500,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 3000,
     slidesToShow: 2,
     slidesToScroll: 1,

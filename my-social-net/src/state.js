@@ -1,4 +1,6 @@
 import React from 'react';
+import profileReducer from './profileReducer';
+import friendsReducer from './friendsReducer';
 
 let store = {
   _state: {
@@ -61,43 +63,9 @@ let store = {
     this._rerenderAll = rerender;
   },
   dispatch(action) {
-
-    if (action.type === "ADD-POST") {
-      let newId = this._state.profilePage.posts.length + 1;
-      let newLikes = 0;
-      let newPost = {
-        id: newId,
-        text: action.newText,
-        likes: newLikes,
-        likeClick: 0
-      };
-      this._state.profilePage.posts.push(newPost);
-      this._rerenderAll(this._state);
-    } else if (action.type === "ADD-LIKE") {
-      for (let k of this._state.profilePage.posts) {
-        if (k.text == action.clickPost.text) {
-          if (k.likeClick == 0) {
-            k.likes += 1;
-            k.likeClick = 1;
-          } else {
-            k.likes -= 1;
-            k.likeClick = 0;
-          }
-          this._rerenderAll(this._state);
-        }
-      }
-    } else if (action.type === "ADD-MESSAGE") {
-      let newId = this._state.friendsPage.messages[action.id].length + 1;
-      let newMessage = {
-        id: newId, 
-        name: 'Me', 
-        text: action.newMessage,
-      };
-      this._state.friendsPage.messages[action.id].push(newMessage);
-      this._rerenderAll(this._state);
-    }
-
-
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.friendsPage = friendsReducer(this._state.friendsPage,action);
+    this._rerenderAll(this._state);
   }
 }
 
@@ -115,7 +83,7 @@ export const addLikeActionCreator = (props) => {
   }
 }
 
-export const addMessageActionCreator = (text,id) => {
+export const addMessageActionCreator = (text, id) => {
   return {
     type: "ADD-MESSAGE",
     newMessage: text,
