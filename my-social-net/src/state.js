@@ -69,26 +69,4 @@ let store = {
   }
 }
 
-export const addPostActionCreator = (text) => {
-  return {
-    type: "ADD-POST",
-    newText: text,
-  }
-}
-
-export const addLikeActionCreator = (props) => {
-  return {
-    type: "ADD-LIKE",
-    clickPost: props
-  }
-}
-
-export const addMessageActionCreator = (text, id) => {
-  return {
-    type: "ADD-MESSAGE",
-    newMessage: text,
-    id: id
-  }
-}
-
 export { store };

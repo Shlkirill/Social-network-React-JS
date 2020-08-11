@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './DialogueWindow.module.css';
 import Dialog from '../Dialog/Dialog';
 import DialogMe from '../DialogMe/DialogMe';
-import { addMessageActionCreator } from '../../../state';
+import { addMessageActionCreator } from '../../../friendsReducer';
 
 const DialogueWindow = (props) => {;
     let dialog = props.messages[props.id].map(item => {

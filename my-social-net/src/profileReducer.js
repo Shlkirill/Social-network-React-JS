@@ -1,3 +1,17 @@
+export const addPostActionCreator = (text) => {
+    return {
+      type: "ADD-POST",
+      newText: text,
+    }
+  }
+  
+export const addLikeActionCreator = (props) => {
+    return {
+      type: "ADD-LIKE",
+      clickPost: props
+    }
+  }
+
 const profileReducer = (state, action) => {
     if (action.type === "ADD-POST") {
         let newId = state.posts.length + 1;
