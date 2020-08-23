@@ -10,10 +10,10 @@ const DialogueWindow = (props) => {;
         <Dialog name={item.name} text={item.text} img={props.img}/> : <DialogMe name={item.name} text={item.text}/>
         });
 
-    let addMessage = () => {
+    let onAddMessage = () => {
         let text = newMessageElement.current.value;
         let id = props.id;
-        props.dispatch(addMessageActionCreator(text,id));
+        props.addMessage(text,id)
         newMessageElement.current.value = '';
     } 
      
@@ -24,7 +24,7 @@ const DialogueWindow = (props) => {;
             {dialog}
             <div className={styles.chatInput}>
                 <textarea ref={newMessageElement} placeholder='new message'></textarea>
-                <button onClick={addMessage}><i class="far fa-arrow-alt-circle-right"></i></button>
+                <button onClick={onAddMessage}><i class="far fa-arrow-alt-circle-right"></i></button>
             </div>
         </div>   
     )

@@ -1,17 +1,17 @@
 import React from 'react';
 import styles from'./Post.module.css'
-import { addLikeActionCreator } from '../../../../profileReducer';
 
 const Post = (props) => {
-  let addLike = () => {
-    props.dispatch(addLikeActionCreator(props));
+  let onAddLike = () => {
+    let postLike = props;
+    props.addLike(postLike);
   }
       
   return(
     <div className={styles.post}> 
       <img src='https://clraik.com/forum/customavatars/avatar14341_15.gif' className={styles.avatar}/>
       <p>{props.text}</p>
-      <i onClick={addLike} className="far fa-heart"></i><span className={styles.likes}>{props.likes}</span>
+      <i onClick={onAddLike} className="far fa-heart"></i><span className={styles.likes}>{props.likes}</span>
     </div>
   )
 }

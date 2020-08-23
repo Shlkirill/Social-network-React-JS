@@ -4,20 +4,20 @@ import './App.css';
 import Header from './components/Header/Header'
 import LeftMenu from './components/LeftMenu/LeftMenu';
 import Profile from './components/Profile/Profile';
-import Messages from './components/Messages/Messages';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
+import MessagesContainer from './components/Messages/MessagesContainer';
 
 const SocialNetworkSite = (props) => {
-
+  debugger;
   return (
     <BrowserRouter>
       <div className='SNsite'>
         <Header />
-        <LeftMenu friendsPage={props.state.friendsPage}/>
-        <Route path='/profile'><Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/></Route>
-        <Route path='/messages'><Messages friendsPage={props.state.friendsPage} dispatch={props.dispatch}/></Route>
+        <LeftMenu store={props.store}/>
+        <Route path='/profile'><Profile store={props.store}/></Route>
+        <Route path='/messages'><MessagesContainer store={props.store}/></Route>
         <Route path='/news'><News/></Route>
         <Route path='/music'><Music/></Route>
         <Route path='/settings'><Settings/></Route>

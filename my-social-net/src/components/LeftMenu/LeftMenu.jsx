@@ -5,6 +5,7 @@ import FriendList from './FriendList/FriendList';
 
 
 const LeftMenu = (props) => {
+  let state = props.store.getState();
   return (
     <div className={styles.leftMenu}> 
       <ul className={styles.menu}>
@@ -14,7 +15,7 @@ const LeftMenu = (props) => {
         <li><NavLink to='/music' activeClassName={styles.active}>Music</NavLink></li>
         <li><NavLink to='/settings' activeClassName={styles.active}>Settings</NavLink></li>
       </ul>
-      <FriendList friends={props.friendsPage.friends}/>
+      <FriendList friends={state.friendsPage.friends}/>
     </div>
   )
 }

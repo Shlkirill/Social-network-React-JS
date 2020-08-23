@@ -10,7 +10,7 @@ import store from './redux/reduxStore';
 let rerenderAll = (state) => {
   ReactDOM.render(
     <React.StrictMode>
-      <SocialNetworkSite state={state} dispatch={store.dispatch.bind(store)} />
+      <SocialNetworkSite store = {store} />
     </React.StrictMode>,
     document.getElementById('root')
   );
