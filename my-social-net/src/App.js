@@ -10,7 +10,6 @@ import Settings from './components/Settings/Settings';
 import MessagesContainer from './components/Messages/MessagesContainer';
 
 const SocialNetworkSite = (props) => {
-  debugger;
   return (
     <BrowserRouter>
       <div className='SNsite'>

@@ -9,11 +9,11 @@ const DialogueWindow = (props) => {;
         return (item.name !== 'Me') ? 
         <Dialog name={item.name} text={item.text} img={props.img}/> : <DialogMe name={item.name} text={item.text}/>
         });
-
     let onAddMessage = () => {
+        console.log(props);
         let text = newMessageElement.current.value;
         let id = props.id;
-        props.addMessage(text,id)
+        props.addMessage(text,id);
         newMessageElement.current.value = '';
     } 
      
