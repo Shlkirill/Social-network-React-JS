@@ -48,16 +48,18 @@ let initialState = {
 };
 
 const friendsReducer = (state = initialState, action) => {
-    if (action.type === "ADD-MESSAGE") {
-        let newId = state.messages[action.id].length + 1;
+  let stateCopy = {...state};
+  stateCopy.messages = {...state.messages};
+  if (action.type === "ADD-MESSAGE") {
+        let newId = stateCopy.messages[action.id].length + 1;
         let newMessage = {
             id: newId,
             name: 'Me',
             text: action.newMessage,
         };
-        state.messages[action.id].push(newMessage);
+        stateCopy.messages[action.id].push(newMessage);
     }
-    return state;
+    return stateCopy;
 }
 
 export default friendsReducer;
