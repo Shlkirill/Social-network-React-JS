@@ -1,12 +1,10 @@
-
-  
-  export const addMessageActionCreator = (text, id) => {
-    return {
-      type: "ADD-MESSAGE",
-      newMessage: text,
-      id: id
-    }
+export const addMessageActionCreator = (text, id) => {
+  return {
+    type: "ADD-MESSAGE",
+    newMessage: text,
+    id: id
   }
+}
 let initialState = {
   friends: [
     { id: 1, name: 'Andrey', avatar: 'https://www.meme-arsenal.com/memes/005754c81977199be7a2fb68c8f48107.jpg' },
@@ -48,18 +46,25 @@ let initialState = {
 };
 
 const friendsReducer = (state = initialState, action) => {
-  let stateCopy = {...state};
-  stateCopy.messages = {...state.messages};
-  if (action.type === "ADD-MESSAGE") {
-        let newId = stateCopy.messages[action.id].length + 1;
-        let newMessage = {
-            id: newId,
-            name: 'Me',
-            text: action.newMessage,
-        };
-        stateCopy.messages[action.id].push(newMessage);
-    }
-    return stateCopy;
+  let stateCopy;
+
+  switch (action.type) {
+    case "ADD-MESSAGE":
+      stateCopy = { 
+        ...state,
+        messages: { ...state.messages },
+       };
+      let newId = stateCopy.messages[action.id].length + 1;
+      let newMessage = {
+        id: newId,
+        name: 'Me',
+        text: action.newMessage,
+      };
+      stateCopy.messages[action.id].push(newMessage);
+      return stateCopy;
+    default:
+      return state;
+  }
 }
 
 export default friendsReducer;

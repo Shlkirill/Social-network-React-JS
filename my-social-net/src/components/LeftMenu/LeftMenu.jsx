@@ -5,7 +5,6 @@ import FriendList from './FriendList/FriendList';
 
 
 const LeftMenu = (props) => {
-  console.log(props);
   return (
     <div className={styles.leftMenu}> 
       <ul className={styles.menu}>
@@ -14,6 +13,7 @@ const LeftMenu = (props) => {
         <li><NavLink to='/news' activeClassName={styles.active}>News</NavLink></li>
         <li><NavLink to='/music' activeClassName={styles.active}>Music</NavLink></li>
         <li><NavLink to='/settings' activeClassName={styles.active}>Settings</NavLink></li>
+        <li><NavLink to='/users' activeClassName={styles.active}>Find Users</NavLink></li>
       </ul>
       <FriendList friends={props.friends}/>
     </div>

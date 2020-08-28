@@ -6,10 +6,10 @@ import DialogWithPerson from './DialogWithPerson/DialogWithPerson';
 
 
 const Messages = (props) => {
-  let interlocutorName = props.friendsPage.friends.map(item => <DialogWithPerson name={item.name} id={item.id} img={item.avatar}/>);
+  let interlocutorName = props.friendsPage.friends.map(item => <DialogWithPerson key={item.id} name={item.name} id={item.id} img={item.avatar}/>);
   
   let dialogWindowName = interlocutorName.map((item) => {
-    return <Route path={`/messages/${item.props.id}`}><DialogueWindow messages={props.friendsPage.messages} id={item.props.id} img={item.props.img} addMessage={props.addMessage}/></Route>
+    return <Route path={`/messages/${item.props.id}`}><DialogueWindow key={item.props.id} messages={props.friendsPage.messages} id={item.props.id} img={item.props.img} addMessage={props.addMessage}/></Route>
   });
 
   return (

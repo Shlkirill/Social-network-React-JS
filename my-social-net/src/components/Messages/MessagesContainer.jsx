@@ -1,6 +1,6 @@
 import React from 'react';
 import Messages from './Messages';
-import { addMessageActionCreator } from '../../friendsReducer';
+import { addMessageActionCreator } from '../../redux/friendsReducer';
 import { connect } from 'react-redux';
 
 // const MessagesContainer = (props) => {
