@@ -5,9 +5,9 @@ import User from './User/User';
 const Users = (props) => {
     let userDate = props.users.map((item)=> {
         if (item.followed == true) {
-            return <User name={item.fullName} followed='follow' follow={props.follow} id={item.id}/>
+            return <User name={item.fullName} id={item.id} status={item.status} location={item.location} avatar={item.avatar} followed='follow' toogleFollow={props.toogleFollow}/>
         } else {
-            return <User name={item.fullName} followed='unfollow' follow={props.follow} id={item.id}/>
+            return <User name={item.fullName} id={item.id} status={item.status} location={item.location} avatar={item.avatar} followed='unfollow' toogleFollow={props.toogleFollow}/>
         }
     });
     

@@ -1,11 +1,16 @@
-export const followActionCreator = (followed, id) => {
+export const toogleFollowAC = (id,followed) => {
   return {
     type: "FOLLOW",
+    userId: id,
     followedText: followed,
-    number: id,
   }
 }
-
+export const setUsersAC = (users) => {
+  return {
+    type: 'SET_USERS',
+    users: users,
+  }
+}
 
 let initialState = {
   users: [
@@ -22,20 +27,19 @@ const UsersReducer = (state = initialState, action) => {
     case "FOLLOW":
       stateCopy = {
         ...state,
+        users: [...state.users]
       };
-      if (action.followedText == 'follow') {
-        alert('Подпишись')
-      } else {
-        alert('Отпишись')
+      for (let k of stateCopy.users) {
+        if (k.id == action.userId) {
+          (action.followedText == 'follow') ? k.followed = false: k.followed = true;
+        }
       }
-
-
-
-
-
-
-
-      return state;
+      return stateCopy;
+    case 'SET_USERS':
+      stateCopy = {
+        ...state,
+        users: [...state.users, ...action.users],
+      } 
     default:
       return state;
   }

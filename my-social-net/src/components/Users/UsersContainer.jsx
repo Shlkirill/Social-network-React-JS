@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './Users';
 import { connect } from 'react-redux';
-import { followActionCreator } from '../../redux/usersReducer';
+import { toogleFollowAC } from '../../redux/usersReducer';
 
 let mapStateToProps = (state) => {
     return {
@@ -10,7 +10,7 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        follow: (followed, id) => { dispatch(followActionCreator(followed, id)) },
+        toogleFollow: (id,followed) => { dispatch(toogleFollowAC(id,followed)) },
     }
 }
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
