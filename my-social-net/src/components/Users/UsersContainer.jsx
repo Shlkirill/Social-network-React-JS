@@ -10,7 +10,7 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        toogleFollow: (id,followed) => { dispatch(toogleFollowAC(id,followed)) },
+        toogleFollow: (id,followed,target) => { dispatch(toogleFollowAC(id,followed,target)) },
         setUsers: () => { dispatch(setUsersAC()) },
     }
 }

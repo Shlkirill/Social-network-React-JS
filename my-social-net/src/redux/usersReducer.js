@@ -1,8 +1,9 @@
-export const toogleFollowAC = (id,followed) => {
+export const toogleFollowAC = (id,followed,target) => {
   return {
     type: "TOOGLE_FOLLOW",
     userId: id,
     followedText: followed,
+    targetButton: target
   }
 }
 export const setUsersAC = (users) => {

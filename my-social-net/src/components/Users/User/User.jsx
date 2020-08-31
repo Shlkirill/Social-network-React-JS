@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './User.module.css'
 
 const User = (props) => {
-    let onToogleFollow = () => {
-        props.toogleFollow(props.id, props.followed);
+    let onToogleFollow = (e) => {
+        props.toogleFollow(props.id, props.followed,e.target);
     }
     
     return (
