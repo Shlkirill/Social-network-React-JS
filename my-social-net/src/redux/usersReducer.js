@@ -1,6 +1,6 @@
 export const toogleFollowAC = (id,followed) => {
   return {
-    type: "FOLLOW",
+    type: "TOOGLE_FOLLOW",
     userId: id,
     followedText: followed,
   }
@@ -24,7 +24,7 @@ const UsersReducer = (state = initialState, action) => {
   let stateCopy;
 
   switch (action.type) {
-    case "FOLLOW":
+    case "TOOGLE_FOLLOW":
       stateCopy = {
         ...state,
         users: [...state.users]
@@ -38,8 +38,9 @@ const UsersReducer = (state = initialState, action) => {
     case 'SET_USERS':
       stateCopy = {
         ...state,
-        users: [...state.users, ...action.users],
+        users: [...state.users, ],
       } 
+      return stateCopy;
     default:
       return state;
   }
