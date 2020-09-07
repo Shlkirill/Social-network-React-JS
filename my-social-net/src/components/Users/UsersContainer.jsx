@@ -10,8 +10,8 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        toogleFollow: (id,followed,target) => { dispatch(toogleFollowAC(id,followed,target)) },
-        setUsers: () => { dispatch(setUsersAC()) },
+        toogleFollow: (id, followed, target) => { dispatch(toogleFollowAC(id, followed, target)) },
+        setUsers: (users) => { dispatch(setUsersAC(users)) },
     }
 }
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);

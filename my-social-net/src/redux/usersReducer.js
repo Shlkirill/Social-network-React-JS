@@ -7,18 +7,15 @@ export const toogleFollowAC = (id,followed,target) => {
   }
 }
 export const setUsersAC = (users) => {
+
   return {
     type: 'SET_USERS',
-    users: users,
+    allUsers: users,
   }
 }
 
 let initialState = {
-  users: [
-    { id: 1, followed: true, fullName: 'Andrey', status: 'I`m fine', location: { country: 'Russia', city: 'Belgorod' }, avatar: 'https://www.meme-arsenal.com/memes/005754c81977199be7a2fb68c8f48107.jpg' },
-    { id: 2, followed: false, fullName: 'Nika', status: 'I`m fine', location: { country: 'Russia', city: 'Belgorod' }, avatar: 'https://www.meme-arsenal.com/memes/005754c81977199be7a2fb68c8f48107.jpg' },
-    { id: 3, followed: true, fullName: 'Kirill', status: 'I`m fine', location: { country: 'Russia', city: 'Belgorod' }, avatar: 'https://www.meme-arsenal.com/memes/005754c81977199be7a2fb68c8f48107.jpg' },
-  ],
+  users: [],
 };
 
 const UsersReducer = (state = initialState, action) => {
@@ -39,7 +36,7 @@ const UsersReducer = (state = initialState, action) => {
     case 'SET_USERS':
       stateCopy = {
         ...state,
-        users: [...state.users, ],
+        users: [...action.allUsers, ],
       } 
       return stateCopy;
     default:
