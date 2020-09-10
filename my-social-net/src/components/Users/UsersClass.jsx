@@ -24,6 +24,15 @@ class UsersClass extends React.Component {
         };
         serverRequest.then(handler);
     }
+    getMoreUsers = () => {
+        this.props.setMoreUsers(this.props.pageSize);
+        let serverRequest = axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.activePage}`);
+
+        let handler = (response) => {
+            this.props.setUsers(response.data.items, response.data.totalCount);
+        };
+        serverRequest.then(handler);
+    }
     render() {
         let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
         let arrPages = [];
@@ -68,7 +77,7 @@ class UsersClass extends React.Component {
                 <h3 className={styles.tittle}>Users</h3>
                 {pagesList2()}
                 {userDate}
-                <button onClick={() => { alert('fewfwe') }} className={styles.button}><i className="fas fa-long-arrow-alt-down"></i>More users<i className="fas fa-long-arrow-alt-down"></i></button>
+                <button onClick={() => {this.getMoreUsers()}} className={styles.button}><i className="fas fa-long-arrow-alt-down"></i>More users<i className="fas fa-long-arrow-alt-down"></i></button>
             </div>
         )
     }

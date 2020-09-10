@@ -18,9 +18,10 @@ export const setPageAC = (clickPage) => {
     clickPage,
   }
 }
-export const setMoreUsersAC = () => {
+export const setMoreUsersAC = (oldPageSize) => {
   return {
     type: 'SET_MORE_USERS',
+    oldPageSize
   }
 }
 
@@ -57,6 +58,16 @@ const UsersReducer = (state = initialState, action) => {
       stateCopy = {
         ...state,
         activePage: action.clickPage,
+      }
+      return stateCopy;
+    case 'SET_MORE_USERS':
+      let newPageSize = (action.oldPageSize < 100)? action.oldPageSize + 10:100;
+      if (newPageSize == 100) {
+        alert("Показано 100 человек, больше показать не могу, перейдите на следующую страницу")
+      }
+      stateCopy = {
+        ...state,
+        pageSize: newPageSize,
       }
       return stateCopy;
     default:

@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './Users';
 import { connect } from 'react-redux';
-import { toogleFollowAC, setUsersAC, setPageAC } from '../../redux/usersReducer';
+import { toogleFollowAC, setUsersAC, setPageAC, setMoreUsersAC } from '../../redux/usersReducer';
 import UsersClass from './UsersClass';
 
 let mapStateToProps = (state) => {
@@ -17,6 +17,7 @@ let mapDispatchToProps = (dispatch) => {
         toogleFollow: (id, followed) => { dispatch(toogleFollowAC(id, followed)) },
         setUsers: (users,totalCount) => { dispatch(setUsersAC(users,totalCount)) },
         setPage: (clickPage) => {dispatch(setPageAC(clickPage))},
+        setMoreUsers: (oldPageSize) => {dispatch(setMoreUsersAC(oldPageSize))},
     }
 }
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass);
