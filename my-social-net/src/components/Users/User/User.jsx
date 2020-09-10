@@ -3,7 +3,7 @@ import styles from './User.module.css'
 
 const User = (props) => {
     let onToogleFollow = (e) => {
-        props.toogleFollow(props.id, props.followed, e.target);
+        props.toogleFollow(props.id, props.followed);
     }
 
     return (

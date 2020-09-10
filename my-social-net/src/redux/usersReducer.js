@@ -1,21 +1,34 @@
-export const toogleFollowAC = (id,followed,target) => {
+export const toogleFollowAC = (id, followed) => {
   return {
     type: "TOOGLE_FOLLOW",
-    userId: id,
-    followedText: followed,
-    targetButton: target
+    id,
+    followed,
   }
 }
-export const setUsersAC = (users) => {
-
+export const setUsersAC = (users, totalCount) => {
   return {
     type: 'SET_USERS',
-    allUsers: users,
+    users,
+    totalCount,
+  }
+}
+export const setPageAC = (clickPage) => {
+  return {
+    type: 'SET_PAGE',
+    clickPage,
+  }
+}
+export const setMoreUsersAC = () => {
+  return {
+    type: 'SET_MORE_USERS',
   }
 }
 
 let initialState = {
   users: [],
+  pageSize: 10,
+  totalUsersCount: 0,
+  activePage: 1,
 };
 
 const UsersReducer = (state = initialState, action) => {
@@ -28,16 +41,23 @@ const UsersReducer = (state = initialState, action) => {
         users: [...state.users]
       };
       for (let k of stateCopy.users) {
-        if (k.id == action.userId) {
-          (action.followedText == 'follow') ? k.followed = false: k.followed = true;
+        if (k.id == action.id) {
+          (action.followed == 'follow') ? k.followed = false : k.followed = true;
         }
       }
       return stateCopy;
     case 'SET_USERS':
       stateCopy = {
         ...state,
-        users: [...action.allUsers, ],
-      } 
+        users: action.users,
+        totalUsersCount: action.totalCount,
+      }
+      return stateCopy;
+    case 'SET_PAGE':
+      stateCopy = {
+        ...state,
+        activePage: action.clickPage,
+      }
       return stateCopy;
     default:
       return state;

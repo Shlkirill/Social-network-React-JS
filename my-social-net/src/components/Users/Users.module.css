@@ -22,3 +22,34 @@
     cursor: pointer;
     opacity: 0.7;
 }
+.activePage {
+    font-weight: 900;
+    background-color: #ACDAE9;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+.pagination li {
+    border-left: 2px solid #DAF2FA;
+    border-top: 2px solid #DAF2FA;
+    border-bottom: 2px solid #DAF2FA;
+}
+.pagination li:nth-last-child(-n+2) {
+    border-right: 2px solid #DAF2FA;
+}
+.pagination li:first-child {
+    border-right: 2px solid #DAF2FA;
+    margin-right: 20px;
+}
+.pagination li:last-child {
+    border-right: 2px solid #DAF2FA;
+    margin-left: 20px;
+}
+.pagination li a {
+    display: block;
+    padding: 3px 7px;
+}
+.pagination li:hover {
+    cursor: pointer;
+}
