@@ -1,3 +1,5 @@
+import { act } from "react-dom/test-utils"
+
 export const toogleFollowAC = (id, followed) => {
   return {
     type: "TOOGLE_FOLLOW",
@@ -18,18 +20,24 @@ export const setPageAC = (clickPage) => {
     clickPage,
   }
 }
-export const setMoreUsersAC = (oldPageSize) => {
+export const setCountUsersAC = (count) => {
   return {
-    type: 'SET_MORE_USERS',
-    oldPageSize
+    type: 'SET_COUNT_USERS',
+    count
   }
 }
-
+export const toogleIfFetchingAC = (isFetching) => {
+  return {
+    type: 'TOOGLE_IS_FETCHING',
+    isFetching
+  }
+}
 let initialState = {
   users: [],
   pageSize: 10,
   totalUsersCount: 0,
   activePage: 1,
+  isFetching: false
 };
 
 const UsersReducer = (state = initialState, action) => {
@@ -60,14 +68,16 @@ const UsersReducer = (state = initialState, action) => {
         activePage: action.clickPage,
       }
       return stateCopy;
-    case 'SET_MORE_USERS':
-      let newPageSize = (action.oldPageSize < 100)? action.oldPageSize + 10:100;
-      if (newPageSize == 100) {
-        alert("Показано 100 человек, больше показать не могу, перейдите на следующую страницу")
-      }
+    case 'SET_COUNT_USERS':
       stateCopy = {
         ...state,
-        pageSize: newPageSize,
+        pageSize: action.count,
+      }
+      return stateCopy;
+    case 'TOOGLE_IS_FETCHING':
+      stateCopy = {
+        ...state,
+        isFetching: action.isFetching
       }
       return stateCopy;
     default:
