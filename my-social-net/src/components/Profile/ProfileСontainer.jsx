@@ -7,6 +7,7 @@ import { setUserProfileAC } from '../../redux/profileReducer';
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
+      console.log(this.props)
         let serverRequest = axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`);
         let handler = (response) => {
           this.props.setUserProfile(response.data)
@@ -14,7 +15,7 @@ class ProfileContainer extends React.Component {
         serverRequest.then(handler);
     }
     render() {
-        return (<Profile {...this.props.profile}/>)
+        return (<Profile profile={this.props.profile}/>)
     }
 }
 

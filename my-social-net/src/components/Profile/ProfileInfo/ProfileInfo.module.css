@@ -10,11 +10,25 @@
     height: 150px;
   }
   .info {
-    padding: 20px 0 0 20px;
+    padding-left: 20px;
+  }
+  .info h4 {
+    padding-bottom: 20px;
+    font-size: 20px;
   }
   .info h4, .info p {
     margin: 0;
   }
   .info span {
     font-weight: 600;
+  }
+  .social {
+    margin-top: 10px;
+  }
+  .social a{
+    font-size: 20px;
+    margin: 0 5px;
+  }
+  .social a:hover {
+    opacity: 0.6;
   }
