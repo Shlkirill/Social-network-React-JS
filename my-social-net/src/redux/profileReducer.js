@@ -11,6 +11,13 @@ export const addLikeActionCreator = (props) => {
     clickPost: props
   }
 }
+export const setUserProfileAC = (userProfile) => {
+  return {
+    type: "SET_USER_PROFILE",
+    userProfile
+  }
+}
+
 
 let initialState = {
   posts: [
@@ -18,12 +25,19 @@ let initialState = {
     { id: 2, text: 'My name is Kirill!', likes: 8, likeClick: 0 },
     { id: 3, text: 'Good life', likes: 5, likeClick: 0 }
   ],
+  profile: {}
 };
 
 const profileReducer = (state = initialState, action) => {
   let stateCopy;
 
   switch (action.type) {
+    case "SET_USER_PROFILE":
+      stateCopy = {
+        ...state,
+        profile: action.userProfile,
+      };
+      return stateCopy;
     case "ADD-POST":
       stateCopy = {
         ...state,

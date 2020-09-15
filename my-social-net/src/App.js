@@ -9,6 +9,7 @@ import Settings from './components/Settings/Settings';
 import MessagesContainer from './components/Messages/MessagesContainer';
 import LeftMenuContainer from './components/LeftMenu/LeftMenu container';
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileСontainer from './components/Profile/ProfileСontainer';
 
 const SocialNetworkSite = (props) => {
   return (
@@ -16,7 +17,7 @@ const SocialNetworkSite = (props) => {
       <div className='SNsite'>
         <Header />
         <LeftMenuContainer />
-        <Route path='/profile'><Profile/></Route>
+        <Route path='/profile'><ProfileСontainer/></Route>
         <Route path='/messages'><MessagesContainer/></Route>
         <Route path='/news'><News/></Route>
         <Route path='/music'><Music/></Route>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styles from './User.module.css'
 
 const User = (props) => {
@@ -9,7 +10,9 @@ const User = (props) => {
     return (
         <div className={styles.user}>
             <div className={styles.user_logo}>
-                <img src={props.avatar} alt="" className={styles.avatar} />
+                <NavLink to={`/profile/${props.id}`}>
+                    <img src={props.avatar} alt="" className={styles.avatar} />
+                </NavLink>
                 <button onClick={onToogleFollow} className={styles.button}>{props.followed}</button>
             </div>
             <div className={styles.user_info}>
