@@ -1,3 +1,5 @@
+import { act } from "@testing-library/react";
+
 export const addMessageActionCreator = (text, id) => {
   return {
     type: "ADD-MESSAGE",
@@ -5,15 +7,16 @@ export const addMessageActionCreator = (text, id) => {
     id: id
   }
 }
+export const addFriendAC = (id, avatar, name) => {
+  return {
+    type: "ADD-FRIEND",
+    id,
+    avatar,
+    name
+  }
+}
 let initialState = {
   friends: [
-    { id: 1, name: 'Andrey', avatar: 'https://www.meme-arsenal.com/memes/005754c81977199be7a2fb68c8f48107.jpg' },
-    { id: 2, name: 'Shaha', avatar: 'https://plastok.com.ua/images/reviews/1579759589_inbound5909117393130304794.jpg' },
-    { id: 3, name: 'Denis', avatar: 'http://discord-me.ru/wp-content/uploads/2017/12/Logotip-Diskorda.png' },
-    { id: 4, name: 'Vlad', avatar: 'https://pp.userapi.com/c638527/v638527117/264a/6BgztT1ZoOo.jpg' },
-    { id: 5, name: 'Oleg', avatar: 'https://avatarko.ru/img/kartinka/16/igra_Minecraft_Endermen_15969.jpg' },
-    { id: 6, name: 'Lera', avatar: 'https://99px.ru/sstorage/1/2012/09/image_11109121919597572619.jpg' },
-    { id: 7, name: 'Inna', avatar: 'https://image.freepik.com/free-vector/_1284-1932.jpg' }
   ],
 
   messages: {
@@ -50,10 +53,10 @@ const friendsReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case "ADD-MESSAGE":
-      stateCopy = { 
+      stateCopy = {
         ...state,
         messages: { ...state.messages },
-       };
+      };
       let newId = stateCopy.messages[action.id].length + 1;
       let newMessage = {
         id: newId,
@@ -61,6 +64,18 @@ const friendsReducer = (state = initialState, action) => {
         text: action.newMessage,
       };
       stateCopy.messages[action.id].push(newMessage);
+      return stateCopy;
+    case "ADD-FRIEND":
+      let newFriend = {
+        id: action.id,
+        name: action.name,
+        avatar: action.avatar
+      }
+      stateCopy = {
+        ...state,
+      };
+      stateCopy.friends.push(newFriend);
+      console.log(stateCopy);
       return stateCopy;
     default:
       return state;

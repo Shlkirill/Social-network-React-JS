@@ -18,6 +18,8 @@
   }
   .info h4, .info p {
     margin: 0;
+    word-wrap: break-word;
+    width: 500px
   }
   .info span {
     font-weight: 600;

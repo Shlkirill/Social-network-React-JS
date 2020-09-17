@@ -4,7 +4,6 @@ import Friend from './Friend/Friend';
 import Slider from "react-slick";
 
 const FriendList = (props) => {
-   
   let friends = props.friends.map( (item) => {
     return <Friend key={item.id} avatar={item.avatar} name={item.name} />
   });

@@ -1,5 +1,3 @@
-import { act } from "react-dom/test-utils"
-
 export const toogleFollowAC = (id, followed) => {
   return {
     type: "TOOGLE_FOLLOW",
@@ -51,7 +49,7 @@ const UsersReducer = (state = initialState, action) => {
       };
       for (let k of stateCopy.users) {
         if (k.id == action.id) {
-          (action.followed == 'follow') ? k.followed = false : k.followed = true;
+          (action.followed == true) ? k.followed = false : k.followed = true;
         }
       }
       return stateCopy;

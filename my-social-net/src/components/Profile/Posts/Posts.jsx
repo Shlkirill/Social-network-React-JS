@@ -3,7 +3,7 @@ import styles from './Posts.module.css';
 import Post from './Post/Post';
 
 const Posts = (props) => {
-  let result = props.postsData.map(item => <Post key={item.id} text={item.text} likes={item.likes} addLike={props.addLike}/>);
+  let result = props.postsData.map(item => <Post key={item.id} text={item.text} likes={item.likes} addLike={props.addLike} profile={props.profile}/>);
 
   let onAddPost = () => {
     let text = newPostElement.current.value

@@ -1,40 +1,37 @@
 import React from 'react';
-import axios from 'axios';
 import Users from './Users';
 import { connect } from 'react-redux';
 import { toogleFollowAC, setUsersAC, setPageAC, setCountUsersAC, toogleIfFetchingAC } from '../../redux/usersReducer';
+import { addFriendAC } from '../../redux/friendsReducer';
+import { apiGetUsers } from '../../api/api';
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        let serverRequest = axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.activePage}`);
         this.props.toogleIsFetching(true);
         let handler = (response) => {
-            this.props.setUsers(response.data.items, response.data.totalCount);
+            this.props.setUsers(response.items, response.totalCount);
             this.props.toogleIsFetching(false);
         };
-        serverRequest.then(handler);
+        apiGetUsers(this.props.pageSize, this.props.activePage).then(handler);
     }
     getActivePage = (page) => {
         this.props.setPage(page);
-        let serverRequest = axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${page}`);
         this.props.toogleIsFetching(true);
         let handler = (response) => {
-            this.props.setUsers(response.data.items, response.data.totalCount);
+            this.props.setUsers(response.items, response.totalCount);
             this.props.toogleIsFetching(false);
         };
-        serverRequest.then(handler);
+        apiGetUsers(this.props.pageSize, page).then(handler);
     }
     setCountUsers = (value) => {
         this.props.setCountUsers(value);
         this.props.toogleIsFetching(true);
-        let serverRequest = axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${value}&page=${this.props.activePage}`);
-
         let handler = (response) => {
-            this.props.setUsers(response.data.items, response.data.totalCount);
+            this.props.setUsers(response.items, response.totalCount);
             this.props.toogleIsFetching(false);
         };
-        serverRequest.then(handler);
+        apiGetUsers(value, this.props.activePage).then(handler);
     }
     render() {
         return (
@@ -44,7 +41,8 @@ class UsersContainer extends React.Component {
                 toogleFollow={this.props.toogleFollow}
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
-                isFetching={this.props.isFetching} />
+                isFetching={this.props.isFetching}
+                addFriend={this.props.addFriend} />
         )
     }
 }
@@ -66,6 +64,7 @@ let mapDispatchToProps = {
     setPage: setPageAC,
     setCountUsers: setCountUsersAC,
     toogleIsFetching: toogleIfFetchingAC,
+    addFriend: addFriendAC,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
