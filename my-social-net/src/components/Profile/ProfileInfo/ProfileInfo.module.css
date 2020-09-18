@@ -6,8 +6,17 @@
     padding-top: 15px;
     padding-left: 20px;
   }
+  .userAvatarAndFollow {
+    display: flex;
+    flex-direction: column;
+  }
+  .bottom {
+    width: 50px;
+    margin: 10px auto;
+  }
   .avatar {
     height: 150px;
+    margin-bottom: 10px;
   }
   .info {
     padding-left: 20px;

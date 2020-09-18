@@ -17,6 +17,12 @@ export const setUserProfileAC = (userProfile) => {
     userProfile
   }
 }
+export const setFollowedUserAC = (followed) => {
+  return {
+    type: "SET_FOLLOWED_USER",
+    followed
+  }
+}
 
 
 let initialState = {
@@ -25,7 +31,8 @@ let initialState = {
     { id: 2, text: 'My name is Kirill!', likes: 8, likeClick: 0 },
     { id: 3, text: 'Good life', likes: 5, likeClick: 0 }
   ],
-  profile: null
+  profile: null,
+  followed: null,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -69,6 +76,12 @@ const profileReducer = (state = initialState, action) => {
           }
         }
       }
+      return stateCopy;
+    case "SET_FOLLOWED_USER":
+      stateCopy = {
+        ...state,
+        followed: action.followed,
+      };
       return stateCopy;
     default:
       return state;

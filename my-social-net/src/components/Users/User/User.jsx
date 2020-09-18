@@ -1,7 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './User.module.css'
-import { apiFollowUser, apiUnfollowUser} from '../../../api/api';
+import { apiFollowUser, apiUnfollowUser } from '../../../api/api';
+import { BottonToogleFollow } from '../../../universalBlocks/toogleFollow/BottonToggleFollow';
+
 
 const User = (props) => {
     let onToogleFollow = () => {
@@ -19,8 +21,7 @@ const User = (props) => {
                 <NavLink to={`/profile/${props.id}`}>
                     <img src={props.avatar} alt="" className={styles.avatar} />
                 </NavLink>
-                {props.followed == true ? <button onClick={onToogleFollow} className={styles.buttonUnfollow}>unfollow</button> :
-                    <button onClick={onToogleFollow} className={styles.buttonFollow}>follow</button>}
+                {BottonToogleFollow(props.followed, onToogleFollow)}
             </div>
             <div className={styles.user_info}>
                 <p className={styles.name}>{props.name}</p>

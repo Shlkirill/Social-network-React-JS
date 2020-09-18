@@ -3,7 +3,7 @@ import styles from './Users.module.css'
 import User from './User/User';
 import photoDefault from '../../img/empty-avatar.png'
 import ReactPaginate from 'react-paginate';
-import Loading from '../../universalBlocks/loading';
+import Loading from '../../universalBlocks/loading/loading';
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);

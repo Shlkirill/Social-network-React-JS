@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { setUserProfileAC } from '../../redux/profileReducer';
+import { setFollowedUserAC, setUserProfileAC } from '../../redux/profileReducer';
 import { withRouter } from 'react-router-dom';
-import { apiSetProfile } from '../../api/api';
+import { apiGetFollowUser, apiSetProfile } from '../../api/api';
 
 class ProfileContainer extends React.Component {
 
@@ -16,9 +16,13 @@ class ProfileContainer extends React.Component {
           this.props.setUserProfile(response)
         };
         apiSetProfile(userId).then(handler)
+
+        apiGetFollowUser(userId).then((responce) => {
+          this.props.setFollowedUser(responce);
+        })
     }
     render() {
-        return (<Profile profile={this.props.profile}/>)
+        return (<Profile profile={this.props.profile} followed={this.props.followed} setFollowedUser={this.props.setFollowedUser}/>)
     }
 }
 
@@ -26,11 +30,13 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-      profile: state.profilePage.profile
+      profile: state.profilePage.profile,
+      followed: state.profilePage.followed
     }
 }
 let mapDispatchToProps = {
   setUserProfile:setUserProfileAC,
+  setFollowedUser: setFollowedUserAC,
 
 }
 

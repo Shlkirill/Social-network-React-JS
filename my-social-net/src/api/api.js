@@ -30,6 +30,13 @@ export const apiSetProfile = (userId) => {
         });
 };
 
+export const apiGetFollowUser = (id) => {
+    return instance.get(`follow/${id}`)
+    .then((response) => {
+        return response.data
+    });
+};
+
 export const apiFollowUser = (id) => {
     return instance.post(`follow/${id}`);
 };

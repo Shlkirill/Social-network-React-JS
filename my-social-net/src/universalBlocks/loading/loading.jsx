@@ -1,5 +1,5 @@
 import React from 'react';
-import loadLogo from '../img/load-final.gif'
+import loadLogo from '../../img/load-final.gif'
 import styles from './loading.module.css'
 
 const Loading = () => {

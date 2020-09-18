@@ -1,5 +1,5 @@
 import React from 'react';
-import Loading from '../../../../universalBlocks/loading';
+import Loading from '../../../../universalBlocks/loading/loading';
 import photoDefault from '../../../../img/empty-avatar.png'
 import styles from'./Post.module.css'
 
