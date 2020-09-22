@@ -9,14 +9,22 @@ const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Loading />
   }
+  let idForTheButton;
   let onToogleFollow = () => {
     if (props.followed == false) {
+      props.followingInProgress(true);
+      idForTheButton = props.id;
       apiFollowUser(props.profile.userId).then(() =>{
         props.setFollowedUser(true);
+        props.followingInProgress(false);
+        idForTheButton = null;
       });
     } else {
+      props.followingInProgress(true);
+      idForTheButton = props.id;
       apiUnfollowUser(props.profile.userId).then(() =>{
         props.setFollowedUser(false);
+        props.followingInProgress(false);
       });;
     }
   };
@@ -26,7 +34,7 @@ const ProfileInfo = (props) => {
       <div className={styles.user}>
         <div className={styles.userAvatarAndFollow}>
           <img src={props.profile.photos.large || photoDefault} className={styles.avatar} />
-          {props.profile.userId !== 2 ? BottonToogleFollow(props.followed, onToogleFollow) : null}
+          {props.profile.userId !== 2 ? BottonToogleFollow('ONE_USER', onToogleFollow, props.followed, props.isProgress, props.id) : null}
         </div>
         <div className={styles.info}>
           <h4>{props.profile.fullName}</h4>

@@ -23,7 +23,12 @@ export const setFollowedUserAC = (followed) => {
     followed
   }
 }
-
+export const followingInProgressAC = (value, id) => {
+  return {
+    type: 'FOLLOWING_IN_PROGRESS',
+    value,
+  }
+}
 
 let initialState = {
   posts: [
@@ -33,6 +38,8 @@ let initialState = {
   ],
   profile: null,
   followed: null,
+  followingInProgress: false,
+
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -82,6 +89,12 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         followed: action.followed,
       };
+      return stateCopy;
+    case 'FOLLOWING_IN_PROGRESS':
+      stateCopy = {
+        ...state,
+        followingInProgress: action.value
+      }
       return stateCopy;
     default:
       return state;

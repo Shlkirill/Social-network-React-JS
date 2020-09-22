@@ -38,9 +38,9 @@ export const apiGetFollowUser = (id) => {
 };
 
 export const apiFollowUser = (id) => {
-    return instance.post(`follow/${id}`);
+    return instance.post(`follow/${id}`)
 };
 
 export const apiUnfollowUser = (id) => {
-    return instance.delete(`/follow/${id}`);
+    return instance.delete(`/follow/${id}`)
 };

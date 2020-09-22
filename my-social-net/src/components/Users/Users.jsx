@@ -13,7 +13,9 @@ const Users = (props) => {
         arrPages.push(i);
     }
     let userDate = props.users.map((item) => {
-        return <User name={item.name} key={item.id} id={item.id} followed={item.followed} avatar={item.photos.small || photoDefault} status={item.status} toogleFollow={props.toogleFollow} addFriend={props.addFriend} />
+        return <User name={item.name} key={item.id} id={item.id} followed={item.followed} avatar={item.photos.small || photoDefault} 
+        status={item.status} toogleFollow={props.toogleFollow} addFriend={props.addFriend} followingInProgress={props.followingInProgress}
+        isProgress={props.isProgress}/>
     });
     return (
         <div className={styles.users}>

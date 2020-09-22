@@ -1,3 +1,5 @@
+import { apiGetUsers } from "../api/api"
+
 export const toogleFollowAC = (id, followed) => {
   return {
     type: "TOOGLE_FOLLOW",
@@ -30,12 +32,21 @@ export const toogleIfFetchingAC = (isFetching) => {
     isFetching
   }
 }
+export const followingInProgressAC = (id, value) => {
+  return {
+    type: 'FOLLOWING_IN_PROGRESS',
+    id,
+    value
+  }
+}
+
 let initialState = {
   users: [],
   pageSize: 10,
   totalUsersCount: 0,
   activePage: 1,
-  isFetching: false
+  isFetching: false,
+  followingInProgress: []
 };
 
 const UsersReducer = (state = initialState, action) => {
@@ -51,6 +62,20 @@ const UsersReducer = (state = initialState, action) => {
         if (k.id == action.id) {
           (action.followed == true) ? k.followed = false : k.followed = true;
         }
+      }
+      return stateCopy;
+    case 'FOLLOWING_IN_PROGRESS':
+      let arr;
+      if (action.value == false) {
+        arr = state.followingInProgress.filter((item) => {
+          return item != action.id
+        })
+      } else {
+        arr = [...state.followingInProgress, action.id]
+      }
+      stateCopy = {
+        ...state,
+        followingInProgress: arr,
       }
       return stateCopy;
     case 'SET_USERS':
@@ -83,4 +108,26 @@ const UsersReducer = (state = initialState, action) => {
   }
 }
 
+export const getUsersThunkCreator = (pageSize, activePage) => {
+  return (dispatch) => {
+    dispatch(toogleIfFetchingAC(true));
+    let handler = (response) => {
+      dispatch(setUsersAC(response.items, response.totalCount));
+      dispatch(toogleIfFetchingAC(false));
+    };
+    apiGetUsers(pageSize, activePage).then(handler);
+  }
+};
+
+export const setCountUserThunkCreator = (value, activePage) => {
+  return (dispatch) => {
+    dispatch(setCountUsersAC(value));
+    dispatch(toogleIfFetchingAC(true));
+    let handler = (response) => {
+      dispatch(setUsersAC(response.items, response.totalCount));
+      dispatch(toogleIfFetchingAC(false));
+    };
+    apiGetUsers(value, activePage).then(handler);
+  }
+};
 export default UsersReducer;

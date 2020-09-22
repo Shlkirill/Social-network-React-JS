@@ -7,12 +7,19 @@ import { BottonToogleFollow } from '../../../universalBlocks/toogleFollow/Botton
 
 const User = (props) => {
     let onToogleFollow = () => {
-        props.toogleFollow(props.id, props.followed);
         if (props.followed == false) {
-            apiFollowUser(props.id);
+            props.followingInProgress(props.id, true);
+            apiFollowUser(props.id).then(() =>{
+                props.toogleFollow(props.id, props.followed);
+                props.followingInProgress(props.id, false);
+            });
             props.addFriend(props.id, props.avatar, props.name);
         } else {
-            apiUnfollowUser(props.id);
+            props.followingInProgress(props.id, true);
+            apiUnfollowUser(props.id).then(() =>{
+                props.toogleFollow(props.id, props.followed);
+                props.followingInProgress(props.id, false);
+            });;
         }
     }
     return (
@@ -21,7 +28,7 @@ const User = (props) => {
                 <NavLink to={`/profile/${props.id}`}>
                     <img src={props.avatar} alt="" className={styles.avatar} />
                 </NavLink>
-                {BottonToogleFollow(props.followed, onToogleFollow)}
+                {BottonToogleFollow('ALL_USER', onToogleFollow, props.followed, props.isProgress, props.id)}
             </div>
             <div className={styles.user_info}>
                 <p className={styles.name}>{props.name}</p>
