@@ -1,3 +1,5 @@
+import { apiAuth } from "../api/api";
+
 export const setUserDataAC = (data) => {
   return {
     type: "SET_USER_DATA",
@@ -40,5 +42,17 @@ const AuthReducer = (state = initialState, action) => {
       return state;
   }
 }
+
+export const authorizationTC = () => {
+  return (dispatch) => {
+    apiAuth().then((response) => {
+      if (response.resultCode === 0) {
+        dispatch(setUserDataAC(response.data));
+      };
+    });
+  }
+};
+
+
 
 export default AuthReducer;

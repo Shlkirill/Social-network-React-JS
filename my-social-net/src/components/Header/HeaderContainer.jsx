@@ -1,24 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from './Header';
-import { setUserDataAC, toogleIfFetchingAC } from '../../redux/authReducer';
-import { apiAuth } from '../../api/api';
+import { authorizationTC, toogleIfFetchingAC } from '../../redux/authReducer';
 
 class HeaderContainer extends React.Component {
 
   componentDidMount() {
-    let handler = (response) => {
-      if (response.resultCode === 0) {
-        this.props.setUserData(response.data)
-      }
-    };
-    apiAuth().then(handler);
+    this.props.authorization();
   }
   render() {
-    return (<Header {...this.props.userInfo}/>)
+    return (<Header {...this.props.userInfo} />)
   }
 }
-
 
 let mapStateToProps = (state) => {
   return {
@@ -26,8 +19,8 @@ let mapStateToProps = (state) => {
   }
 }
 let mapDispatchToProps = {
-  setUserData: setUserDataAC,
-  toogleIfFetching: toogleIfFetchingAC
+  toogleIfFetching: toogleIfFetchingAC,
+  authorization: authorizationTC
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

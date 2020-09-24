@@ -6,7 +6,9 @@ import PostsContainer from './Posts/PostsContainer';
 const Profile = (props) => {
   return(
     <div className={styles.main}>
-      <ProfileInfo profile={props.profile} followed={props.followed} setFollowedUser={props.setFollowedUser} isProgress={props.isProgress} followingInProgress={props.followingInProgress}/>
+      <ProfileInfo  profile={props.profile} followed={props.followed} 
+                    setFollowedUser={props.setFollowedUser} isProgress={props.isProgress} 
+                    followingInProgress={props.followingInProgress} followUser={props.followUser} unFollowUser={props.unFollowUser}/>
       <PostsContainer/>
     </div>
   )

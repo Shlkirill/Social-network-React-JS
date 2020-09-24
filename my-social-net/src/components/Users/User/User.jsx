@@ -1,25 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './User.module.css'
-import { apiFollowUser, apiUnfollowUser } from '../../../api/api';
 import { BottonToogleFollow } from '../../../universalBlocks/toogleFollow/BottonToggleFollow';
 
 
 const User = (props) => {
     let onToogleFollow = () => {
         if (props.followed == false) {
-            props.followingInProgress(props.id, true);
-            apiFollowUser(props.id).then(() =>{
-                props.toogleFollow(props.id, props.followed);
-                props.followingInProgress(props.id, false);
-            });
+            props.followUser(props.id, props.followed);
             props.addFriend(props.id, props.avatar, props.name);
         } else {
-            props.followingInProgress(props.id, true);
-            apiUnfollowUser(props.id).then(() =>{
-                props.toogleFollow(props.id, props.followed);
-                props.followingInProgress(props.id, false);
-            });;
+            props.unFollowUser(props.id, props.followed);
         }
     }
     return (

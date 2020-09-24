@@ -6,6 +6,7 @@ import DialogWithPerson from './DialogWithPerson/DialogWithPerson';
 
 
 const Messages = (props) => {
+  
   let interlocutorName = props.friendsPage.friends.map(item => <DialogWithPerson key={item.id} name={item.name} id={item.id} img={item.avatar}/>);
   
   let dialogWindowName = interlocutorName.map((item) => {

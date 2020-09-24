@@ -3,29 +3,17 @@ import Loading from '../../../universalBlocks/loading/loading';
 import styles from './ProfileInfo.module.css'
 import photoDefault from '../../../img/empty-avatar.png'
 import { BottonToogleFollow } from '../../../universalBlocks/toogleFollow/BottonToggleFollow';
-import { apiFollowUser, apiUnfollowUser } from '../../../api/api';
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Loading />
   }
-  let idForTheButton;
   let onToogleFollow = () => {
     if (props.followed == false) {
-      props.followingInProgress(true);
-      idForTheButton = props.id;
-      apiFollowUser(props.profile.userId).then(() =>{
-        props.setFollowedUser(true);
-        props.followingInProgress(false);
-        idForTheButton = null;
-      });
+      props.followUser(props.profile.userId);
     } else {
-      props.followingInProgress(true);
-      idForTheButton = props.id;
-      apiUnfollowUser(props.profile.userId).then(() =>{
-        props.setFollowedUser(false);
-        props.followingInProgress(false);
-      });;
+      props.unFollowUser(props.profile.userId);
     }
   };
   return (
@@ -38,6 +26,7 @@ const ProfileInfo = (props) => {
         </div>
         <div className={styles.info}>
           <h4>{props.profile.fullName}</h4>
+          <p><ProfileStatus /> </p>
           <p><span>Date of Birth: </span>12.08.1994 g.</p>
           <p><span>City: </span>Belogorod</p>
           <p><span>Education: </span>Belgorod economic university</p>

@@ -9,6 +9,7 @@ import LeftMenuContainer from './components/LeftMenu/LeftMenu container';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileСontainer from './components/Profile/ProfileСontainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import LoginContainer from './components/Login/LoginContainer';
 
 const SocialNetworkSite = (props) => {
   return (
@@ -22,6 +23,7 @@ const SocialNetworkSite = (props) => {
         <Route path='/music'><Music/></Route>
         <Route path='/settings'><Settings/></Route>
         <Route path='/users'><UsersContainer /></Route>
+        <Route path='/login'><LoginContainer /></Route>
       </div>
     </BrowserRouter>  
   );

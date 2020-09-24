@@ -1,3 +1,5 @@
+import { apiFollowUser, apiGetFollowUser, apiSetProfile, apiUnfollowUser } from "../api/api"
+
 export const addPostActionCreator = (text) => {
   return {
     type: "ADD-POST",
@@ -100,5 +102,42 @@ const profileReducer = (state = initialState, action) => {
       return state;
   }
 }
+
+export const setProfileTC = (userId) => {
+  return (dispatch) => {
+    apiSetProfile(userId).then((response) => {
+      dispatch(setUserProfileAC(response))
+    });
+  }
+}
+
+export const getFollowUserTC = (userId) => {
+  return (dispatch) => {
+    apiGetFollowUser(userId).then((responce) => {
+      dispatch(setFollowedUserAC(responce));
+    })
+  }
+}
+
+export const followUserTC = (userId) => {
+  return (dispatch) => {
+    dispatch(followingInProgressAC(true));
+    apiFollowUser(userId).then(() => {
+      dispatch(setFollowedUserAC(true));
+      dispatch(followingInProgressAC(false));
+    });
+  }
+}
+
+export const unFollowUserTC = (userId) => {
+  return (dispatch) => {
+    dispatch(followingInProgressAC(true));
+    apiUnfollowUser(userId).then(() =>{
+      dispatch(setFollowedUserAC(false));
+      dispatch(followingInProgressAC(false));
+    });
+  }
+}
+
 
 export default profileReducer;

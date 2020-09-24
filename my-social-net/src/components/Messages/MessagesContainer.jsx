@@ -1,11 +1,13 @@
 import React from 'react';
 import Messages from './Messages';
-import { addMessageActionCreator } from '../../redux/friendsReducer';
 import { connect } from 'react-redux';
+import { withAuthRedirectComponent } from '../hoc/withAuthRedirect';
+import { addMessageActionCreator } from '../../redux/friendsReducer';
+import { compose } from 'redux';
 
 // const MessagesContainer = (props) => {
 //   let state = props.store.getState();
-  
+
 //   let addMessage = (text,id) => {
 //     props.store.dispatch(addMessageActionCreator(text,id));
 // } 
@@ -13,6 +15,7 @@ import { connect } from 'react-redux';
 //   <Messages friendsPage={state.friendsPage} addMessage={addMessage}/>
 //   )
 // }
+
 
 let mapStateToProps = (state) => {
   return {
@@ -22,11 +25,11 @@ let mapStateToProps = (state) => {
 
 let mapDispatcherToProps = (dispatch) => {
   return {
-    addMessage: (text,id) => {dispatch(addMessageActionCreator(text,id))}
+    addMessage: (text, id) => { dispatch(addMessageActionCreator(text, id)) }
   }
 }
 
-
-const MessagesContainer = connect(mapStateToProps,mapDispatcherToProps)(Messages);
-
-export default MessagesContainer;
+export default compose(
+  connect(mapStateToProps, mapDispatcherToProps),
+  withAuthRedirectComponent,
+)(Messages);

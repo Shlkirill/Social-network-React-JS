@@ -1,4 +1,4 @@
-import { apiGetUsers } from "../api/api"
+import { apiFollowUser, apiGetUsers, apiUnfollowUser } from "../api/api"
 
 export const toogleFollowAC = (id, followed) => {
   return {
@@ -108,26 +108,50 @@ const UsersReducer = (state = initialState, action) => {
   }
 }
 
-export const getUsersThunkCreator = (pageSize, activePage) => {
+export const getUsersTC = (pageSize, activePage) => {
   return (dispatch) => {
     dispatch(toogleIfFetchingAC(true));
-    let handler = (response) => {
+    apiGetUsers(pageSize, activePage).then((response) => {
       dispatch(setUsersAC(response.items, response.totalCount));
       dispatch(toogleIfFetchingAC(false));
-    };
-    apiGetUsers(pageSize, activePage).then(handler);
+    });
   }
 };
 
-export const setCountUserThunkCreator = (value, activePage) => {
+export const getActivePageTC = (pageSize, page) => {
   return (dispatch) => {
-    dispatch(setCountUsersAC(value));
-    dispatch(toogleIfFetchingAC(true));
-    let handler = (response) => {
-      dispatch(setUsersAC(response.items, response.totalCount));
-      dispatch(toogleIfFetchingAC(false));
-    };
-    apiGetUsers(value, activePage).then(handler);
+    dispatch(setPageAC(page));
+    dispatch(getUsersTC(pageSize, page));
   }
 };
+
+export const setCountUserTC = (value, activePage) => {
+  return (dispatch) => {
+    dispatch(setCountUsersAC(value));
+    dispatch(getUsersTC(value, activePage));
+  }
+};
+
+
+export const followUserTC = (id, followed) => {
+  return (dispatch) => {
+    dispatch(followingInProgressAC(id, true));
+    apiFollowUser(id).then(() =>{
+      dispatch(toogleFollowAC(id, followed));
+      dispatch(followingInProgressAC(id, false));
+    });
+  }
+};
+
+export const unFollowUserTC = (id, followed) => {
+  return (dispatch) => {
+    dispatch(followingInProgressAC(id, true));
+    apiUnfollowUser(id).then(() =>{
+      dispatch(toogleFollowAC(id, followed));
+      dispatch(followingInProgressAC(id, false));
+    });
+  }
+};
+
+
 export default UsersReducer;
