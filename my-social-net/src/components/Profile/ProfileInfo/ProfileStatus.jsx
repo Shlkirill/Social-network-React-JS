@@ -7,29 +7,26 @@ class ProfileStatus extends React.Component {
         editMode: false,
     }
 
-
-
-    toogleEditMode(e) {
-        console.log(e.target.value);
-        this.state.editMode == false ?
-            this.setState({
-                editMode: true
-            }) :
-            this.setState({
-                editMode: false
-            })
+    onEditMode() {
+        this.setState({
+            editMode: true
+        })
     }
-
-
+    offEditMode(e) {
+        this.setState({
+            editMode: false
+        })
+        console.log(e.target.value)
+    }
 
     render() {
         return (
             <div>{this.state.editMode == true ?
                 <div>
-                    <input autoFocus={true} onBlur={this.toogleEditMode.bind(this)} type="text" />
+                    <input autoFocus={true} onBlur={this.offEditMode.bind(this)} type="text" />
                 </div> :
                 <div>
-                    <span onClick={this.toogleEditMode.bind(this)}>Спанчик</span>
+                    <span onClick={this.onEditMode.bind(this)}>Спанчик</span>
                 </div>}
             </div>
         )
