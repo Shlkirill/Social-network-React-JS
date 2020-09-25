@@ -43,3 +43,15 @@
   .social a:hover {
     opacity: 0.6;
   }
+  .status span {
+    font-weight: 300!important;
+    font-style: italic;
+  }
+  .status {
+    display: inline-block;
+    min-height: 100px;
+
+  }
+  .status:hover{
+    background-color:rgba(117, 8, 226, 0.2);
+  }

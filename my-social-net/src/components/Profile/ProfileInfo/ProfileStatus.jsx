@@ -1,10 +1,12 @@
 import React from 'react';
+import styles from './ProfileInfo.module.css'
 
 class ProfileStatus extends React.Component {
 
 
     state = {
         editMode: false,
+        statusText: 'Введите Ваш первый статус',
     }
 
     onEditMode() {
@@ -13,20 +15,27 @@ class ProfileStatus extends React.Component {
         })
     }
     offEditMode(e) {
-        this.setState({
-            editMode: false
-        })
-        console.log(e.target.value)
+        if (e.target.value.match(/^[ ]+$/) || e.target.value=='') {
+            this.setState({
+                editMode: false,
+                statusText: 'Введите Ваш первый статус',
+            })
+        } else {
+            this.setState({
+                editMode: false,
+                statusText: e.target.value,
+            })
+        }
     }
 
     render() {
         return (
             <div>{this.state.editMode == true ?
                 <div>
-                    <input autoFocus={true} onBlur={this.offEditMode.bind(this)} type="text" />
+                    <input autoFocus={true} type="text" onBlur={this.offEditMode.bind(this)} />
                 </div> :
-                <div>
-                    <span onClick={this.onEditMode.bind(this)}>Спанчик</span>
+                <div className={styles.status}>
+                    <span onClick={this.onEditMode.bind(this)}>{this.state.statusText}</span>
                 </div>}
             </div>
         )
