@@ -28,3 +28,7 @@ button::-moz-focus-inner {
   z-index: 999;
   right: 2px;
 }
+.fa-arrow-circle-right {
+  font-size: 20px;
+  color: rgb(5, 185, 185);
+}

@@ -22,7 +22,6 @@
     padding-left: 20px;
   }
   .info h4 {
-    padding-bottom: 20px;
     font-size: 20px;
   }
   .info h4, .info p {
@@ -43,15 +42,40 @@
   .social a:hover {
     opacity: 0.6;
   }
-  .status span {
+  .statusEditOff span {
+    display: block;
     font-weight: 300!important;
     font-style: italic;
   }
-  .status {
-    display: inline-block;
-    min-height: 100px;
-
+  .statusEditOff {
+    height: 25px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    margin-bottom: 20px;
   }
-  .status:hover{
-    background-color:rgba(117, 8, 226, 0.2);
+
+  .statusEditOff:hover{
+    background-color:rgba(243, 252, 255, 0.7);
+    border: 1px solid rgb(0, 233, 233);
+    cursor: pointer;
+  }
+  .statusEditOn {
+    height: 25px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    display: flex;
+  }
+  .statusEditOn input {
+    width: 100%;
+    border: none;
+    border: 1px solid rgb(0, 233, 233);
+  }
+  .statusEditOn button {
+    border: none;
+    background: none;
+  }
+  .statusEditOn button:hover {
+    cursor: pointer;
+    opacity: 0.7;
   }

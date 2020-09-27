@@ -9,7 +9,9 @@ class ProfileStatus extends React.Component {
         statusText: 'Введите Ваш первый статус',
     }
 
-    onEditMode() {
+    onEditMode = () => {
+        debugger;
+        console.log('this:', this)
         this.setState({
             editMode: true
         })
@@ -31,11 +33,12 @@ class ProfileStatus extends React.Component {
     render() {
         return (
             <div>{this.state.editMode == true ?
-                <div>
-                    <input autoFocus={true} type="text" onBlur={this.offEditMode.bind(this)} />
+                <div className={styles.statusEditOn}>
+                    <input placeholder="max-60 symbol" maxLength={60} autoFocus={true} type="text" onBlur={this.offEditMode.bind(this)} />
+                    <button onClick={this.offEditMode.bind(this)}><i className="fas fa-arrow-circle-right"></i></button>
                 </div> :
-                <div className={styles.status}>
-                    <span onClick={this.onEditMode.bind(this)}>{this.state.statusText}</span>
+                <div className={styles.statusEditOff}>
+                    <span onClick={this.onEditMode}>{this.state.statusText}</span>
                 </div>}
             </div>
         )
