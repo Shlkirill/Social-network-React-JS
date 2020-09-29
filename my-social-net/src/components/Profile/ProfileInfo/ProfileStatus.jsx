@@ -6,18 +6,16 @@ class ProfileStatus extends React.Component {
 
     state = {
         editMode: false,
-        statusText: 'Введите Ваш первый статус',
+        statusText: this.props.status,
     }
 
     onEditMode = () => {
-        debugger;
-        console.log('this:', this)
         this.setState({
             editMode: true
         })
     }
     offEditMode(e) {
-        if (e.target.value.match(/^[ ]+$/) || e.target.value=='') {
+        if (e.target.value.match(/^[ ]+$/) || e.target.value == '') {
             this.setState({
                 editMode: false,
                 statusText: 'Введите Ваш первый статус',
@@ -27,10 +25,18 @@ class ProfileStatus extends React.Component {
                 editMode: false,
                 statusText: e.target.value,
             })
+            this.props.getUpdateSatus(e.target.value);
         }
     }
-
+    componentDidUpdate(prevProps) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                statusText: this.props.status
+            })
+        }
+    }
     render() {
+        console.log(this.props.status);
         return (
             <div>{this.state.editMode == true ?
                 <div className={styles.statusEditOn}>
@@ -38,7 +44,7 @@ class ProfileStatus extends React.Component {
                     <button onClick={this.offEditMode.bind(this)}><i className="fas fa-arrow-circle-right"></i></button>
                 </div> :
                 <div className={styles.statusEditOff}>
-                    <span onClick={this.onEditMode}>{this.state.statusText}</span>
+                    <span onClick={this.onEditMode}>{this.state.statusText || 'Статус пуст =('}</span>
                 </div>}
             </div>
         )

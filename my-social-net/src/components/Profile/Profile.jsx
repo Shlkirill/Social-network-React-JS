@@ -8,7 +8,8 @@ const Profile = (props) => {
     <div className={styles.main}>
       <ProfileInfo  profile={props.profile} followed={props.followed} 
                     setFollowedUser={props.setFollowedUser} isProgress={props.isProgress} 
-                    followingInProgress={props.followingInProgress} followUser={props.followUser} unFollowUser={props.unFollowUser}/>
+                    followingInProgress={props.followingInProgress} followUser={props.followUser} 
+                    unFollowUser={props.unFollowUser} status={props.status} getUpdateSatus={props.getUpdateSatus}/>
       <PostsContainer/>
     </div>
   )

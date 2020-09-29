@@ -44,3 +44,11 @@ export const apiFollowUser = (id) => {
 export const apiUnfollowUser = (id) => {
     return instance.delete(`/follow/${id}`)
 };
+
+export const apiGetStatus = (userId) => {
+    return instance.get(`/profile/status/${userId}`)
+};
+
+export const apiUpdateStatus = (status) => {
+    return instance.put(`/profile/status`, {status: status})
+};

@@ -1,4 +1,4 @@
-import { apiFollowUser, apiGetFollowUser, apiSetProfile, apiUnfollowUser } from "../api/api"
+import { apiFollowUser, apiGetFollowUser, apiGetStatus, apiSetProfile, apiUnfollowUser, apiUpdateStatus } from "../api/api"
 
 export const addPostActionCreator = (text) => {
   return {
@@ -25,10 +25,16 @@ export const setFollowedUserAC = (followed) => {
     followed
   }
 }
-export const followingInProgressAC = (value, id) => {
+export const followingInProgressAC = (value) => {
   return {
     type: 'FOLLOWING_IN_PROGRESS',
     value,
+  }
+}
+export const setStatusAC = (status) => {
+  return {
+    type: 'SET_STATUS',
+    status,
   }
 }
 
@@ -41,6 +47,7 @@ let initialState = {
   profile: null,
   followed: null,
   followingInProgress: false,
+  status: "",
 
 };
 
@@ -98,6 +105,12 @@ const profileReducer = (state = initialState, action) => {
         followingInProgress: action.value
       }
       return stateCopy;
+    case 'SET_STATUS':
+      stateCopy = {
+        ...state,
+        status: action.status
+      }
+      return stateCopy;
     default:
       return state;
   }
@@ -132,10 +145,27 @@ export const followUserTC = (userId) => {
 export const unFollowUserTC = (userId) => {
   return (dispatch) => {
     dispatch(followingInProgressAC(true));
-    apiUnfollowUser(userId).then(() =>{
+    apiUnfollowUser(userId).then(() => {
       dispatch(setFollowedUserAC(false));
       dispatch(followingInProgressAC(false));
     });
+  }
+}
+
+export const getUserStatusTC = (userId) => {
+  return (dispatch) => {
+    apiGetStatus(userId).then((response) => {
+      dispatch(setStatusAC(response.data))
+    })
+  }
+}
+
+export const getUpdateSatusTC = (status) => {
+  return (dispatch) => {
+
+    apiUpdateStatus(status).then((response) => {
+        console.log(response)
+    })
   }
 }
 
