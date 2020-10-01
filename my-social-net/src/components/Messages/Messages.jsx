@@ -11,7 +11,7 @@ const Messages = (props) => {
   
   let dialogWindowName = interlocutorName.map((item) => {
     return <Route path={`/messages/${item.props.id}`}><DialogueWindow key={item.props.id} messages={props.friendsPage.messages} 
-    id={item.props.id} img={item.props.img} addMessage={props.addMessage} handleSubmit={props.handleSubmit} onSubmit={props.onSubmit}/></Route>
+    id={item.props.id} img={item.props.img} addMessage={props.addMessage}/></Route>
   });
 
   return (

@@ -6,19 +6,11 @@ import { reduxForm } from 'redux-form';
 
 
 const PostsContainer = (props) => {
-  const onSubmit = (formData) =>{
-    props.addPost(formData.newPost)
-  }
   
   return(
-    <ContactForm {...props} onSubmit={onSubmit}/>
+    <Posts {...props}/>
   )
 }
-
-const ContactForm = reduxForm({
-  form: 'newPost'
-})(Posts);
-
 
 
 

@@ -4,24 +4,13 @@ import { connect } from 'react-redux';
 import { withAuthRedirectComponent } from '../hoc/withAuthRedirect';
 import { addMessageActionCreator } from '../../redux/friendsReducer';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
 
 const MessagesContainer = (props) => {
-  const onSubmit = (formData) =>{
-    debugger;
-    props.addMessage(formData.newMessage, 1)
-    
-  }
 
   return (
-  <ContactForm {...props} onSubmit={onSubmit}/>
+  <Messages {...props}/>
   )
 }
-
-const ContactForm = reduxForm({
-  form: 'newMessage'
-})(Messages);
-
 
 let mapStateToProps = (state) => {
   return {
