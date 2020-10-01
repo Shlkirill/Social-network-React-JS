@@ -77,6 +77,7 @@ const profileReducer = (state = initialState, action) => {
       stateCopy.posts.push(newPost);
       return stateCopy;
     case "ADD-LIKE":
+      console.log(action.clickPost.text)
       stateCopy = {
         ...state,
         posts: [...state.posts],

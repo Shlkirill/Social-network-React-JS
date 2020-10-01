@@ -2,6 +2,25 @@ import React from 'react';
 import Posts from './Posts';
 import { addPostActionCreator, addLikeActionCreator } from '../../../redux/profileReducer';
 import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
+
+
+const PostsContainer = (props) => {
+  const onSubmit = (formData) =>{
+    props.addPost(formData.newPost)
+  }
+  
+  return(
+    <ContactForm {...props} onSubmit={onSubmit}/>
+  )
+}
+
+const ContactForm = reduxForm({
+  form: 'newPost'
+})(Posts);
+
+
+
 
 let mapStateToProps = (state) => {
   return{
@@ -16,7 +35,8 @@ let mapDispatchToProps = (dispatch) => {
   }
 }
 
-const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts);
 
 
-export default PostsContainer;
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer);

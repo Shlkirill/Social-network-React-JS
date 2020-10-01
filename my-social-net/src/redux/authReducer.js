@@ -1,4 +1,5 @@
-import { apiAuth } from "../api/api";
+import { Redirect } from "react-router-dom";
+import { apiAuth, apiLogin, apiUnLogin } from "../api/api";
 
 export const setUserDataAC = (data) => {
   return {
@@ -10,6 +11,14 @@ export const toogleIfFetchingAC = (isFetching) => {
   return {
     type: 'TOOGLE_IS_FETCHING',
     isFetching
+  }
+}
+export const setLoginAC = (login, password, remember) => {
+  return {
+    type: 'SET_LOGIN',
+    login,
+    password,
+    remember
   }
 }
 
@@ -38,6 +47,12 @@ const AuthReducer = (state = initialState, action) => {
         isFetching: action.isFetching
       }
       return stateCopy;
+    case 'SET_LOGIN':
+      console.log(action.login, action.password, action.remember);
+      stateCopy = {
+        ...state,
+      };
+      return stateCopy;
     default:
       return state;
   }
@@ -52,6 +67,27 @@ export const authorizationTC = () => {
     });
   }
 };
+
+
+export const accountLoginTC = (obj) => {
+  return (dispatch) => {
+    apiLogin(obj).then((response) => {
+      if (response.data.resultCode === 0) {
+        alert('Вы вошли')
+      } else {
+        alert('где то ошибочка')
+      }
+    })
+  }
+}
+
+export const outOfAccountTC = () => {
+  return (dispatch) => {
+    apiUnLogin().then(()=> {
+      alert('Вы вышли')
+    })
+  }
+}
 
 
 

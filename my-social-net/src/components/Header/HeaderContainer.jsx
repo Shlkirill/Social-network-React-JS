@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from './Header';
-import { authorizationTC, toogleIfFetchingAC } from '../../redux/authReducer';
+import { authorizationTC, outOfAccountTC, toogleIfFetchingAC } from '../../redux/authReducer';
 
 class HeaderContainer extends React.Component {
 
@@ -9,7 +9,7 @@ class HeaderContainer extends React.Component {
     this.props.authorization();
   }
   render() {
-    return (<Header {...this.props.userInfo} />)
+    return (<Header {...this.props.userInfo} outOfAccount={this.props.outOfAccount}/>)
   }
 }
 
@@ -20,7 +20,8 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = {
   toogleIfFetching: toogleIfFetchingAC,
-  authorization: authorizationTC
+  authorization: authorizationTC,
+  outOfAccount: outOfAccountTC
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

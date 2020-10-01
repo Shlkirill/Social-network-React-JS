@@ -3,6 +3,7 @@ import styles from './DialogueWindow.module.css';
 import Dialog from '../Dialog/Dialog';
 import DialogMe from '../DialogMe/DialogMe';
 import { addMessageActionCreator } from '../../../redux/friendsReducer';
+import FormAddNewText from '../../../universalBlocks/forms/AddNewText';
 
 const DialogueWindow = (props) => {;
     let dialog = props.messages[props.id].map(item => {
@@ -17,13 +18,11 @@ const DialogueWindow = (props) => {;
     } 
      
     let newMessageElement = React.createRef();
-
     return(
         <div className={styles.allMessages}> 
             {dialog}
             <div className={styles.chatInput}>
-                <textarea ref={newMessageElement} placeholder='new message'></textarea>
-                <button onClick={onAddMessage}><i class="far fa-arrow-alt-circle-right"></i></button>
+                <FormAddNewText handleSubmit={props.handleSubmit} name={'newMessage'} placeholder={'send new message'}/>
             </div>
         </div>   
     )

@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 export const withAuthRedirectComponent = (Component) => {
 
     const RedidectComponent = (props) => {
-        debugger;
         if (props.isAuth === false) return <Redirect to={'/login'} />
 
         return (

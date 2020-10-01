@@ -1,14 +1,31 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
+import { accountLoginTC } from '../../redux/authReducer';
 import Login from "./Login";
 
-const LoginContainer = () => {
+const ContactForm = reduxForm({
+    form: 'login',
+  })(Login);
+
+const LoginContainer = (props) => {
+    const onSubmit = (formData) =>{
+        props.accountLogin(formData);
+    }
     return (
-        <Login />
+        <ContactForm onSubmit={onSubmit}/>
     )
 }
 
+let mapStateToProps = (state) => {
+    return {
+
+    }
+}
+let mapDispatchToProps = {
+    accountLogin: accountLoginTC
+  }
 
 
 
-
-export default LoginContainer
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

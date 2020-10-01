@@ -16,7 +16,7 @@ export const addFriendAC = (id, avatar, name) => {
   }
 }
 let initialState = {
-  friends: [
+  friends: [{id:1, name:'kirill'}
   ],
 
   messages: {

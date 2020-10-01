@@ -4,6 +4,7 @@ import Profile from './Profile';
 import { followingInProgressAC, followUserTC, getFollowUserTC, getUpdateSatusTC, getUserStatusTC, setFollowedUserAC, setProfileTC, setUserProfileAC, unFollowUserTC } from '../../redux/profileReducer';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { withAuthRedirectComponent } from '../hoc/withAuthRedirect';
 
 class ProfileContainer extends React.Component {
 
