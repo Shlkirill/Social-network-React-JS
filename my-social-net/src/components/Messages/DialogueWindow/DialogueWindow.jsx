@@ -6,13 +6,12 @@ import FormAddNewText from '../../../universalBlocks/forms/AddNewText';
 import { reduxForm } from 'redux-form';
 
 const DialogueWindow = (props) => {
-
     const ContactForm = reduxForm({
         form: 'newMessage'
     })(FormAddNewText);
 
     const onSubmit = (formData) => {
-        props.addMessage(formData.newMessage, 1)
+        props.addMessage(formData.newMessage, props.id)
 
     }
     let dialog = props.messages[props.id].map(item => {
