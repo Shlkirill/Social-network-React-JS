@@ -4,21 +4,20 @@ import { required, maxLength, minLength } from '../../utils/validations/validati
 import { TextareaField } from './formsControls/formsControls.jsx'
 import styles from './AddNewText.module.css';
 
-const minLength2 = minLength(2)
-const maxLength15 = maxLength(15)
 const maxLength100 = maxLength(100)
+const maxLength200 = maxLength(200)
 
 const FormAddNewText = (props) => {
-  
+
   const validateCreactor = () => {
     switch (props.name) {
       case 'newPost':
-        return [required, maxLength15, minLength2]
+        return [maxLength200]
       case 'newMessage':
-        return [required, maxLength100]
+        return [maxLength100]
     }
   }
-
+  console.log(props)
   return (
     <form onSubmit={props.handleSubmit}>
 
@@ -28,7 +27,7 @@ const FormAddNewText = (props) => {
           validate={validateCreactor()} />
       </div>
       <div>
-        <button className={styles.inputSubmit}>Send</button>
+        <button className={styles.inputSubmit} disabled={props.pristine || props.submitting || props.invalid}>Send</button>
       </div>
     </form>
   )

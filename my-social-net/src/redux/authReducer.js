@@ -1,10 +1,11 @@
 import { Redirect } from "react-router-dom";
-import { apiAuth, apiLogin, apiUnLogin } from "../api/api";
+import { apiAuth, apiLogin, apiLogout } from "../api/api";
 
-export const setUserDataAC = (data) => {
+export const setUserDataAC = (data, isAuth) => {
   return {
     type: "SET_USER_DATA",
     data,
+    isAuth
   }
 }
 export const toogleIfFetchingAC = (isFetching) => {
@@ -38,7 +39,7 @@ const AuthReducer = (state = initialState, action) => {
       stateCopy = {
         ...state,
         ...action.data,
-        isAuth: true,
+        isAuth: action.isAuth,
       };
       return stateCopy;
     case 'TOOGLE_IS_FETCHING':
@@ -48,7 +49,6 @@ const AuthReducer = (state = initialState, action) => {
       }
       return stateCopy;
     case 'SET_LOGIN':
-      console.log(action.login, action.password, action.remember);
       stateCopy = {
         ...state,
       };
@@ -62,7 +62,7 @@ export const authorizationTC = () => {
   return (dispatch) => {
     apiAuth().then((response) => {
       if (response.resultCode === 0) {
-        dispatch(setUserDataAC(response.data));
+        dispatch(setUserDataAC(response.data, true));
       };
     });
   }
@@ -73,6 +73,7 @@ export const accountLoginTC = (obj) => {
   return (dispatch) => {
     apiLogin(obj).then((response) => {
       if (response.data.resultCode === 0) {
+        dispatch(setUserDataAC(response.data, true));
         alert('Вы вошли')
       } else {
         alert('где то ошибочка')
@@ -83,7 +84,8 @@ export const accountLoginTC = (obj) => {
 
 export const outOfAccountTC = () => {
   return (dispatch) => {
-    apiUnLogin().then(()=> {
+    apiLogout().then(()=> {
+      dispatch(setUserDataAC(null, false));
       alert('Вы вышли')
     })
   }

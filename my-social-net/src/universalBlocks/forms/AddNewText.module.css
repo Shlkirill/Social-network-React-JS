@@ -19,3 +19,8 @@
   cursor: pointer;
   opacity: 0.7;
 }
+.inputSubmit:disabled {
+  background-color: #717279;
+  cursor: auto ;
+  opacity: 1;
+}

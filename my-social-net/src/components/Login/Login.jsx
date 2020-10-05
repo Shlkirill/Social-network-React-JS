@@ -22,7 +22,7 @@ const Login = (props) => {
                 <Field name="remember" component={inputField} type="checkbox" /> Remember me
             </div>
             <div>
-                <button>Login</button>
+                <button type="submit" disabled={props.pristine || props.submitting || props.invalid}>Login</button>
             </div>
         </form>
     )

@@ -55,8 +55,6 @@ export const apiUpdateStatus = (status) => {
 export const apiLogin = (obj) => {
     return instance.post(`/auth/login`, obj);
 };
-export const apiUnLogin = (obj) => {
-    return instance.delete(`/auth/login`).then((a) => {
-        console.log(a)
-    });
+export const apiLogout = () => {
+    return instance.delete(`/auth/login`)
 };
