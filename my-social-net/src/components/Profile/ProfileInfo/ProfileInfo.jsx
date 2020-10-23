@@ -22,11 +22,12 @@ const ProfileInfo = (props) => {
       <div className={styles.user}>
         <div className={styles.userAvatarAndFollow}>
           <img src={props.profile.photos.large || photoDefault} className={styles.avatar} />
-          {props.profile.userId !== 11314 ? BottonToogleFollow('ONE_USER', onToogleFollow, props.followed, props.isProgress, props.id) : null}
+          {props.profile.userId !== props.authId ? BottonToogleFollow('ONE_USER', onToogleFollow, props.followed, props.isProgress, props.id) : null}
         </div>
         <div className={styles.info}>
           <h4>{props.profile.fullName}</h4>
-          <p><ProfileStatus status={props.status} getUpdateSatus={props.getUpdateSatus}/> </p>
+          <p><ProfileStatus status={props.status} getUpdateSatus={props.getUpdateSatus} 
+          getUserStatus={props.getUserStatus} authId={props.authId} userId={props.profile.userId}/></p>
           <p><span>Date of Birth: </span>12.08.1994 g.</p>
           <p><span>City: </span>Belogorod</p>
           <p><span>Education: </span>Belgorod economic university</p>

@@ -52,8 +52,8 @@ export const apiGetStatus = (userId) => {
 export const apiUpdateStatus = (status) => {
     return instance.put(`/profile/status`, {status: status})
 };
-export const apiLogin = (obj) => {
-    return instance.post(`/auth/login`, obj);
+export const apiLogin = (objData) => {
+    return instance.post(`/auth/login`, objData);
 };
 export const apiLogout = () => {
     return instance.delete(`/auth/login`)

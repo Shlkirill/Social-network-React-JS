@@ -22,7 +22,7 @@ const Posts = (props) => {
         <h3> My posts</h3>
         <ContactForm onSubmit={onSubmit} name={'newPost'} placeholder={'send new post'} />
       </div>
-      <div className={styles.posts}>
+      <div className={styles.posts}>  
         {result}
       </div>
     </div>

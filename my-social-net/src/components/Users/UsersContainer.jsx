@@ -3,6 +3,7 @@ import Users from './Users';
 import { connect } from 'react-redux';
 import { setCountUsersAC, getUsersTC, setCountUserTC, getActivePageTC, followUserTC, unFollowUserTC} from '../../redux/usersReducer';
 import { addFriendAC } from '../../redux/friendsReducer';
+import { getUsers, getFetching, getActivePage, getTotalUsersCount, getUsersPageSize, getFollowingInProgress, getUsersSuperCreateSelectorTEST } from '../../redux/users-selectors';
 
 class UsersContainer extends React.Component {
 
@@ -34,12 +35,12 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.allUsers.users,
-        pageSize: state.allUsers.pageSize,
-        totalUsersCount: state.allUsers.totalUsersCount,
-        activePage: state.allUsers.activePage,
-        isFetching: state.allUsers.isFetching,
-        isProgress: state.allUsers.followingInProgress,
+        users: getUsersSuperCreateSelectorTEST(state),
+        pageSize: getUsersPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        activePage: getActivePage(state),
+        isFetching: getFetching(state),
+        isProgress: getFollowingInProgress(state),
     }
 }
 let mapDispatchToProps = {

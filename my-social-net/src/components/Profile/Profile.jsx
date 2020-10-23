@@ -9,7 +9,9 @@ const Profile = (props) => {
       <ProfileInfo  profile={props.profile} followed={props.followed} 
                     setFollowedUser={props.setFollowedUser} isProgress={props.isProgress} 
                     followingInProgress={props.followingInProgress} followUser={props.followUser} 
-                    unFollowUser={props.unFollowUser} status={props.status} getUpdateSatus={props.getUpdateSatus}/>
+                    unFollowUser={props.unFollowUser} status={props.status} 
+                    getUpdateSatus={props.getUpdateSatus} getUserStatus={props.getUserStatus}
+                    authId={props.authId}/>
       <PostsContainer/>
     </div>
   )

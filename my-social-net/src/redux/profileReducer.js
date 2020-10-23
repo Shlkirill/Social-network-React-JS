@@ -165,7 +165,6 @@ export const getUpdateSatusTC = (status) => {
   return (dispatch) => {
 
     apiUpdateStatus(status).then((response) => {
-        console.log(response)
     })
   }
 }

@@ -13,13 +13,13 @@ const LoginContainer = (props) => {
         props.accountLogin(formData);
     }
     return (
-        <ContactForm onSubmit={onSubmit}/>
+        <ContactForm onSubmit={onSubmit} isAuth={props.isAuth}/>
     )
 }
 
 let mapStateToProps = (state) => {
     return {
-
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = {

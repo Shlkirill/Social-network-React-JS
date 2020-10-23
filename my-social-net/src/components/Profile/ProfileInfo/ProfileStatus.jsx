@@ -1,53 +1,46 @@
 import React from 'react';
 import styles from './ProfileInfo.module.css'
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-class ProfileStatus extends React.Component {
+const ProfileStatus = (props) => {
 
+    let [editMode, setEditMode] = useState(false)
+    let [statusText, setStatusText] = useState(props.status)
 
-    state = {
-        editMode: false,
-        statusText: this.props.status,
+    let enableMode = () => {
+        setEditMode(true);
     }
 
-    onEditMode = () => {
-        this.setState({
-            editMode: true
-        })
+    let disableMode = (e) => {
+        setEditMode(false);
+        if (statusText !== props.status) {
+            props.getUpdateSatus(statusText)
+            props.getUserStatus(props.authId)
+        };
     }
-    offEditMode(e) {
-        if (e.target.value.match(/^[ ]+$/) || e.target.value == '') {
-            this.setState({
-                editMode: false,
-                statusText: 'Введите Ваш первый статус',
-            })
-        } else {
-            this.setState({
-                editMode: false,
-                statusText: e.target.value,
-            })
-            this.props.getUpdateSatus(e.target.value);
-        }
+    let editStatusText = (e) => {
+        e.target.value.match(/^[ ]+$/) || e.target.value == '' ? setStatusText(props.status) : setStatusText(e.target.value)
     }
-    componentDidUpdate(prevProps) {
-        if (prevProps.status !== this.props.status) {
-            this.setState({
-                statusText: this.props.status
-            })
-        }
-    }
-    render() {
-        return (
-            <div>{this.state.editMode == true ?
+    useEffect(() => {
+        setStatusText(props.status);
+    }, [props.status])
+    return (
+        <div>
+            {props.userId == props.authId ? <div>{editMode == true ?
                 <div className={styles.statusEditOn}>
-                    <input placeholder="max-60 symbol" maxLength={60} autoFocus={true} type="text" onBlur={this.offEditMode.bind(this)} />
-                    <button onClick={this.offEditMode.bind(this)}><i className="fas fa-arrow-circle-right"></i></button>
+                    <input onChange={editStatusText} placeholder="max-60 symbol" maxLength={60} autoFocus={true} type="text" onBlur={disableMode} />
+                    <button onClick={disableMode}><i className="fas fa-arrow-circle-right"></i></button>
                 </div> :
                 <div className={styles.statusEditOff}>
-                    <span onClick={this.onEditMode}>{this.state.statusText || 'Статус пуст =('}</span>
+                    <span onClick={enableMode}> {statusText || 'Статус пуст'}</span>
                 </div>}
-            </div>
-        )
-    }
+            </div> :
+                <div className={styles.statusAllUsers}>
+                    <span> {statusText || 'Статус пуст'}</span>
+                </div>}
+        </div>
+    )
 }
 
 export default ProfileStatus

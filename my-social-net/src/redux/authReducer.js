@@ -1,5 +1,5 @@
-import { Redirect } from "react-router-dom";
 import { apiAuth, apiLogin, apiLogout } from "../api/api";
+import { stopSubmit } from "redux-form";
 
 export const setUserDataAC = (data, isAuth) => {
   return {
@@ -60,7 +60,7 @@ const AuthReducer = (state = initialState, action) => {
 
 export const authorizationTC = () => {
   return (dispatch) => {
-    apiAuth().then((response) => {
+    return apiAuth().then((response) => {
       if (response.resultCode === 0) {
         dispatch(setUserDataAC(response.data, true));
       };
@@ -69,20 +69,20 @@ export const authorizationTC = () => {
 };
 
 
-export const accountLoginTC = (obj) => {
+export const accountLoginTC = (objData) => {
   return (dispatch) => {
-    apiLogin(obj).then((response) => {
+    apiLogin(objData).then((response) => {
       if (response.data.resultCode === 0) {
-        dispatch(setUserDataAC(response.data, true));
+        dispatch(authorizationTC());
         alert('Вы вошли')
       } else {
-        alert('где то ошибочка')
+        dispatch(stopSubmit('login', {_error: response.data.messages[0]}))
       }
     })
   }
 }
 
-export const outOfAccountTC = () => {
+export const logoutAccountTC = () => {
   return (dispatch) => {
     apiLogout().then(()=> {
       dispatch(setUserDataAC(null, false));
