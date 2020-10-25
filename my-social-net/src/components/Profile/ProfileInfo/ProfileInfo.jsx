@@ -2,14 +2,14 @@ import React from 'react';
 import Loading from '../../../universalBlocks/loading/loading';
 import styles from './ProfileInfo.module.css'
 import photoDefault from '../../../img/empty-avatar.png'
-import { BottonToogleFollow } from '../../../universalBlocks/toogleFollow/BottonToggleFollow';
+import { BottonToggleFollow } from '../../../universalBlocks/toggleFollow/BottonToggleFollow';
 import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Loading />
   }
-  let onToogleFollow = () => {
+  let onToggleFollow = () => {
     if (props.followed == false) {
       props.followUser(props.profile.userId);
     } else {
@@ -22,7 +22,7 @@ const ProfileInfo = (props) => {
       <div className={styles.user}>
         <div className={styles.userAvatarAndFollow}>
           <img src={props.profile.photos.large || photoDefault} className={styles.avatar} />
-          {props.profile.userId !== props.authId ? BottonToogleFollow('ONE_USER', onToogleFollow, props.followed, props.isProgress, props.id) : null}
+          {props.profile.userId !== props.authId ? BottonToggleFollow('ONE_USER', onToggleFollow, props.followed, props.isProgress, props.id) : null}
         </div>
         <div className={styles.info}>
           <h4>{props.profile.fullName}</h4>

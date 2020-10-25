@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './Users';
 import { connect } from 'react-redux';
-import { setCountUsersAC, getUsersTC, setCountUserTC, getActivePageTC, followUserTC, unFollowUserTC, tooglefollowUserTC} from '../../redux/usersReducer';
+import { setCountUsersAC, getUsersTC, setCountUserTC, getActivePageTC, togglefollowUserTC} from '../../redux/usersReducer';
 import { addFriendAC } from '../../redux/friendsReducer';
 import { getUsers, getFetching, getActivePage, getTotalUsersCount, getUsersPageSize, getFollowingInProgress, getUsersSuperCreateSelectorTEST } from '../../redux/users-selectors';
 
@@ -27,9 +27,7 @@ class UsersContainer extends React.Component {
                 isFetching={this.props.isFetching}
                 addFriend={this.props.addFriend}
                 isProgress={this.props.isProgress}
-                followUser={this.props.followUser}
-                unFollowUser={this.props.unFollowUser}
-                tooglefollowUser={this.props.tooglefollowUser} />
+                togglefollowUser={this.props.togglefollowUser} />
         )
     }
 }
@@ -50,9 +48,7 @@ let mapDispatchToProps = {
     getUsers: getUsersTC,
     getActivePage: getActivePageTC,
     setCountUser: setCountUserTC,
-    followUser: followUserTC,
-    unFollowUser: unFollowUserTC,
-    tooglefollowUser: tooglefollowUserTC
+    togglefollowUser: togglefollowUserTC
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

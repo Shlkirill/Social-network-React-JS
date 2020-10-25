@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Botton.module.css'
 
-export const BottonToogleFollow = (initial, action, followed, arr, id) => {
+export const BottonToggleFollow = (initial, action, followed, arr, id) => {
     let result;
     if (initial == "ONE_USER") {
         result = arr;

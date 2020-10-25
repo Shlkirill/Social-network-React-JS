@@ -1,8 +1,8 @@
-import { apiFollowUser, apiGetUsers, apiUnfollowUser, apiToogleFollowUser } from "../api/api"
+import { apiFollowUser, apiGetUsers, apiUnfollowUser, apitogglefollowUser } from "../api/api"
 
-export const toogleFollowAC = (id, followed) => {
+export const toggleFollowAC = (id, followed) => {
   return {
-    type: "TOOGLE_FOLLOW",
+    type: "TOGGLE_FOLLOW",
     id,
     followed,
   }
@@ -26,9 +26,9 @@ export const setCountUsersAC = (count) => {
     count
   }
 }
-export const toogleIfFetchingAC = (isFetching) => {
+export const toggleIfFetchingAC = (isFetching) => {
   return {
-    type: 'TOOGLE_IS_FETCHING',
+    type: 'TOGGLE_IS_FETCHING',
     isFetching
   }
 }
@@ -53,7 +53,7 @@ const UsersReducer = (state = initialState, action) => {
   let stateCopy;
 
   switch (action.type) {
-    case "TOOGLE_FOLLOW":
+    case "TOGGLE_FOLLOW":
       stateCopy = {
         ...state,
         users: [...state.users]
@@ -97,7 +97,7 @@ const UsersReducer = (state = initialState, action) => {
         pageSize: action.count,
       }
       return stateCopy;
-    case 'TOOGLE_IS_FETCHING':
+    case 'TOGGLE_IS_FETCHING':
       stateCopy = {
         ...state,
         isFetching: action.isFetching
@@ -109,10 +109,10 @@ const UsersReducer = (state = initialState, action) => {
 }
 
 export const getUsersTC = (pageSize, activePage) => async (dispatch) => {
-  dispatch(toogleIfFetchingAC(true));
+  dispatch(toggleIfFetchingAC(true));
   let response = await apiGetUsers(pageSize, activePage);
   dispatch(setUsersAC(response.items, response.totalCount));
-  dispatch(toogleIfFetchingAC(false));
+  dispatch(toggleIfFetchingAC(false));
 };
 
 export const getActivePageTC = (pageSize, page) => (dispatch) => {
@@ -125,32 +125,13 @@ export const setCountUserTC = (value, activePage) => (dispatch) => {
   dispatch(getUsersTC(value, activePage));
 };
 
-export const tooglefollowUserTC = (id, followed) => async (dispatch) => {
+export const togglefollowUserTC = (id, followed) => async (dispatch) => {
   dispatch(followingInProgressAC(id, true));
-  let response = await apiToogleFollowUser(id, followed);
+  let response = await apitogglefollowUser(id, followed);
   if (response.status === 200) {
-    dispatch(toogleFollowAC(id, followed));
+    dispatch(toggleFollowAC(id, followed));
     dispatch(followingInProgressAC(id, false));
   }
 };
-
-export const followUserTC = (id, followed) => async (dispatch) => {
-  dispatch(followingInProgressAC(id, true));
-  let response = await apiFollowUser(id);
-  if (response.status === 200) {
-    dispatch(toogleFollowAC(id, followed));
-    dispatch(followingInProgressAC(id, false));
-  }
-};
-
-export const unFollowUserTC = (id, followed) => async (dispatch) => {
-  dispatch(followingInProgressAC(id, true));
-  let response = await apiUnfollowUser(id)
-  if (response.status === 200) {
-    dispatch(toogleFollowAC(id, followed));
-    dispatch(followingInProgressAC(id, false));
-  }
-};
-
 
 export default UsersReducer;

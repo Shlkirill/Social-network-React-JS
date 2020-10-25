@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from './Header';
-import { authorizationTC, logoutAccountTC, toogleIfFetchingAC } from '../../redux/authReducer';
+import { authorizationTC, logoutAccountTC, toggleIfFetchingAC } from '../../redux/authReducer';
 
 class HeaderContainer extends React.Component {
 
@@ -16,7 +16,7 @@ let mapStateToProps = (state) => {
   }
 }
 let mapDispatchToProps = {
-  toogleIfFetching: toogleIfFetchingAC,
+  toggleIfFetching: toggleIfFetchingAC,
   logoutAccount: logoutAccountTC
 }
 

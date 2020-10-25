@@ -29,7 +29,7 @@ export const apiGetFollowUser = async (id) => {
     return response.data
 };
 
-export const apiToogleFollowUser = (id, value) => {
+export const apitogglefollowUser = (id, value) => {
     return value ? instance.delete(`/follow/${id}`) : instance.post(`follow/${id}`);
 }
 

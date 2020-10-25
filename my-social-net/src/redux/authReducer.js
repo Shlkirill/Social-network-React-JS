@@ -9,9 +9,9 @@ export const setUserDataAC = (data, isAuth) => {
     isAuth
   }
 }
-export const toogleIfFetchingAC = (isFetching) => {
+export const toggleIfFetchingAC = (isFetching) => {
   return {
-    type: 'TOOGLE_IS_FETCHING',
+    type: 'TOGGLE_IS_FETCHING',
     isFetching
   }
 }
@@ -43,7 +43,7 @@ const AuthReducer = (state = initialState, action) => {
         isAuth: action.isAuth,
       };
       return stateCopy;
-    case 'TOOGLE_IS_FETCHING':
+    case 'TOGGLE_IS_FETCHING':
       stateCopy = {
         ...state,
         isFetching: action.isFetching
