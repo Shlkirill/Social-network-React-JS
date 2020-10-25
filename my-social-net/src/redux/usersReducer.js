@@ -1,4 +1,4 @@
-import { apiFollowUser, apiGetUsers, apiUnfollowUser } from "../api/api"
+import { apiFollowUser, apiGetUsers, apiUnfollowUser, apiToogleFollowUser } from "../api/api"
 
 export const toogleFollowAC = (id, followed) => {
   return {
@@ -125,6 +125,14 @@ export const setCountUserTC = (value, activePage) => (dispatch) => {
   dispatch(getUsersTC(value, activePage));
 };
 
+export const tooglefollowUserTC = (id, followed) => async (dispatch) => {
+  dispatch(followingInProgressAC(id, true));
+  let response = await apiToogleFollowUser(id, followed);
+  if (response.status === 200) {
+    dispatch(toogleFollowAC(id, followed));
+    dispatch(followingInProgressAC(id, false));
+  }
+};
 
 export const followUserTC = (id, followed) => async (dispatch) => {
   dispatch(followingInProgressAC(id, true));

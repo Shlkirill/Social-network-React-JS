@@ -15,7 +15,6 @@ export const apiGetUsers = async (count, page) => {
 };
 
 export const apiAuth = async () => {
-    debugger;
     let response = await instance.get(`auth/me`,);
     return response.data
 };
@@ -29,6 +28,10 @@ export const apiGetFollowUser = async (id) => {
     let response = await instance.get(`follow/${id}`);
     return response.data
 };
+
+export const apiToogleFollowUser = (id, value) => {
+    return value ? instance.delete(`/follow/${id}`) : instance.post(`follow/${id}`);
+}
 
 export const apiFollowUser = (id) => {
     return instance.post(`follow/${id}`)

@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './Users';
 import { connect } from 'react-redux';
-import { setCountUsersAC, getUsersTC, setCountUserTC, getActivePageTC, followUserTC, unFollowUserTC} from '../../redux/usersReducer';
+import { setCountUsersAC, getUsersTC, setCountUserTC, getActivePageTC, followUserTC, unFollowUserTC, tooglefollowUserTC} from '../../redux/usersReducer';
 import { addFriendAC } from '../../redux/friendsReducer';
 import { getUsers, getFetching, getActivePage, getTotalUsersCount, getUsersPageSize, getFollowingInProgress, getUsersSuperCreateSelectorTEST } from '../../redux/users-selectors';
 
@@ -28,7 +28,8 @@ class UsersContainer extends React.Component {
                 addFriend={this.props.addFriend}
                 isProgress={this.props.isProgress}
                 followUser={this.props.followUser}
-                unFollowUser={this.props.unFollowUser} />
+                unFollowUser={this.props.unFollowUser}
+                tooglefollowUser={this.props.tooglefollowUser} />
         )
     }
 }
@@ -50,7 +51,8 @@ let mapDispatchToProps = {
     getActivePage: getActivePageTC,
     setCountUser: setCountUserTC,
     followUser: followUserTC,
-    unFollowUser: unFollowUserTC
+    unFollowUser: unFollowUserTC,
+    tooglefollowUser: tooglefollowUserTC
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

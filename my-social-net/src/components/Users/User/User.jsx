@@ -7,10 +7,10 @@ import { BottonToogleFollow } from '../../../universalBlocks/toogleFollow/Botton
 const User = (props) => {
     let onToogleFollow = () => {
         if (props.followed == false) {
-            props.followUser(props.id, props.followed);
+            props.tooglefollowUser(props.id, props.followed);
             props.addFriend(props.id, props.avatar, props.name);
         } else {
-            props.unFollowUser(props.id, props.followed);
+            props.tooglefollowUser(props.id, props.followed);
         }
     }
     return (

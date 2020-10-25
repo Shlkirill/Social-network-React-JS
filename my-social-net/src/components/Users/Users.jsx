@@ -15,7 +15,8 @@ const Users = (props) => {
     let userDate = props.users.map((item) => {
         return <User name={item.name} key={item.id} id={item.id} followed={item.followed} 
         avatar={item.photos.small || photoDefault} status={item.status} addFriend={props.addFriend} 
-        isProgress={props.isProgress} followUser={props.followUser} unFollowUser={props.unFollowUser}/>
+        isProgress={props.isProgress} followUser={props.followUser} unFollowUser={props.unFollowUser}
+        tooglefollowUser={props.tooglefollowUser}/>
     });
     return (
         <div className={styles.users}>
