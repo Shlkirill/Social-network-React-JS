@@ -117,56 +117,46 @@ const profileReducer = (state = initialState, action) => {
   }
 }
 
-export const setProfileTC = (userId) => {
-  return (dispatch) => {
-    apiSetProfile(userId).then((response) => {
-      dispatch(setUserProfileAC(response))
-    });
+export const setProfileTC = (userId) => async (dispatch) => {
+  let response = await apiSetProfile(userId)
+  if (response != undefined) {
+    dispatch(setUserProfileAC(response))
   }
 }
 
-export const getFollowUserTC = (userId) => {
-  return (dispatch) => {
-    apiGetFollowUser(userId).then((responce) => {
-      dispatch(setFollowedUserAC(responce));
-    })
+
+export const getFollowUserTC = (userId) => async (dispatch) => {
+  let response = await apiGetFollowUser(userId);
+  dispatch(setFollowedUserAC(response));
+}
+
+export const followUserTC = (userId) => async (dispatch) => {
+  dispatch(followingInProgressAC(true));
+  let response = await apiFollowUser(userId);
+  if (response.data.resultCode === 0) {
+    dispatch(setFollowedUserAC(true));
+    dispatch(followingInProgressAC(false));
   }
 }
 
-export const followUserTC = (userId) => {
-  return (dispatch) => {
-    dispatch(followingInProgressAC(true));
-    apiFollowUser(userId).then(() => {
-      dispatch(setFollowedUserAC(true));
-      dispatch(followingInProgressAC(false));
-    });
+export const unFollowUserTC = (userId) => async (dispatch) => {
+  dispatch(followingInProgressAC(true));
+  let response = await apiUnfollowUser(userId);
+  if (response.data.resultCode === 0) {
+    dispatch(setFollowedUserAC(false));
+    dispatch(followingInProgressAC(false));
   }
 }
 
-export const unFollowUserTC = (userId) => {
-  return (dispatch) => {
-    dispatch(followingInProgressAC(true));
-    apiUnfollowUser(userId).then(() => {
-      dispatch(setFollowedUserAC(false));
-      dispatch(followingInProgressAC(false));
-    });
+export const getUserStatusTC = (userId) => async (dispatch) => {
+  let response = await apiGetStatus(userId);
+  if (response.status === 200) {
+    dispatch(setStatusAC(response.data))
   }
 }
 
-export const getUserStatusTC = (userId) => {
-  return (dispatch) => {
-    apiGetStatus(userId).then((response) => {
-      dispatch(setStatusAC(response.data))
-    })
-  }
-}
-
-export const getUpdateSatusTC = (status) => {
-  return (dispatch) => {
-
-    apiUpdateStatus(status).then((response) => {
-    })
-  }
+export const getUpdateSatusTC = (status) => async () => {
+    apiUpdateStatus(status);
 }
 
 

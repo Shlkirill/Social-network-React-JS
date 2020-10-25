@@ -9,32 +9,25 @@ const instance = axios.create({
 })
 
 
-export const apiGetUsers = (count, page) => {
-    return instance.get(`users?count=${count}&page=${page}`)
-        .then((response) => {
-            return response.data
-        });
+export const apiGetUsers = async (count, page) => {
+    let response = await instance.get(`users?count=${count}&page=${page}`)
+    return response.data
 };
 
-export const apiAuth = () => {
-    return instance.get(`auth/me`,)
-        .then((response) => {
-            return response.data
-        });
+export const apiAuth = async () => {
+    debugger;
+    let response = await instance.get(`auth/me`,);
+    return response.data
 };
 
-export const apiSetProfile = (userId) => {
-    return instance.get(`profile/${userId}`)
-        .then((response) => {
-            return response.data
-        });
+export const apiSetProfile = async (userId) => {
+    let response = await instance.get(`profile/${userId}`);
+    return response.data
 };
 
-export const apiGetFollowUser = (id) => {
-    return instance.get(`follow/${id}`)
-    .then((response) => {
-        return response.data
-    });
+export const apiGetFollowUser = async (id) => {
+    let response = await instance.get(`follow/${id}`);
+    return response.data
 };
 
 export const apiFollowUser = (id) => {
@@ -50,7 +43,7 @@ export const apiGetStatus = (userId) => {
 };
 
 export const apiUpdateStatus = (status) => {
-    return instance.put(`/profile/status`, {status: status})
+    return instance.put(`/profile/status`, { status: status })
 };
 export const apiLogin = (objData) => {
     return instance.post(`/auth/login`, objData);

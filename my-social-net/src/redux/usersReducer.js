@@ -108,48 +108,39 @@ const UsersReducer = (state = initialState, action) => {
   }
 }
 
-export const getUsersTC = (pageSize, activePage) => {
-  return (dispatch) => {
-    dispatch(toogleIfFetchingAC(true));
-    apiGetUsers(pageSize, activePage).then((response) => {
-      dispatch(setUsersAC(response.items, response.totalCount));
-      dispatch(toogleIfFetchingAC(false));
-    });
-  }
+export const getUsersTC = (pageSize, activePage) => async (dispatch) => {
+  dispatch(toogleIfFetchingAC(true));
+  let response = await apiGetUsers(pageSize, activePage);
+  dispatch(setUsersAC(response.items, response.totalCount));
+  dispatch(toogleIfFetchingAC(false));
 };
 
-export const getActivePageTC = (pageSize, page) => {
-  return (dispatch) => {
-    dispatch(setPageAC(page));
-    dispatch(getUsersTC(pageSize, page));
-  }
+export const getActivePageTC = (pageSize, page) => (dispatch) => {
+  dispatch(setPageAC(page));
+  dispatch(getUsersTC(pageSize, page));
 };
 
-export const setCountUserTC = (value, activePage) => {
-  return (dispatch) => {
-    dispatch(setCountUsersAC(value));
-    dispatch(getUsersTC(value, activePage));
-  }
+export const setCountUserTC = (value, activePage) => (dispatch) => {
+  dispatch(setCountUsersAC(value));
+  dispatch(getUsersTC(value, activePage));
 };
 
 
-export const followUserTC = (id, followed) => {
-  return (dispatch) => {
-    dispatch(followingInProgressAC(id, true));
-    apiFollowUser(id).then(() =>{
-      dispatch(toogleFollowAC(id, followed));
-      dispatch(followingInProgressAC(id, false));
-    });
+export const followUserTC = (id, followed) => async (dispatch) => {
+  dispatch(followingInProgressAC(id, true));
+  let response = await apiFollowUser(id);
+  if (response.status === 200) {
+    dispatch(toogleFollowAC(id, followed));
+    dispatch(followingInProgressAC(id, false));
   }
 };
 
-export const unFollowUserTC = (id, followed) => {
-  return (dispatch) => {
-    dispatch(followingInProgressAC(id, true));
-    apiUnfollowUser(id).then(() =>{
-      dispatch(toogleFollowAC(id, followed));
-      dispatch(followingInProgressAC(id, false));
-    });
+export const unFollowUserTC = (id, followed) => async (dispatch) => {
+  dispatch(followingInProgressAC(id, true));
+  let response = await apiUnfollowUser(id)
+  if (response.status === 200) {
+    dispatch(toogleFollowAC(id, followed));
+    dispatch(followingInProgressAC(id, false));
   }
 };
 

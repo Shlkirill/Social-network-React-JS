@@ -4,7 +4,7 @@ import Post from './Post/Post';
 import FormAddNewText from '../../../universalBlocks/forms/AddNewText';
 import { reduxForm } from 'redux-form';
 
-const Posts = (props) => {
+const Posts = React.memo((props) => {
 
   const ContactForm = reduxForm({
     form: 'newPost'
@@ -15,7 +15,7 @@ const Posts = (props) => {
   }
 
   let result = props.postsData.map(item => <Post key={item.id} text={item.text} likes={item.likes} addLike={props.addLike} profile={props.profile} />);
-
+  console.log('RENDER POSTS')
   return (
     <div className={styles.side}>
       <div className={styles.createPost}>
@@ -28,5 +28,5 @@ const Posts = (props) => {
     </div>
   )
 }
-
+)
 export default Posts;

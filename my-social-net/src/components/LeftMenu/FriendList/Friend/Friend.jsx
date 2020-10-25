@@ -3,7 +3,6 @@ import styles from './Friend.module.css'
 import { NavLink } from 'react-router-dom';
 
 const Friend = (props) => { 
-  console.log(props);
   return (
     <div className={styles.wrapper}>
       <img className={styles.avatar} src={props.avatar}/>

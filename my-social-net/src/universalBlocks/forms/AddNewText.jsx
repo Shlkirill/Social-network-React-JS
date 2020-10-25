@@ -17,7 +17,6 @@ const FormAddNewText = (props) => {
         return [maxLength100]
     }
   }
-  console.log(props)
   return (
     <form onSubmit={props.handleSubmit}>
 

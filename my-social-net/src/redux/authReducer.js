@@ -1,5 +1,6 @@
 import { apiAuth, apiLogin, apiLogout } from "../api/api";
 import { stopSubmit } from "redux-form";
+import { wait } from "@testing-library/react";
 
 export const setUserDataAC = (data, isAuth) => {
   return {
@@ -58,36 +59,30 @@ const AuthReducer = (state = initialState, action) => {
   }
 }
 
-export const authorizationTC = () => {
-  return (dispatch) => {
-    return apiAuth().then((response) => {
-      if (response.resultCode === 0) {
-        dispatch(setUserDataAC(response.data, true));
-      };
-    });
-  }
+export const authorizationTC = () => async (dispatch) => {
+  let response = await apiAuth()
+  if (response.resultCode === 0) {
+    dispatch(setUserDataAC(response.data, true));
+  };
 };
 
 
-export const accountLoginTC = (objData) => {
-  return (dispatch) => {
-    apiLogin(objData).then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(authorizationTC());
-        alert('Вы вошли')
-      } else {
-        dispatch(stopSubmit('login', {_error: response.data.messages[0]}))
-      }
-    })
+export const accountLoginTC = (objData) => async (dispatch) => {
+  let response = await apiLogin(objData);
+
+  if (response.data.resultCode === 0) {
+    dispatch(authorizationTC());
+    alert('Вы вошли')
+  } else {
+    dispatch(stopSubmit('login', { _error: response.data.messages[0] }))
   }
 }
 
-export const logoutAccountTC = () => {
-  return (dispatch) => {
-    apiLogout().then(()=> {
-      dispatch(setUserDataAC(null, false));
-      alert('Вы вышли')
-    })
+export const logoutAccountTC = () => async (dispatch) => {
+  let response = await apiLogout();
+  if (response.data.resultCode === 0) {
+    dispatch(setUserDataAC(null, false));
+    alert('Вы вышли')
   }
 }
 

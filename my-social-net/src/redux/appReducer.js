@@ -25,13 +25,9 @@ const appReducer = (state = initialState, action) => {
   }
 }
 
-export const initializeAppTC = () => {
-  return (dispatch) => {
-    let promiseAuthorization = dispatch(authorizationTC());
-    promiseAuthorization.then(() => {
-      dispatch(initializedAC());
-    })
-    };
+export const initializeAppTC = () => async (dispatch) => {
+  await dispatch(authorizationTC());
+  dispatch(initializedAC());
 };
 
 

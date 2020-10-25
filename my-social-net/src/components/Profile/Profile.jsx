@@ -4,6 +4,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import PostsContainer from './Posts/PostsContainer';
   
 const Profile = (props) => {
+  console.log('RENDER PROFILE')
   return(
     <div className={styles.main}>
       <ProfileInfo  profile={props.profile} followed={props.followed} 
