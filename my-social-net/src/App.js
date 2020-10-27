@@ -1,22 +1,22 @@
-import React from 'react';
-import { Route, BrowserRouter, withRouter } from 'react-router-dom';
+import React, { Suspense } from 'react';
+import { Route, withRouter } from 'react-router-dom';
 import './App.css';
+import ProfileСontainer from './components/Profile/ProfileСontainer';
+import UsersContainer from './components/Users/UsersContainer';
+import MessagesContainer from './components/Messages/MessagesContainer';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import MessagesContainer from './components/Messages/MessagesContainer';
 import LeftMenuContainer from './components/LeftMenu/LeftMenu container';
-import UsersContainer from './components/Users/UsersContainer';
-import ProfileСontainer from './components/Profile/ProfileСontainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/LoginContainer';
 import { connect } from 'react-redux';
 import { initializeAppTC } from './redux/appReducer';
-
 import { compose } from 'redux';
-import Loading from './universalBlocks/loading/loading';
+import Loading from './common/loading/loading';
+import { lazyImport } from './components/hoc/lazyImport';
 
-class SocialNetworkSite extends React.Component {
+class App extends React.Component {
   componentDidMount() {
     this.props.initializeApp();
   }
@@ -26,12 +26,12 @@ class SocialNetworkSite extends React.Component {
         <div className='SNsite'>
           <HeaderContainer />
           <LeftMenuContainer />
-          <Route path='/profile/:userId?'><ProfileСontainer /></Route>
-          <Route path='/messages'><MessagesContainer /></Route>
+          <Route path='/profile/:userId?'><Suspense><ProfileСontainer /></Suspense></Route>
+          <Route path='/messages'><Suspense><MessagesContainer /></Suspense></Route>
           <Route path='/news'><News /></Route>
           <Route path='/music'><Music /></Route>
           <Route path='/settings'><Settings /></Route>
-          <Route path='/users'><UsersContainer /></Route>
+          <Route path='/users'><Suspense><UsersContainer /></Suspense></Route>
           <Route path='/login'><LoginContainer /></Route>
         </div>
       );
@@ -53,4 +53,4 @@ const mapDispatchToProps = {
 export default compose(
   withRouter,
   connect(mapStateToProps, mapDispatchToProps))
-  (SocialNetworkSite);
+  (App);

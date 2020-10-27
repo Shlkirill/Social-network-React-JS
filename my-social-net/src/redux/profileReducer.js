@@ -1,4 +1,4 @@
-import { apiFollowUser, apiGetFollowUser, apiGetStatus, apiSetProfile, apiUnfollowUser, apiUpdateStatus } from "../api/api"
+import { apiGetFollowUser, apiGetStatus, apiSetProfile, apitogglefollowUser, apiUpdateStatus } from "../api/api"
 
 export const addPostActionCreator = (text) => {
   return {
@@ -6,7 +6,6 @@ export const addPostActionCreator = (text) => {
     newText: text,
   }
 }
-
 export const addLikeActionCreator = (props) => {
   return {
     type: "ADD-LIKE",
@@ -130,23 +129,15 @@ export const getFollowUserTC = (userId) => async (dispatch) => {
   dispatch(setFollowedUserAC(response));
 }
 
-export const followUserTC = (userId) => async (dispatch) => {
+export const togglefollowUserTC = (id, followed) => async (dispatch) => {
   dispatch(followingInProgressAC(true));
-  let response = await apiFollowUser(userId);
-  if (response.data.resultCode === 0) {
-    dispatch(setFollowedUserAC(true));
+  debugger;
+  let response = await apitogglefollowUser(id, followed);
+  if (response.status === 200) {
+    dispatch(setFollowedUserAC(!followed));
     dispatch(followingInProgressAC(false));
   }
-}
-
-export const unFollowUserTC = (userId) => async (dispatch) => {
-  dispatch(followingInProgressAC(true));
-  let response = await apiUnfollowUser(userId);
-  if (response.data.resultCode === 0) {
-    dispatch(setFollowedUserAC(false));
-    dispatch(followingInProgressAC(false));
-  }
-}
+};
 
 export const getUserStatusTC = (userId) => async (dispatch) => {
   let response = await apiGetStatus(userId);
@@ -156,7 +147,7 @@ export const getUserStatusTC = (userId) => async (dispatch) => {
 }
 
 export const getUpdateSatusTC = (status) => async () => {
-    apiUpdateStatus(status);
+  apiUpdateStatus(status);
 }
 
 

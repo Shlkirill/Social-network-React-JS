@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { followingInProgressAC, followUserTC, getFollowUserTC, getUpdateSatusTC, getUserStatusTC, setFollowedUserAC, setProfileTC, setUserProfileAC, unFollowUserTC } from '../../redux/profileReducer';
+import { followingInProgressAC, getFollowUserTC, getUpdateSatusTC, getUserStatusTC, setFollowedUserAC, setProfileTC, setUserProfileAC, togglefollowUserTC} from '../../redux/profileReducer';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { withAuthRedirectComponent } from '../hoc/withAuthRedirect';
@@ -18,10 +18,9 @@ const ProfileContainer = (props) => {
   }, [])
   return (<Profile profile={props.profile} followed={props.followed}
     setFollowedUser={props.setFollowedUser} isProgress={props.isProgress}
-    followingInProgress={props.followingInProgress} followUser={props.followUser}
-    unFollowUser={props.unFollowUser} status={props.status}
+    followingInProgress={props.followingInProgress} status={props.status}
     getUpdateSatus={props.getUpdateSatus} getUserStatus={props.getUserStatus}
-    authId={props.authId} />)
+    authId={props.authId} togglefollowUser={props.togglefollowUser}/>)
 }
 
 
@@ -64,10 +63,9 @@ let mapDispatchToProps = {
   followingInProgress: followingInProgressAC,
   setProfile: setProfileTC,
   getFollowUser: getFollowUserTC,
-  followUser: followUserTC,
-  unFollowUser: unFollowUserTC,
   getUserStatus: getUserStatusTC,
   getUpdateSatus: getUpdateSatusTC,
+  togglefollowUser: togglefollowUserTC
 }
 
 

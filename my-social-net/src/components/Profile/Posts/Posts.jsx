@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Posts.module.css';
 import Post from './Post/Post';
-import FormAddNewText from '../../../universalBlocks/forms/AddNewText';
+import FormAddNewText from '../../../common/forms/AddNewText';
 import { reduxForm } from 'redux-form';
 
 const Posts = React.memo((props) => {

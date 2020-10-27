@@ -3,7 +3,7 @@ import styles from './Users.module.css'
 import User from './User/User';
 import photoDefault from '../../img/empty-avatar.png'
 import ReactPaginate from 'react-paginate';
-import Loading from '../../universalBlocks/loading/loading';
+import Loading from '../../common/loading/loading';
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -13,8 +13,9 @@ const Users = (props) => {
         arrPages.push(i);
     }
     let userDate = props.users.map((item) => {
-        return <User name={item.name} key={item.id} id={item.id} followed={item.followed} 
-        avatar={item.photos.small || photoDefault} status={item.status} addFriend={props.addFriend} 
+        return <User name={item.name} key={item.id} id={item.id} 
+        followed={item.followed} avatar={item.photos.small || photoDefault} 
+        status={item.status} addFriend={props.addFriend} 
         isProgress={props.isProgress} togglefollowUser={props.togglefollowUser}/>
     });
     return (

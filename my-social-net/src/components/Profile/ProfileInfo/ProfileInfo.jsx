@@ -1,8 +1,8 @@
 import React from 'react';
-import Loading from '../../../universalBlocks/loading/loading';
+import Loading from '../../../common/loading/loading';
 import styles from './ProfileInfo.module.css'
 import photoDefault from '../../../img/empty-avatar.png'
-import { BottonToggleFollow } from '../../../universalBlocks/toggleFollow/BottonToggleFollow';
+import { BottonToggleFollow } from '../../../common/toggleFollow/BottonToggleFollow';
 import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
@@ -10,11 +10,8 @@ const ProfileInfo = (props) => {
     return <Loading />
   }
   let onToggleFollow = () => {
-    if (props.followed == false) {
-      props.followUser(props.profile.userId);
-    } else {
-      props.unFollowUser(props.profile.userId);
-    }
+    console.log(props.followed);
+    props.togglefollowUser(props.profile.userId, props.followed);
   };
   return (
     <div>

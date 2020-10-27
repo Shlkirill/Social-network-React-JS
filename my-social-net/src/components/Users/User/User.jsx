@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './User.module.css'
-import { BottonToggleFollow } from '../../../universalBlocks/toggleFollow/BottonToggleFollow';
+import { BottonToggleFollow } from '../../../common/toggleFollow/BottonToggleFollow';
 
 
 const User = (props) => {

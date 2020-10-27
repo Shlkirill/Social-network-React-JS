@@ -6,14 +6,14 @@ import Login from "./Login";
 
 const ContactForm = reduxForm({
     form: 'login',
-  })(Login);
+})(Login);
 
 const LoginContainer = (props) => {
-    const onSubmit = (formData) =>{
+    const onSubmit = (formData) => {
         props.accountLogin(formData);
     }
     return (
-        <ContactForm onSubmit={onSubmit} isAuth={props.isAuth}/>
+        <ContactForm onSubmit={onSubmit} isAuth={props.isAuth} />
     )
 }
 
@@ -24,7 +24,7 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = {
     accountLogin: accountLoginTC
-  }
+}
 
 
 

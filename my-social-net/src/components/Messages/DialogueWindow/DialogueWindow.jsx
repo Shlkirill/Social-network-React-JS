@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './DialogueWindow.module.css';
 import Dialog from '../Dialog/Dialog';
 import DialogMe from '../DialogMe/DialogMe';
-import FormAddNewText from '../../../universalBlocks/forms/AddNewText';
+import FormAddNewText from '../../../common/forms/AddNewText';
 import { reduxForm } from 'redux-form';
 
 const DialogueWindow = (props) => {
