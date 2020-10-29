@@ -54,3 +54,12 @@ export const apiLogin = (objData) => {
 export const apiLogout = () => {
     return instance.delete(`/auth/login`)
 };
+export const apiUploadAvatar = (photo) => {
+    let formData = new FormData()
+    formData.append('image', photo)
+    return instance.put(`/profile/photo`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+};

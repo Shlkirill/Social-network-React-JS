@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { followingInProgressAC, getFollowUserTC, getUpdateSatusTC, getUserStatusTC, setFollowedUserAC, setProfileTC, setUserProfileAC, togglefollowUserTC} from '../../redux/profileReducer';
+import { followingInProgressAC, getFollowUserTC, getUpdateSatusTC, getUserStatusTC, putAvatarToServerTC, setFollowedUserAC, setProfileTC, setUserProfileAC, togglefollowUserTC} from '../../redux/profileReducer';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { withAuthRedirectComponent } from '../hoc/withAuthRedirect';
@@ -15,14 +15,15 @@ const ProfileContainer = (props) => {
     props.setProfile(userId);
     props.getFollowUser(userId);
     props.getUserStatus(userId);
-  }, [])
+  }, [props.match.params.userId])
+  console.log('render')
   return (<Profile profile={props.profile} followed={props.followed}
     setFollowedUser={props.setFollowedUser} isProgress={props.isProgress}
     followingInProgress={props.followingInProgress} status={props.status}
     getUpdateSatus={props.getUpdateSatus} getUserStatus={props.getUserStatus}
-    authId={props.authId} togglefollowUser={props.togglefollowUser}/>)
+    authId={props.authId} togglefollowUser={props.togglefollowUser}
+    putAvatarToServer={props.putAvatarToServer}/>)
 }
-
 
 
 
@@ -65,7 +66,8 @@ let mapDispatchToProps = {
   getFollowUser: getFollowUserTC,
   getUserStatus: getUserStatusTC,
   getUpdateSatus: getUpdateSatusTC,
-  togglefollowUser: togglefollowUserTC
+  togglefollowUser: togglefollowUserTC,
+  putAvatarToServer: putAvatarToServerTC
 }
 
 
