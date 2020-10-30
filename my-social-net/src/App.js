@@ -14,8 +14,7 @@ import { connect } from 'react-redux';
 import { initializeAppTC } from './redux/appReducer';
 import { compose } from 'redux';
 import Loading from './common/loading/loading';
-import { lazyImport } from './components/hoc/lazyImport';
-import EditProfile from './components/Profile/ProfileInfo/EditProfile/EditProfile';
+import EditProfileContainer from './components/Profile/ProfileInfo/EditProfile/EditProfile';
 
 class App extends React.Component {
   componentDidMount() {
@@ -34,7 +33,7 @@ class App extends React.Component {
           <Route path='/settings'><Settings /></Route>
           <Route path='/users'><Suspense><UsersContainer /></Suspense></Route>
           <Route path='/login'><LoginContainer /></Route>
-          <Route path='/edit'><EditProfile /></Route>
+          <Route path='/edit'><EditProfileContainer/></Route>
         </div>
       );
     } else {

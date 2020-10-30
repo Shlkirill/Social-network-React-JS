@@ -63,3 +63,6 @@ export const apiUploadAvatar = (photo) => {
         }
     })
 };
+export const apiEditProfile = (objData) => {
+    return instance.put(`/profile`, objData)
+};

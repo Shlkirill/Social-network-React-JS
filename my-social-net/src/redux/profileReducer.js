@@ -1,4 +1,4 @@
-import { apiGetFollowUser, apiGetStatus, apiSetProfile, apitogglefollowUser, apiUpdateStatus, apiUploadAvatar } from "../api/api"
+import { apiEditProfile, apiGetFollowUser, apiGetStatus, apiSetProfile, apitogglefollowUser, apiUpdateStatus, apiUploadAvatar } from "../api/api"
 
 export const addPostActionCreator = (text) => {
   return {
@@ -40,6 +40,12 @@ export const uploadAnAvatarAC = (photo) => {
   return {
     type: 'UPLOAD_AVATAR',
     photo
+  }
+}
+export const uploadProfileInfo = (dataInfo) => {
+  return {
+    type: 'UPLOAD_PROFILE_INFO',
+    dataInfo
   }
 }
 
@@ -124,6 +130,11 @@ const profileReducer = (state = initialState, action) => {
         
       }
       return stateCopy;
+    case 'UPLOAD_PROFILE_INFO':
+      stateCopy = {
+        ...state,
+      }
+      return stateCopy
     default:
       return state;
   }
@@ -165,6 +176,12 @@ export const getUpdateSatusTC = (status) => async () => {
 export const putAvatarToServerTC = (photo) => async (dispatch) => {
   let response = await apiUploadAvatar(photo);
   dispatch(uploadAnAvatarAC(response.data.data.photos))
+}
+
+export const putProfileInfoTC= (dataInfo) => async (dispatch) => {
+  let response = await apiEditProfile(dataInfo);
+  console.log(response);
+  dispatch(uploadProfileInfo(dataInfo));
 }
 
 
