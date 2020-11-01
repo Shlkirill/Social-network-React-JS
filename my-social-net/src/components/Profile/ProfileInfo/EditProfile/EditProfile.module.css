@@ -1,4 +1,18 @@
-  .inputForm{
+.inputForm {
     display: flex;
     justify-content: center;
-  }
+}
+
+.error {
+    display: inline-block;
+    padding: 0px 15px;
+    border: 1px solid red;
+    color: red;
+}
+
+.submitSucceeded {
+    display: inline-block;
+    padding: 0px 15px;
+    border: 1px solid rgb(23, 255, 127);
+    color: rgb(23, 255, 127);
+}

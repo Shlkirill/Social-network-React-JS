@@ -58,9 +58,10 @@ const ProfileInfo = (props) => {
           <p><span>tel.: </span>8-800-555-35-35</p>
           <p><span>About me:</span> {props.profile.aboutMe}</p>
           <div className={styles.social}><a href={props.profile.contacts.vk}><i class="fab fa-vk"></i></a><a href={props.profile.contacts.instagram}><i class="fab fa-instagram"></i></a><a href={props.profile.contacts.facebook}><i class="fab fa-facebook-square"></i></a></div>
-        <div className={styles.editButton}>
-           <NavLink to='/edit'><button>Edit Profile</button></NavLink>
-        </div>
+          {props.profile.userId == props.authId ?
+            <div className={styles.editButton}>
+              <NavLink to='/edit'><button>Edit Profile</button></NavLink>
+            </div> : null}
         </div>
       </div>
       <div className={uploadMode ? styles.popUpUploadAvatarContainer : styles.hidden} onClick={offUploadMode} data-click={'parent'}>

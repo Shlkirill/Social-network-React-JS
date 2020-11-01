@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { initializeAppTC } from './redux/appReducer';
 import { compose } from 'redux';
 import Loading from './common/loading/loading';
-import EditProfileContainer from './components/Profile/ProfileInfo/EditProfile/EditProfile';
+import EditProfileContainer from './components/Profile/ProfileInfo/EditProfile/EditProfileContainer';
 
 class App extends React.Component {
   componentDidMount() {
@@ -26,7 +26,7 @@ class App extends React.Component {
         <div className='SNsite'>
           <HeaderContainer />
           <LeftMenuContainer />
-          <Route path='/profile/:userId?'><Suspense><ProfileСontainer /></Suspense></Route>
+          <Route path='/profile/:userId?'><ProfileСontainer /></Route>
           <Route path='/messages'><Suspense><MessagesContainer /></Suspense></Route>
           <Route path='/news'><News /></Route>
           <Route path='/music'><Music /></Route>

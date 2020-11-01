@@ -1,4 +1,5 @@
 import { apiEditProfile, apiGetFollowUser, apiGetStatus, apiSetProfile, apitogglefollowUser, apiUpdateStatus, apiUploadAvatar } from "../api/api"
+import { stopSubmit } from "redux-form"
 
 export const addPostActionCreator = (text) => {
   return {
@@ -126,8 +127,8 @@ const profileReducer = (state = initialState, action) => {
     case 'UPLOAD_AVATAR':
       stateCopy = {
         ...state,
-        profile: {...state.profile, photos: action.photo }
-        
+        profile: { ...state.profile, photos: action.photo }
+
       }
       return stateCopy;
     case 'UPLOAD_PROFILE_INFO':
@@ -178,11 +179,15 @@ export const putAvatarToServerTC = (photo) => async (dispatch) => {
   dispatch(uploadAnAvatarAC(response.data.data.photos))
 }
 
-export const putProfileInfoTC= (dataInfo) => async (dispatch) => {
+export const putProfileInfoTC = (dataInfo) => async (dispatch) => {
   let response = await apiEditProfile(dataInfo);
   console.log(response);
-  dispatch(uploadProfileInfo(dataInfo));
+  if (response.data.resultCode === 0) {
+    alert('Успешно отредактировано')
+  } else {
+    dispatch(stopSubmit('editMode', { _error: response.data.messages[0] }))
+    alert('Не все поля заполнены') 
+  }
 }
 
-
-export default profileReducer;
+  export default profileReducer;

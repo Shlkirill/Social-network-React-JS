@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import { putProfileInfoTC } from '../../../../redux/profileReducer';
+import React from 'react';
+import { Field} from 'redux-form';
 import styles from './EditProfile.module.css'
 
 const EditProfile = (props) => {
@@ -13,7 +11,7 @@ const EditProfile = (props) => {
       </div>
       <div className={styles.inputForm}>
         <div>Looking for a job:</div>
-        <div><Field type="checkbox" component="input" name='lookingForAJob'/></div>
+        <div><Field type="checkbox" component="input" name='lookingForAJob' /></div>
       </div>
       <div className={styles.inputForm}>
         <div>Your professional skills:</div>
@@ -26,65 +24,46 @@ const EditProfile = (props) => {
       <div>Contact:</div>
       <div className={styles.inputForm}>
         <div>Facebook:</div>
-        <div><Field type="text" component="input" name='facebook' /></div>
+        <div><Field type="text" component="input" name='contacts.facebook' /></div>
       </div>
       <div className={styles.inputForm}>
         <div>Github:</div>
-        <div><Field type="text" component="input" name='github' /></div>
+        <div><Field type="text" component="input" name='contacts.github' /></div>
       </div>
       <div className={styles.inputForm}>
         <div>Instagram:</div>
-        <div><Field type="text" component="input" name='instagram' /></div>
+        <div><Field type="text" component="input" name='contacts.instagram' /></div>
       </div>
       <div className={styles.inputForm}>
         <div>MainLink:</div>
-        <div><Field type="text" component="input" name='mainlink' /></div>
+        <div><Field type="text" component="input" name='contacts.mainLink' /></div>
       </div>
       <div className={styles.inputForm}>
         <div>Twitter:</div>
-        <div><Field type="text" component="input" name='twitter' /></div>
+        <div><Field type="text" component="input" name='contacts.twitter' /></div>
       </div>
       <div className={styles.inputForm}>
         <div>Vk:</div>
-        <div><Field type="text" component="input" name='vk' /></div>
+        <div><Field type="text" component="input" name='contacts.vk' /></div>
       </div>
       <div className={styles.inputForm}>
         <div>Website:</div>
-        <div><Field type="text" component="input" name='website' /></div>
+        <div><Field type="text" component="input" name='contacts.website' /></div>
       </div>
       <div className={styles.inputForm}>
         <div>Youtube:</div>
-        <div><Field type="text" component="input" name='youtube' /></div>
+        <div><Field type="text" component="input" name='contacts.youtube' /></div>
       </div>
       <button>Сохранить</button>
+      {props.error &&
+        <div className={styles.error}>
+          {props.error}
+        </div>}
+      {props.submitSucceeded &&
+        <div className={styles.submitSucceeded}>
+          Information has been edited and will appear on your page
+      </div>}
     </form>
   )
 }
-
-const EditProfileContainer = (props) => {
-
-  const EditProfileForm = reduxForm({
-    form: 'editMode',
-  })(EditProfile);
-
-  const onSubmit = (formData) => {
-    props.putProfileInfo(formData);
-  }
-
-  return (
-    <div>
-      <EditProfileForm onSubmit={onSubmit} {...props}/>
-    </div>
-  )
-}
-
-let mapStateToProps = (state) => {
-  return {
-  }
-}
-let mapDispatchToProps = {
-  putProfileInfo: putProfileInfoTC
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditProfileContainer);;
+export default EditProfile
