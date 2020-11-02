@@ -1,14 +1,13 @@
-import React, {useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import {reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { putProfileInfoTC, setProfileTC } from '../../../../redux/profileReducer';
 import Loading from '../../../../common/loading/loading';
 import EditProfile from './EditProfile';
 
 const EditProfileContainer = (props) => {
-  debugger;
   useEffect(() => {
-     if (props.profile == null) props.setProfile(props.authId);
+    if (props.profile == null) props.setProfile(props.authId);
   }, [props.profile])
 
   const EditProfileForm = reduxForm({

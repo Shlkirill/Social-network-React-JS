@@ -1,8 +1,14 @@
 import React from 'react';
-import { Field} from 'redux-form';
+import { Field } from 'redux-form';
 import styles from './EditProfile.module.css'
 
 const EditProfile = (props) => {
+  let contactsArr = Object.keys(props.profile.contacts).map((a) => {
+    return <div className={styles.inputForm}>
+      <div>{a}:</div>
+      <div><Field type="text" component="input" name={`contacts.${a}`} /></div>
+    </div>
+  })
   return (
     <form onSubmit={props.handleSubmit}>
       <div className={styles.inputForm}>
@@ -21,39 +27,9 @@ const EditProfile = (props) => {
         <div>About me:</div>
         <div><Field type="text" component="textarea" name='aboutMe' /></div>
       </div>
-      <div>Contact:</div>
-      <div className={styles.inputForm}>
-        <div>Facebook:</div>
-        <div><Field type="text" component="input" name='contacts.facebook' /></div>
-      </div>
-      <div className={styles.inputForm}>
-        <div>Github:</div>
-        <div><Field type="text" component="input" name='contacts.github' /></div>
-      </div>
-      <div className={styles.inputForm}>
-        <div>Instagram:</div>
-        <div><Field type="text" component="input" name='contacts.instagram' /></div>
-      </div>
-      <div className={styles.inputForm}>
-        <div>MainLink:</div>
-        <div><Field type="text" component="input" name='contacts.mainLink' /></div>
-      </div>
-      <div className={styles.inputForm}>
-        <div>Twitter:</div>
-        <div><Field type="text" component="input" name='contacts.twitter' /></div>
-      </div>
-      <div className={styles.inputForm}>
-        <div>Vk:</div>
-        <div><Field type="text" component="input" name='contacts.vk' /></div>
-      </div>
-      <div className={styles.inputForm}>
-        <div>Website:</div>
-        <div><Field type="text" component="input" name='contacts.website' /></div>
-      </div>
-      <div className={styles.inputForm}>
-        <div>Youtube:</div>
-        <div><Field type="text" component="input" name='contacts.youtube' /></div>
-      </div>
+
+      {contactsArr}
+
       <button>Сохранить</button>
       {props.error &&
         <div className={styles.error}>

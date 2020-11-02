@@ -1,4 +1,4 @@
-import { apiAuth, apiLogin, apiLogout } from "../api/api";
+import { apiAuth, apiCaptcha, apiLogin, apiLogout } from "../api/api";
 import { stopSubmit } from "redux-form";
 import { wait } from "@testing-library/react";
 
@@ -13,6 +13,12 @@ export const toggleIfFetchingAC = (isFetching) => {
   return {
     type: 'TOGGLE_IS_FETCHING',
     isFetching
+  }
+}
+export const setCaptchaAC = (url) => {
+  return {
+    type: 'SET_CAPTCHA',
+    url
   }
 }
 export const setLoginAC = (login, password, remember) => {
@@ -30,6 +36,7 @@ let initialState = {
   login: null,
   isFetching: false,
   isAuth: false,
+  captchaUrl: null
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -54,6 +61,13 @@ const AuthReducer = (state = initialState, action) => {
         ...state,
       };
       return stateCopy;
+    case 'SET_CAPTCHA':
+      stateCopy = {
+        ...state,
+        captchaUrl: action.url
+      };
+      console.log(stateCopy);
+      return stateCopy;
     default:
       return state;
   }
@@ -73,6 +87,9 @@ export const accountLoginTC = (objData) => async (dispatch) => {
   if (response.data.resultCode === 0) {
     dispatch(authorizationTC());
     alert('Вы вошли')
+  } else if (response.data.resultCode === 10) {
+    let response2 = await apiCaptcha();
+    dispatch(setCaptchaAC(response2.url))
   } else {
     dispatch(stopSubmit('login', { _error: response.data.messages[0] }))
   }

@@ -28,6 +28,9 @@ const Login = (props) => {
                     {props.error}
                 </div>}
                 <div>
+                    {props.captcha ? <img src={props.captcha} className={styles.captcha} alt=""/> : null}
+                </div>
+                <div>
                     <button type="submit" disabled={props.pristine || props.submitting || props.invalid}>Login</button>
                 </div>
             </form>

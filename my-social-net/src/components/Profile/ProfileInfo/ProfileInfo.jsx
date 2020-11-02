@@ -4,10 +4,10 @@ import styles from './ProfileInfo.module.css'
 import photoDefault from '../../../img/empty-avatar.png'
 import { BottonToggleFollow } from '../../../common/toggleFollow/BottonToggleFollow';
 import ProfileStatus from './ProfileStatus';
-import EditProfile from './EditProfile/EditProfile';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 
 const ProfileInfo = (props) => {
+  console.log(props.profile)
 
   let [uploadMode, setpUploadMode] = useState(false);
 
@@ -44,20 +44,26 @@ const ProfileInfo = (props) => {
               BottonToggleFollow('ONE_USER', onToggleFollow, props.followed, props.isProgress, props.id) :
               <div>
                 <button onClick={onUploadMode}>Upload New Avatar</button>
-              </div>
-            }
+              </div>}
           </div>
         </div>
         <div className={styles.info}>
           <h4>{props.profile.fullName}</h4>
           <p><ProfileStatus status={props.status} getUpdateSatus={props.getUpdateSatus}
             getUserStatus={props.getUserStatus} authId={props.authId} userId={props.profile.userId} /></p>
-          <p><span>Date of Birth: </span>12.08.1994 g.</p>
-          <p><span>City: </span>Belogorod</p>
-          <p><span>Education: </span>Belgorod economic university</p>
-          <p><span>tel.: </span>8-800-555-35-35</p>
+          <p><span>LookingForAJob:</span> {props.profile.lookingForAJob?'Yes':'No'}</p>
+          <p><span>LookingForAJobDescription:</span> {props.profile.lookingForAJobDescription}</p>
           <p><span>About me:</span> {props.profile.aboutMe}</p>
-          <div className={styles.social}><a href={props.profile.contacts.vk}><i class="fab fa-vk"></i></a><a href={props.profile.contacts.instagram}><i class="fab fa-instagram"></i></a><a href={props.profile.contacts.facebook}><i class="fab fa-facebook-square"></i></a></div>
+          <div className={styles.social}>
+            {props.profile.contacts.facebook ? <a href={props.profile.contacts.facebook}><i class="fab fa-facebook-square"></i></a> : null}
+            {props.profile.contacts.website ? <a href={props.profile.contacts.website}><i class="far fa-window-restore"></i></a> : null}
+            {props.profile.contacts.vk ? <a href={props.profile.contacts.vk}><i class="fab fa-vk"></i></a> : null}
+            {props.profile.contacts.twitter ? <a href={props.profile.contacts.twitter}><i class="fab fa-twitter-square"></i></a> : null}
+            {props.profile.contacts.instagram ? <a href={props.profile.contacts.instagram}><i class="fab fa-instagram"></i></a> : null}
+            {props.profile.contacts.youtube ? <a href={props.profile.contacts.youtube}><i class="fab fa-youtube"></i></a> : null}
+            {props.profile.contacts.github ? <a href={props.profile.contacts.github}><i class="fab fa-github-square"></i></a> : null}
+            {props.profile.contacts.mainLink ? <a href={props.profile.contacts.mainLink}><i class="fas fa-external-link-square-alt"></i></a> : null}
+          </div>
           {props.profile.userId == props.authId ?
             <div className={styles.editButton}>
               <NavLink to='/edit'><button>Edit Profile</button></NavLink>

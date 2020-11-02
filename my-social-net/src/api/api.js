@@ -15,8 +15,13 @@ export const apiGetUsers = async (count, page) => {
 };
 
 export const apiAuth = async () => {
-    let response = await instance.get(`auth/me`,);
+    let response = await instance.get(`auth/me`);
     return response.data
+};
+
+export const apiCaptcha = async () => {
+    let response = await instance.get(`/security/get-captcha-url`);
+    return response.data;
 };
 
 export const apiSetProfile = async (userId) => {
