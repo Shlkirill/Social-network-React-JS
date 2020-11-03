@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
 import ProfileСontainer from './components/Profile/ProfileСontainer';
 import UsersContainer from './components/Users/UsersContainer';
@@ -26,14 +26,18 @@ class App extends React.Component {
         <div className='SNsite'>
           <HeaderContainer />
           <LeftMenuContainer />
-          <Route path='/profile/:userId?'><ProfileСontainer /></Route>
-          <Route path='/messages'><Suspense><MessagesContainer /></Suspense></Route>
-          <Route path='/news'><News /></Route>
-          <Route path='/music'><Music /></Route>
-          <Route path='/settings'><Settings /></Route>
-          <Route path='/users'><Suspense><UsersContainer /></Suspense></Route>
-          <Route path='/login'><LoginContainer /></Route>
-          <Route path='/edit'><EditProfileContainer/></Route>
+          <Switch>
+            <Route exact path='/'><Redirect to={'/profile'}/></Route>
+            <Route path='/profile/:userId?'><ProfileСontainer /></Route>
+            <Route path='/messages'><Suspense><MessagesContainer /></Suspense></Route>
+            <Route path='/news'><News /></Route>
+            <Route path='/music'><Music /></Route>
+            <Route path='/settings'><Settings /></Route>
+            <Route path='/users'><Suspense><UsersContainer /></Suspense></Route>
+            <Route path='/login'><LoginContainer /></Route>
+            <Route path='/edit'><EditProfileContainer/></Route>
+            <Route path='/*'><div>404 NOT FOUND</div></Route>
+          </Switch>  
         </div>
       );
     } else {

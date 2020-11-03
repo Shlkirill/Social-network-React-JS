@@ -11,6 +11,7 @@ const ContactForm = reduxForm({
 const LoginContainer = (props) => {
     const onSubmit = (formData) => {
         props.accountLogin(formData);
+        console.log(formData)
     }
     return (
         <ContactForm onSubmit={onSubmit} isAuth={props.isAuth} captcha={props.captcha}/>

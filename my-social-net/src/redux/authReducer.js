@@ -87,10 +87,11 @@ export const accountLoginTC = (objData) => async (dispatch) => {
   if (response.data.resultCode === 0) {
     dispatch(authorizationTC());
     alert('Вы вошли')
-  } else if (response.data.resultCode === 10) {
-    let response2 = await apiCaptcha();
-    dispatch(setCaptchaAC(response2.url))
   } else {
+    if (response.data.resultCode === 10) {
+      let response2 = await apiCaptcha();
+      dispatch(setCaptchaAC(response2.url))
+    }
     dispatch(stopSubmit('login', { _error: response.data.messages[0] }))
   }
 }

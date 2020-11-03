@@ -27,9 +27,13 @@ const Login = (props) => {
                 {props.error && <div className={styles.error}>
                     {props.error}
                 </div>}
-                <div>
-                    {props.captcha ? <img src={props.captcha} className={styles.captcha} alt=""/> : null}
-                </div>
+                {props.captcha &&
+                    <div>
+                        <div><img src={props.captcha} className={styles.captcha} alt="" /></div>
+                        <div>
+                            <Field name="captcha" component={inputField} type="text" />
+                        </div>
+                    </div>}
                 <div>
                     <button type="submit" disabled={props.pristine || props.submitting || props.invalid}>Login</button>
                 </div>
