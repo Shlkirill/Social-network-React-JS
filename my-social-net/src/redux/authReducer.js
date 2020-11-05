@@ -82,17 +82,22 @@ export const authorizationTC = () => async (dispatch) => {
 
 
 export const accountLoginTC = (objData) => async (dispatch) => {
-  let response = await apiLogin(objData);
+  debugger;
+  try {
+    let response = await apiLogin(objData);
 
-  if (response.data.resultCode === 0) {
-    dispatch(authorizationTC());
-    alert('Вы вошли')
-  } else {
-    if (response.data.resultCode === 10) {
-      let response2 = await apiCaptcha();
-      dispatch(setCaptchaAC(response2.url))
+    if (response.data.resultCode === 0) {
+      dispatch(authorizationTC());
+      alert('Вы вошли')
+    } else {
+      if (response.data.resultCode === 10) {
+        let response2 = await apiCaptcha();
+        dispatch(setCaptchaAC(response2.url))
+      }
+      dispatch(stopSubmit('login', { _error: response.data.messages[0] }))
     }
-    dispatch(stopSubmit('login', { _error: response.data.messages[0] }))
+  } catch (err) {
+    dispatch(stopSubmit('login', { _error: 'server error' }))
   }
 }
 

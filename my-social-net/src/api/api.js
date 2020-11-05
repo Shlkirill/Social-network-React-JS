@@ -54,7 +54,6 @@ export const apiUpdateStatus = (status) => {
     return instance.put(`/profile/status`, { status: status })
 };
 export const apiLogin = (objData) => {
-    debugger;
     return instance.post(`/auth/login`, objData);
 };
 export const apiLogout = () => {

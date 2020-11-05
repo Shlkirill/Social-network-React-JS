@@ -21,33 +21,42 @@ class App extends React.Component {
     this.props.initializeApp();
   }
   render() {
-    if (this.props.initialize) {
+    debugger;
+    if (!this.props.initialize) {
+      return <Loading />
+    } else if (!this.props.isAuth) {
+      return (
+        <div>
+          <Route path='/'><Redirect to={'/login'} /><LoginContainer /></Route>
+        </div>
+      )
+
+    } else {
       return (
         <div className='SNsite'>
           <HeaderContainer />
           <LeftMenuContainer />
           <Switch>
-            <Route exact path='/'><Redirect to={'/profile'}/></Route>
+            <Route exact path='/'><Redirect to={'/profile'} /></Route>
+            <Route exact path='/login'><Redirect to={'/profile'} /></Route>
             <Route path='/profile/:userId?'><ProfileСontainer /></Route>
             <Route path='/messages'><Suspense><MessagesContainer /></Suspense></Route>
             <Route path='/news'><News /></Route>
             <Route path='/music'><Music /></Route>
             <Route path='/settings'><Settings /></Route>
             <Route path='/users'><Suspense><UsersContainer /></Suspense></Route>
-            <Route path='/login'><LoginContainer /></Route>
-            <Route path='/edit'><EditProfileContainer/></Route>
+            <Route path='/edit'><EditProfileContainer /></Route>
             <Route path='/*'><div>404 NOT FOUND</div></Route>
-          </Switch>  
+          </Switch>
         </div>
       );
-    } else {
-      return <Loading />
     }
   }
 }
 const mapStateToProps = (state) => {
   return {
-    initialize: state.appInitial.initialized
+    initialize: state.appInitial.initialized,
+    isAuth: state.auth.isAuth,
   }
 }
 

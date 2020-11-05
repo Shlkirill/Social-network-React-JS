@@ -7,7 +7,6 @@ import ProfileStatus from './ProfileStatus';
 import { NavLink} from 'react-router-dom';
 
 const ProfileInfo = (props) => {
-  console.log(props.profile)
 
   let [uploadMode, setpUploadMode] = useState(false);
 

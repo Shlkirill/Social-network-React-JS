@@ -4,6 +4,8 @@ import { reduxForm } from 'redux-form';
 import { putProfileInfoTC, setProfileTC } from '../../../../redux/profileReducer';
 import Loading from '../../../../common/loading/loading';
 import EditProfile from './EditProfile';
+import { compose } from 'redux';
+import { withAuthRedirectComponent } from '../../../hoc/withAuthRedirect';
 
 const EditProfileContainer = (props) => {
   useEffect(() => {
@@ -35,5 +37,7 @@ let mapDispatchToProps = {
   setProfile: setProfileTC,
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditProfileContainer);;
+export default compose( 
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirectComponent)
+  (EditProfileContainer);

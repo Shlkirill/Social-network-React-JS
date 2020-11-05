@@ -155,7 +155,6 @@ export const getFollowUserTC = (userId) => async (dispatch) => {
 
 export const togglefollowUserTC = (id, followed) => async (dispatch) => {
   dispatch(followingInProgressAC(true));
-  debugger;
   let response = await apitogglefollowUser(id, followed);
   if (response.status === 200) {
     dispatch(setFollowedUserAC(!followed));
@@ -181,7 +180,6 @@ export const putAvatarToServerTC = (photo) => async (dispatch) => {
 
 export const putProfileInfoTC = (dataInfo) => async (dispatch) => {
   let response = await apiEditProfile(dataInfo);
-  console.log(response);
   if (response.data.resultCode === 0) {
     alert('Успешно отредактировано')
   } else {
