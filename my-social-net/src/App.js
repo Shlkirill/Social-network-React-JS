@@ -21,7 +21,6 @@ class App extends React.Component {
     this.props.initializeApp();
   }
   render() {
-    debugger;
     if (!this.props.initialize) {
       return <Loading />
     } else if (!this.props.isAuth) {
@@ -34,20 +33,22 @@ class App extends React.Component {
     } else {
       return (
         <div className='SNsite'>
-          <HeaderContainer />
           <LeftMenuContainer />
-          <Switch>
-            <Route exact path='/'><Redirect to={'/profile'} /></Route>
-            <Route exact path='/login'><Redirect to={'/profile'} /></Route>
-            <Route path='/profile/:userId?'><ProfileСontainer /></Route>
-            <Route path='/messages'><Suspense><MessagesContainer /></Suspense></Route>
-            <Route path='/news'><News /></Route>
-            <Route path='/music'><Music /></Route>
-            <Route path='/settings'><Settings /></Route>
-            <Route path='/users'><Suspense><UsersContainer /></Suspense></Route>
-            <Route path='/edit'><EditProfileContainer /></Route>
-            <Route path='/*'><div>404 NOT FOUND</div></Route>
-          </Switch>
+          <div className='main'>
+            <HeaderContainer />
+            <Switch>
+              <Route exact path='/'><Redirect to={'/profile'} /></Route>
+              <Route exact path='/login'><Redirect to={'/profile'} /></Route>
+              <Route path='/profile/:userId?'><ProfileСontainer /></Route>
+              <Route path='/messages'><Suspense><MessagesContainer /></Suspense></Route>
+              <Route path='/news'><News /></Route>
+              <Route path='/music'><Music /></Route>
+              <Route path='/settings'><Settings /></Route>
+              <Route path='/users'><Suspense><UsersContainer /></Suspense></Route>
+              <Route path='/edit'><EditProfileContainer /></Route>
+              <Route path='/*'><div>404 NOT FOUND</div></Route>
+            </Switch>
+          </div>
         </div>
       );
     }

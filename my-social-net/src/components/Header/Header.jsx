@@ -5,9 +5,8 @@ import { NavLink } from 'react-router-dom';
 const Header = (props) => {
     return (
       <div className={styles.header}>
-          <NavLink to='/profile'><img src='http://www.pngall.com/wp-content/uploads/2016/06/Superman-Logo-Free-Download-PNG.png' className={styles.logo}/></NavLink>
-          <p>SOCIAL CITE</p>
-          {props.isAuth ? <button onClick={props.logoutAccount} className={styles.button}>Exit</button> : <NavLink to={'/login'}><button className={styles.button}>Sign In</button></NavLink> }
+          <p></p>
+          {props.isAuth ? <button onClick={props.logoutAccount} className={styles.button}><i class="fas fa-sign-out-alt"></i></button> : <NavLink to={'/login'}><button className={styles.button}>Sign In</button></NavLink> }
       </div>
     )
   }

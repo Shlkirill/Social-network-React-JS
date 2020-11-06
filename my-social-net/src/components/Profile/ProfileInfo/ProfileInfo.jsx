@@ -31,19 +31,16 @@ const ProfileInfo = (props) => {
     }
   };
   return (
-    <div>
-      <img src='http://dgdesign.ru/uploads/posts/2018-05/1525700405_shapka-sayta-tehnologii-2114654127851.jpg' className={styles.image} />
+    <div className={styles.profileInfo}>
       <div className={styles.user}>
         <div className={styles.userAvatarAndFollow}>
           <div>
             <img src={props.profile.photos.large || photoDefault} className={styles.avatar} />
           </div>
-          <div>
+          <div className={styles.buttonUnderAvatar}>
             {props.profile.userId !== props.authId ?
               BottonToggleFollow('ONE_USER', onToggleFollow, props.followed, props.isProgress, props.id) :
-              <div>
-                <button onClick={onUploadMode}>Upload New Avatar</button>
-              </div>}
+                <button className={styles.buttonEditAvatar} onClick={onUploadMode}>Edit avatar</button>}
           </div>
         </div>
         <div className={styles.info}>

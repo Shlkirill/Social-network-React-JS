@@ -3,22 +3,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ACDAE9;
+  background-color: rgb(255, 255, 255);
   padding: 0 30px;
-}
-.logo {
-  height: 120px;
+  height: 80px;
+  box-shadow: -2px 3px 6px 0px #B5B5B5;
+  border-top-right-radius: 10px;
 }
 .button {
   height: 40px;
-  width: 70px;
+  width: 50px;
   border-radius: 10px;
-  background-color: #2C3B81;
+  background-color: #3b6ef0;
   border: none;
   color: #fff;
-  font-weight: 600;
 }
 .button:hover {
   cursor: pointer;
   background-color: #7084E2;
+}
+.button i {
+  font-size: 18px;
 }
