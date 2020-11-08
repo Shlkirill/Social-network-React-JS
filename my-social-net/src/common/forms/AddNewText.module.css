@@ -1,25 +1,32 @@
 .inputText {
   width: 100%;
   height: 50px;
-  background-color: #F3FCFF;
   box-sizing: border-box;
   resize: none;
+  padding-left: 10px;
+  padding-top: 5px;
+  font-size: 14px;
+  border: none;
+  border-bottom: 1px solid #999999;
+  outline: none;
 }
 .inputSubmit {
-  height: 40px;
-  border-radius: 10px;
-  background-color: #2C3B81;
+  text-align: right;
+  margin-top: 5px;
+}
+.inputSubmit button {
+  border-radius: 2px;
+  background-color: #3b6ef0;
+  height: 28px;
+  width: 55px;
   border: none;
   color: #fff;
-  font-weight: 600;
-  margin-top: 10px;
-  float: right;
 }
-.inputSubmit:hover{
+.inputSubmit button:hover{
   cursor: pointer;
   opacity: 0.7;
 }
-.inputSubmit:disabled {
+.inputSubmit button:disabled {
   background-color: #717279;
   cursor: auto ;
   opacity: 1;

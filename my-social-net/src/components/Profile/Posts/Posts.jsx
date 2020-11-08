@@ -16,7 +16,7 @@ const Posts = React.memo((props) => {
 
   let result = props.postsData.map(item => <Post key={item.id} text={item.text} likes={item.likes} addLike={props.addLike} profile={props.profile} />);
   return (
-    <div className={styles.side}>
+    <div className={styles.postsBlock}>
       <div className={styles.createPost}>
         <h3> My posts</h3>
         <ContactForm onSubmit={onSubmit} name={'newPost'} placeholder={'send new post'} />

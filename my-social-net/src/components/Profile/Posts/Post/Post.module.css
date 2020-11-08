@@ -1,7 +1,9 @@
   .post {
     display: flex;
-    margin-top: 20px;
     align-items: center;
+  }
+  .post:not(:last-child) {
+    margin-bottom: 20px;
   }
   .post p {
     padding-left: 20px;
@@ -21,4 +23,5 @@
   .avatar {
     height: 50px;
     border-radius: 30px; 
+    border: 1px solid rgb(202, 202, 202);
   }

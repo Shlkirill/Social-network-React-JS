@@ -25,8 +25,8 @@ const FormAddNewText = (props) => {
           component={TextareaField} type="text" placeholder={props.placeholder}
           validate={validateCreactor()} />
       </div>
-      <div>
-        <button className={styles.inputSubmit} disabled={props.pristine || props.submitting || props.invalid}>Send</button>
+      <div className={styles.inputSubmit}>
+        <button disabled={props.pristine || props.submitting || props.invalid}>Send</button>
       </div>
     </form>
   )

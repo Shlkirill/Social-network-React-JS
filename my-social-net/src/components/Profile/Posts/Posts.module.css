@@ -1,0 +1,14 @@
+.postsBlock {
+    margin: 20px;
+}
+.createPost, .posts {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 0px #B5B5B5;
+    margin-bottom: 20px;
+}
+.createPost h3 {
+    margin-left: 5px;
+    margin-bottom: 10px;
+}

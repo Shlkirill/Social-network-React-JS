@@ -1,12 +1,12 @@
 @import './fonts/fonts.css';
 
 *{
+  font-family: 'Montserrat';
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: 'Montserrat';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

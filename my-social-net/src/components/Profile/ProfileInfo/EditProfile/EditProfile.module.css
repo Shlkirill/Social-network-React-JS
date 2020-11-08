@@ -1,8 +1,21 @@
+.container {
+    width: 500px;
+    background-color: #fff;
+    margin: 20px auto auto auto;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 0px #B5B5B5;
+}
 .inputForm {
     display: flex;
-    justify-content: center;
+    justify-content: end;
 }
-
+.inputName {
+    flex: 1;
+}
+.inputField {
+    flex: 1;
+}
 .error {
     display: inline-block;
     padding: 0px 15px;
