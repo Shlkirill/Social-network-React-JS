@@ -13,10 +13,10 @@ const Users = (props) => {
         arrPages.push(i);
     }
     let userDate = props.users.map((item) => {
-        return <User name={item.name} key={item.id} id={item.id} 
-        followed={item.followed} avatar={item.photos.small || photoDefault} 
-        status={item.status} addFriend={props.addFriend} 
-        isProgress={props.isProgress} togglefollowUser={props.togglefollowUser}/>
+        return <User name={item.name} key={item.id} id={item.id}
+            followed={item.followed} avatar={item.photos.small || photoDefault}
+            status={item.status} addFriend={props.addFriend}
+            isProgress={props.isProgress} togglefollowUser={props.togglefollowUser} />
     });
     return (
         <div className={styles.users}>
@@ -45,7 +45,9 @@ const Users = (props) => {
                     <option value='50'>50</option>
                 </select>
             </div>
-            {userDate}
+            <div className={styles.usersList}>
+                {userDate}
+            </div>
         </div>
     )
 }

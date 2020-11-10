@@ -1,3 +1,60 @@
+.container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        background-color: rgb(241, 241, 241);
+    width: 100%;
+    height: 100%;
+    
+}
+.containerLoginForm{
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    width: 500px;
+    height: 400px;
+    justify-content: end;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 0px #B5B5B5;
+}
+.tittle {
+    flex: 1;
+    margin-top: 30px;
+    font-weight: bold;
+}
+.loginForm {
+    flex: 2;
+}
+.rememberCheckbox {
+    display: flex;
+}
+.rememberCheckbox span{
+    margin-left: 10px;
+}
+.inputField {
+    width: 225px;
+    border: none;
+    border-bottom: 1px solid #999999;
+    outline: none;
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.submitContainer {
+    text-align: right;
+}
+.submit {
+    border-radius: 2px;
+    background-color: #3b6ef0;
+    height: 28px;
+    width: 55px;
+    border: none;
+    color: #fff;
+}
+
 .error {
     display: inline-block;
     padding: 0px 15px;

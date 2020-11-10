@@ -1,21 +1,56 @@
-.container {
-    width: 500px;
+.container{
     background-color: #fff;
-    margin: 20px auto auto auto;
-    padding: 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 3px 0px #B5B5B5;
+    margin: 20px;
+}
+.title {
+    text-align: center;
+    margin: 10px 0 30px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #999999;
+}
+.editProfile {
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px;
 }
 .inputForm {
     display: flex;
-    justify-content: end;
+    align-items: center;
+    margin-bottom: 15px;
 }
 .inputName {
     flex: 1;
+    font-weight: bold;
+}
+.inputFieldParent {
+    flex: 0;
 }
 .inputField {
-    flex: 1;
+    width: 225px;
+    resize: none;
+    border: none;
+    border-bottom: 1px solid #999999;
+    outline: none;
+    background-color: none;
 }
+.textareaField {
+    border: 1px solid #999999;
+}
+.submitContainer {
+    text-align: right;
+}
+.submit {
+    border-radius: 2px;
+    background-color: #3b6ef0;
+    height: 28px;
+    width: 85px;
+    border: none;
+    color: #fff;
+    margin: 15px 0;
+}
+
 .error {
     display: inline-block;
     padding: 0px 15px;
