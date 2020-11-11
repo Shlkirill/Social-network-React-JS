@@ -1,36 +1,69 @@
 import { apiAuth, apiCaptcha, apiLogin, apiLogout } from "../api/api";
 import { stopSubmit } from "redux-form";
-import { wait } from "@testing-library/react";
+
+const SET_USER_DATA = 'SET_USER_DATA';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const SET_CAPTCHA = 'SET_CAPTCHA';
+const SET_LOGIN = 'SET_LOGIN';
+
+type setUserActionType = {
+  type: typeof SET_USER_DATA,
+  data: string,
+  isAuth: boolean
+}
+type toggleIfFetchingActionType = {
+  type: typeof TOGGLE_IS_FETCHING,
+  isFetching: boolean
+}
+type setCaptchaActionType = {
+  type: typeof SET_CAPTCHA,
+  url: string
+}
+type setLoginActionType = {
+  type: typeof SET_LOGIN,
+  login: string,
+  password: number,
+  remember: boolean
+}
 
 export const setUserDataAC = (data, isAuth) => {
   return {
-    type: "SET_USER_DATA",
+    type: SET_USER_DATA,
     data,
     isAuth
   }
 }
 export const toggleIfFetchingAC = (isFetching) => {
   return {
-    type: 'TOGGLE_IS_FETCHING',
+    type: TOGGLE_IS_FETCHING,
     isFetching
   }
 }
 export const setCaptchaAC = (url) => {
   return {
-    type: 'SET_CAPTCHA',
+    type: SET_CAPTCHA,
     url
   }
 }
 export const setLoginAC = (login, password, remember) => {
   return {
-    type: 'SET_LOGIN',
+    type: SET_LOGIN,
     login,
     password,
     remember
   }
 }
 
-let initialState = {
+type initalStateType = {
+  email: string | null,
+  id: number | null,
+  login: string | null,
+  isFetching: boolean,
+  isAuth: boolean,
+  captchaUrl: boolean | null
+}
+
+let initialState: initalStateType = {
   email: null,
   id: null,
   login: null,
@@ -39,7 +72,7 @@ let initialState = {
   captchaUrl: null
 };
 
-const AuthReducer = (state = initialState, action) => {
+const AuthReducer = (state = initialState, action): initalStateType => {
   let stateCopy;
 
   switch (action.type) {
@@ -47,7 +80,7 @@ const AuthReducer = (state = initialState, action) => {
       stateCopy = {
         ...state,
         ...action.data,
-        isAuth: action.isAuth,
+        isAuth: action.isAuth
       };
       return stateCopy;
     case 'TOGGLE_IS_FETCHING':
@@ -73,7 +106,7 @@ const AuthReducer = (state = initialState, action) => {
   }
 }
 
-export const authorizationTC = () => async (dispatch) => {
+export const authorizationTC = () => async (dispatch:any) => {
   let response = await apiAuth()
   if (response.resultCode === 0) {
     dispatch(setUserDataAC(response.data, true));
@@ -81,7 +114,7 @@ export const authorizationTC = () => async (dispatch) => {
 };
 
 
-export const accountLoginTC = (objData) => async (dispatch) => {
+export const accountLoginTC = (objData:any) => async (dispatch:any) => {
   debugger;
   try {
     let response = await apiLogin(objData);
@@ -101,7 +134,7 @@ export const accountLoginTC = (objData) => async (dispatch) => {
   }
 }
 
-export const logoutAccountTC = () => async (dispatch) => {
+export const logoutAccountTC = () => async (dispatch:any) => {
   let response = await apiLogout();
   if (response.data.resultCode === 0) {
     dispatch(setUserDataAC(null, false));
