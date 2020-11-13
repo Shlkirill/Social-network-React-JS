@@ -8,7 +8,7 @@ const SET_LOGIN = 'SET_LOGIN';
 
 type setUserActionType = {
   type: typeof SET_USER_DATA,
-  data: string,
+  data: string|null,
   isAuth: boolean
 }
 type toggleIfFetchingActionType = {
@@ -26,26 +26,26 @@ type setLoginActionType = {
   remember: boolean
 }
 
-export const setUserDataAC = (data, isAuth) => {
+export const setUserDataAC = (data:string|null, isAuth:boolean):setUserActionType => {
   return {
     type: SET_USER_DATA,
     data,
     isAuth
   }
 }
-export const toggleIfFetchingAC = (isFetching) => {
+export const toggleIfFetchingAC = (isFetching:boolean): toggleIfFetchingActionType => {
   return {
     type: TOGGLE_IS_FETCHING,
     isFetching
   }
 }
-export const setCaptchaAC = (url) => {
+export const setCaptchaAC = (url:string): setCaptchaActionType => {
   return {
     type: SET_CAPTCHA,
     url
   }
 }
-export const setLoginAC = (login, password, remember) => {
+export const setLoginAC = (login:string, password:number, remember:boolean): setLoginActionType => {
   return {
     type: SET_LOGIN,
     login,
@@ -60,7 +60,7 @@ type initalStateType = {
   login: string | null,
   isFetching: boolean,
   isAuth: boolean,
-  captchaUrl: boolean | null
+  captchaUrl: string | null
 }
 
 let initialState: initalStateType = {
@@ -72,7 +72,7 @@ let initialState: initalStateType = {
   captchaUrl: null
 };
 
-const AuthReducer = (state = initialState, action): initalStateType => {
+const AuthReducer = (state = initialState, action:any): initalStateType => {
   let stateCopy;
 
   switch (action.type) {
@@ -115,7 +115,6 @@ export const authorizationTC = () => async (dispatch:any) => {
 
 
 export const accountLoginTC = (objData:any) => async (dispatch:any) => {
-  debugger;
   try {
     let response = await apiLogin(objData);
 
