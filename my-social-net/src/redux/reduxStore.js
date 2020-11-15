@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import {reducer as formReducer, reducer} from 'redux-form';
 import profileReducer from './profileReducer';
 import friendsReducer from './friendsReducer';
-import usersReducer from './usersReducer';
+import usersReducer from './usersReducer.ts';
 import authReducer from './authReducer';
 import thunkMiddleware from 'redux-thunk';
 import appReducer from './appReducer';

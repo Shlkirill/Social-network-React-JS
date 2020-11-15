@@ -109,7 +109,7 @@ type contactProfileType = {
   mainLink: string
 }
 
-type photosProfileType = {
+export type photosProfileType = {
   small: string,
   large: string,
 }
@@ -201,7 +201,7 @@ const profileReducer = (state = initialState, action: any): initialStateType => 
     case UPLOAD_AVATAR:
       stateCopy = {
         ...state,
-        // profile: { ...state.profile, photos: action.photo }
+        profile: { ...state.profile, photos: action.photo } as profileType
 
       }
       return stateCopy;

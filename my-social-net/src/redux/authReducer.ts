@@ -54,7 +54,7 @@ export const setLoginAC = (login:string, password:number, remember:boolean): set
   }
 }
 
-type initalStateType = {
+export type initalStateAuthType = {
   email: string | null,
   id: number | null,
   login: string | null,
@@ -63,7 +63,7 @@ type initalStateType = {
   captchaUrl: string | null
 }
 
-let initialState: initalStateType = {
+let initialState: initalStateAuthType = {
   email: null,
   id: null,
   login: null,
@@ -72,7 +72,7 @@ let initialState: initalStateType = {
   captchaUrl: null
 };
 
-const AuthReducer = (state = initialState, action:any): initalStateType => {
+const AuthReducer = (state = initialState, action:any): initalStateAuthType => {
   let stateCopy;
 
   switch (action.type) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './Users';
 import { connect } from 'react-redux';
-import { setCountUsersAC, getUsersTC, setCountUserTC, getActivePageTC, togglefollowUserTC} from '../../redux/usersReducer';
+import { setCountUsersAC, getUsersTC, setCountUserTC, getActivePageTC, togglefollowUserTC} from '../../redux/usersReducer.ts';
 import { addFriendAC } from '../../redux/friendsReducer';
 import { getUsers, getFetching, getActivePage, getTotalUsersCount, getUsersPageSize, getFollowingInProgress, getUsersSuperCreateSelectorTEST } from '../../redux/users-selectors';
 
