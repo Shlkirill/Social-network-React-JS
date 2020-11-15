@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import LeftMenu from './LeftMenu';
+import { friendsType } from '../../redux/friendsReducer';
 
+type PropsType = {
+  friends: friendsType
+}
 
-
-class LeftMenuContainer extends React.Component {
+class LeftMenuContainer extends React.Component<PropsType> {
 
   render() {
     return (
@@ -15,7 +18,7 @@ class LeftMenuContainer extends React.Component {
 }
 
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: any) => {
   return {
     friends: state.friendsPage.friends,
   }

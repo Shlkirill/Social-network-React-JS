@@ -29,7 +29,7 @@ export const addFriendAC = (id:number, avatar:string, name:string):addFriendActi
   }
 }
 
-type friendsType = {
+export type friendsType = {
   id: number,
   name: string
 }
