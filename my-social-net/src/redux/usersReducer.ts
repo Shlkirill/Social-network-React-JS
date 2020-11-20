@@ -1,5 +1,7 @@
-import { apiFollowUser, apiGetUsers, apiUnfollowUser, apitogglefollowUser } from "../api/api"
-import {photosProfileType} from './profileReducer'
+import { ThunkAction } from "redux-thunk";
+import { apiGetUsers, apitogglefollowUser } from "../api/api"
+import { photosProfileType } from './profileReducer'
+import { AppStateType } from "./reduxStore";
 
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
 const SET_USERS = 'SET_USER';
@@ -36,6 +38,8 @@ type followingInProgressActionType = {
   value: boolean
 
 }
+type ActionUsersTypes = toogleFollowTActionType | setUsersActionType | setPageActionType | setCountUsersActionType | toggleIfFetchingActionType | followingInProgressActionType
+
 export const toggleFollowAC = (id: number, followed: boolean): toogleFollowTActionType => {
   return {
     type: TOGGLE_FOLLOW,
@@ -76,7 +80,7 @@ export const followingInProgressAC = (id: number, value: boolean): followingInPr
   }
 }
 
-type usersType = {
+export type usersType = {
   id: number,
   name: string,
   status: string,
@@ -95,7 +99,7 @@ let initialState = {
   followingInProgress: [] as Array<usersType>,
 };
 
-const UsersReducer = (state = initialState, action: any): initialStateType => {
+const UsersReducer = (state = initialState, action: ActionUsersTypes): initialStateType => {
   let stateCopy;
 
   switch (action.type) {
@@ -154,30 +158,39 @@ const UsersReducer = (state = initialState, action: any): initialStateType => {
   }
 }
 
-export const getUsersTC = (pageSize: number, activePage: number) => async (dispatch: any) => {
-  dispatch(toggleIfFetchingAC(true));
-  let response = await apiGetUsers(pageSize, activePage);
-  dispatch(setUsersAC(response.items, response.totalCount));
-  dispatch(toggleIfFetchingAC(false));
-};
+type ThunkUsersType = ThunkAction<void, AppStateType, unknown, ActionUsersTypes>
 
-export const getActivePageTC = (pageSize: number, page: number) => (dispatch: any) => {
-  dispatch(setPageAC(page));
-  dispatch(getUsersTC(pageSize, page));
-};
+export const getUsersTC = (pageSize: number, activePage: number): ThunkUsersType => {
+  return (
+    async (dispatch) => {
+      dispatch(toggleIfFetchingAC(true));
+      let response = await apiGetUsers(pageSize, activePage);
+      dispatch(setUsersAC(response.items, response.totalCount));
+      dispatch(toggleIfFetchingAC(false));
+    }
+  )
+}
 
-export const setCountUserTC = (value: number, activePage: number) => (dispatch: any) => {
-  dispatch(setCountUsersAC(value));
-  dispatch(getUsersTC(value, activePage));
-};
+export const getActivePageTC = (pageSize: number, page: number): ThunkUsersType =>
+  (dispatch) => {
+    dispatch(setPageAC(page));
+    dispatch(getUsersTC(pageSize, page));
+  };
 
-export const togglefollowUserTC = (id: number, followed: boolean) => async (dispatch: any) => {
-  dispatch(followingInProgressAC(id, true));
-  let response = await apitogglefollowUser(id, followed);
-  if (response.status === 200) {
-    dispatch(toggleFollowAC(id, followed));
-    dispatch(followingInProgressAC(id, false));
-  }
-};
+export const setCountUserTC = (value: number, activePage: number): ThunkUsersType =>
+  (dispatch) => {
+    dispatch(setCountUsersAC(value));
+    dispatch(getUsersTC(value, activePage));
+  };
+
+export const togglefollowUserTC = (id: number, followed: boolean): ThunkUsersType =>
+  async (dispatch) => {
+    dispatch(followingInProgressAC(id, true));
+    let response = await apitogglefollowUser(id, followed);
+    if (response.status === 200) {
+      dispatch(toggleFollowAC(id, followed));
+      dispatch(followingInProgressAC(id, false));
+    }
+  };
 
 export default UsersReducer;

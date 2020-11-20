@@ -1,3 +1,4 @@
+
 const ADD_MESSAGE = 'ADD_MESSAGE';
 const ADD_FRIEND = 'ADD_FRIEND';
 
@@ -31,14 +32,15 @@ export const addFriendAC = (id:number, avatar:string, name:string):addFriendActi
 
 export type friendsType = {
   id: number,
-  name: string
+  name: string,
+  avatar: string,
 }
-type messagesType = {
+export type messagesType = {
   id: number,
   name: string,
   text: string
 }
-type initialStateType = typeof initialState;
+export type initialStateFriendsType = typeof initialState;
 
 let initialState = {
   friends: [{id:1, name:'kirill'}
@@ -55,7 +57,7 @@ let initialState = {
   }
 };
 
-const friendsReducer = (state = initialState, action:any ):initialStateType => {
+const friendsReducer = (state = initialState, action:any ):initialStateFriendsType => {
   let stateCopy;
 
   switch (action.type) {

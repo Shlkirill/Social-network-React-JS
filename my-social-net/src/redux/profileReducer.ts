@@ -92,7 +92,7 @@ export const uploadProfileInfo = (dataInfo: string): uploadProfileInfoActionType
   }
 }
 
-type postType = {
+export type postType = {
   id: number,
   text: string,
   likes: number,
@@ -114,11 +114,12 @@ export type photosProfileType = {
   large: string,
 }
 
-type profileType = {
+export type profileType = {
   userId: number,
   lookingForAJob: boolean,
   lookingForAJobDescription: string,
   fullName: string,
+  aboutMe: string,
   contacts: contactProfileType,
   photos: photosProfileType
 }

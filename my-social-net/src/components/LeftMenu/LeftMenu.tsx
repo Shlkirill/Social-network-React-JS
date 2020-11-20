@@ -2,11 +2,12 @@ import React from 'react';
 import styles from './LeftMenu.module.css'
 import { NavLink } from 'react-router-dom';
 import FriendList from './FriendList/FriendList';
+//@ts-ignore
 import logo from '../../img/logo2.PNG';
 import { friendsType } from '../../redux/friendsReducer';
 
 type PorpsType = {
-  friends: friendsType
+  friends: Array<friendsType>
 }
 
 const LeftMenu: React.FC<PorpsType> = ({friends}) => {

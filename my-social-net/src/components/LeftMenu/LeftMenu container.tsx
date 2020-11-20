@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LeftMenu from './LeftMenu';
 import { friendsType } from '../../redux/friendsReducer';
+import { AppStateType } from '../../redux/reduxStore';
 
 type PropsType = {
-  friends: friendsType
+  friends: Array<friendsType>
 }
 
 class LeftMenuContainer extends React.Component<PropsType> {
@@ -18,11 +19,11 @@ class LeftMenuContainer extends React.Component<PropsType> {
 }
 
 
-let mapStateToProps = (state: any) => {
+let mapStateToProps = (state: AppStateType) => {
   return {
     friends: state.friendsPage.friends,
   }
 }
-
+//@ts-ignore
 export default connect(mapStateToProps)(LeftMenuContainer);
 
