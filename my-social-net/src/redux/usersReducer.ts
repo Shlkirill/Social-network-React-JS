@@ -118,6 +118,7 @@ const UsersReducer = (state = initialState, action: ActionUsersTypes): initialSt
       let arr;
       if (action.value == false) {
         arr = state.followingInProgress.filter((item) => {
+          //@ts-ignore
           return item != action.id
         })
       } else {
@@ -127,6 +128,7 @@ const UsersReducer = (state = initialState, action: ActionUsersTypes): initialSt
         ...state,
         followingInProgress: arr,
       }
+      //@ts-ignore
       return stateCopy;
     case SET_USERS:
       stateCopy = {
@@ -134,6 +136,7 @@ const UsersReducer = (state = initialState, action: ActionUsersTypes): initialSt
         users: action.users,
         totalUsersCount: action.totalCount,
       }
+      //@ts-ignore
       return stateCopy;
     case SET_PAGE:
       stateCopy = {
