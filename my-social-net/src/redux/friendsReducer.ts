@@ -61,19 +61,21 @@ const friendsReducer = (state = initialState, action:any ):initialStateFriendsTy
   let stateCopy;
 
   switch (action.type) {
-    // case ADD_MESSAGE:
-    //   stateCopy = {
-    //     ...state,
-    //     messages: { ...state.messages },
-    //   };
-    //   let newId = stateCopy.messages[action.id].length + 1;
-    //   let newMessage = {
-    //     id: newId,
-    //     name: 'Me',
-    //     text: action.text,
-    //   };
-    //   stateCopy.messages[action.id].push(newMessage);
-    //   return stateCopy;
+    case ADD_MESSAGE:
+      stateCopy = {
+        ...state,
+        messages: { ...state.messages },
+      };
+      //@ts-ignore
+      let newId = stateCopy.messages[action.id].length + 1;
+      let newMessage = {
+        id: newId,
+        name: 'Me',
+        text: action.text,
+      };
+      //@ts-ignore
+      stateCopy.messages[action.id].push(newMessage);
+      return stateCopy;
     case ADD_FRIEND:
       let newFriend = {
         id: action.id,

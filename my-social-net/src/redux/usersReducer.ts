@@ -1,6 +1,5 @@
 import { ThunkAction } from "redux-thunk";
-import { apiGetUsers, apitogglefollowUser } from "../api/api"
-import { photosProfileType } from './profileReducer'
+import { apiGetUsers, apitogglefollowUser} from "../api/api"
 import { AppStateType } from "./reduxStore";
 
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
@@ -17,7 +16,7 @@ type toogleFollowTActionType = {
 }
 type setUsersActionType = {
   type: typeof SET_USERS,
-  users: string,
+  users: Array<usersType>,
   totalCount: number
 }
 type setPageActionType = {
@@ -47,7 +46,7 @@ export const toggleFollowAC = (id: number, followed: boolean): toogleFollowTActi
     followed,
   }
 }
-export const setUsersAC = (users: string, totalCount: number): setUsersActionType => {
+export const setUsersAC = (users: Array<usersType>, totalCount: number): setUsersActionType => {
   return {
     type: SET_USERS,
     users,
@@ -81,11 +80,12 @@ export const followingInProgressAC = (id: number, value: boolean): followingInPr
 }
 
 export type usersType = {
+  followed: boolean,
   id: number,
   name: string,
-  status: string,
-  photos: photosProfileType,
-  followed: boolean
+  photos: { small: string | null, large: string | null }
+  status: null | string
+  uniqueUrlName: string | null
 }
 
 type initialStateType = typeof initialState;
@@ -162,6 +162,7 @@ const UsersReducer = (state = initialState, action: ActionUsersTypes): initialSt
 }
 
 type ThunkUsersType = ThunkAction<void, AppStateType, unknown, ActionUsersTypes>
+
 
 export const getUsersTC = (pageSize: number, activePage: number): ThunkUsersType => {
   return (

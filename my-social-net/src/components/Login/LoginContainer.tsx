@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { accountLoginTC } from '../../redux/authReducer';
+import { accountLoginTC, FormDataType } from '../../redux/authReducer';
 import { AppStateType } from '../../redux/reduxStore';
 import Login from "./Login";
 
@@ -11,11 +11,6 @@ const ContactForm = reduxForm({
     //@ts-ignore
 })(Login);
 
-type FormDataType = {
-    email: string,
-    password: string
-}
-
 type PropsType = {
     isAuth: boolean,
     captcha: string,
@@ -24,7 +19,6 @@ type PropsType = {
 }
 
 const LoginContainer: React.FC<PropsType> = ({ isAuth, captcha, accountLogin }) => {
-    debugger;
     const onSubmit = (formData:FormDataType) => {
         accountLogin(formData);
     }

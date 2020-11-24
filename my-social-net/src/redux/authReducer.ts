@@ -1,14 +1,22 @@
-import { apiAuth, apiCaptcha, apiLogin, apiLogout } from "../api/api";
+import { apiAuth, apiCaptcha, apiLogin, apiLogout, AuthMeType, ResultCodesEnum } from "../api/api";
 import { stopSubmit } from "redux-form";
+import { ThunkAction } from "redux-thunk";
+import { AppStateType } from "./reduxStore";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const SET_CAPTCHA = 'SET_CAPTCHA';
 const SET_LOGIN = 'SET_LOGIN';
 
+type dataUserType = {
+  id: number,
+  login: string,
+  email: string
+}
+
 type setUserActionType = {
   type: typeof SET_USER_DATA,
-  data: string|null,
+  data: dataUserType | null,
   isAuth: boolean
 }
 type toggleIfFetchingActionType = {
@@ -26,7 +34,9 @@ type setLoginActionType = {
   remember: boolean
 }
 
-export const setUserDataAC = (data:string|null, isAuth:boolean):setUserActionType => {
+type authReducedActuonType = setUserActionType | toggleIfFetchingActionType | setCaptchaActionType | setLoginActionType;
+
+export const setUserDataAC = (data:dataUserType | null, isAuth:boolean):setUserActionType => {
   return {
     type: SET_USER_DATA,
     data,
@@ -106,15 +116,25 @@ const AuthReducer = (state = initialState, action:any): initalStateAuthType => {
   }
 }
 
-export const authorizationTC = () => async (dispatch:any) => {
+
+type ThunkUsersType = ThunkAction<void, AppStateType, unknown, authReducedActuonType>;
+
+export type FormDataType = {
+  email: string,
+  password: string,
+  rememberMe: boolean,
+  captcha: boolean
+}
+
+export const authorizationTC = ():ThunkUsersType => async (dispatch) => {
   let response = await apiAuth()
-  if (response.resultCode === 0) {
+  if (response.resultCode === ResultCodesEnum.Success) {
     dispatch(setUserDataAC(response.data, true));
   };
 };
 
 
-export const accountLoginTC = (objData:any) => async (dispatch:any) => {
+export const accountLoginTC = (objData: FormDataType):ThunkUsersType => async (dispatch) => {
   try {
     let response = await apiLogin(objData);
 
@@ -123,17 +143,19 @@ export const accountLoginTC = (objData:any) => async (dispatch:any) => {
       alert('Вы вошли')
     } else {
       if (response.data.resultCode === 10) {
-        let response2 = await apiCaptcha();
-        dispatch(setCaptchaAC(response2.url))
+        let response = await apiCaptcha();
+        dispatch(setCaptchaAC(response.url))
       }
+      //@ts-ignore
       dispatch(stopSubmit('login', { _error: response.data.messages[0] }))
     }
   } catch (err) {
+    //@ts-ignore
     dispatch(stopSubmit('login', { _error: 'server error' }))
   }
 }
 
-export const logoutAccountTC = () => async (dispatch:any) => {
+export const logoutAccountTC = ():ThunkUsersType => async (dispatch) => {
   let response = await apiLogout();
   if (response.data.resultCode === 0) {
     dispatch(setUserDataAC(null, false));

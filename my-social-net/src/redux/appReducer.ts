@@ -1,4 +1,6 @@
+import { ThunkAction } from "redux-thunk";
 import { authorizationTC } from "./authReducer";
+import { AppStateType } from "./reduxStore";
 
 const SET_INITIALIZED = "SET_INITIALIZED";
 
@@ -34,8 +36,10 @@ const appReducer = (state = initialState, action: initializedActionType): initia
       return state;
   }
 }
+type ThunkUsersType = ThunkAction<void, AppStateType, unknown, initializedActionType>
 
-export const initializeAppTC = () => async (dispatch: any) => {
+export const initializeAppTC = ():ThunkUsersType => async (dispatch) => {
+  
   await dispatch(authorizationTC());
   dispatch(initializedAC());
 };

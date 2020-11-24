@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Botton.module.css'
 
 export const BottonToggleFollow = (initial: string, action: () => void, followed: boolean, arr: boolean, id: number|null) => {
-    debugger;
     let result;
     if (initial == "ONE_USER") {
         result = arr;

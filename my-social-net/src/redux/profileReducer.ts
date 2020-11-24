@@ -1,5 +1,7 @@
 import { apiEditProfile, apiGetFollowUser, apiGetStatus, apiSetProfile, apitogglefollowUser, apiUpdateStatus, apiUploadAvatar } from "../api/api"
 import { stopSubmit } from "redux-form"
+import { ThunkAction } from "redux-thunk";
+import { AppStateType } from "./reduxStore";
 
 const ADD_POST = 'ADD_POST';
 const ADD_LIKE = 'ADD_LIKE';
@@ -20,7 +22,7 @@ type addLikeActionType = {
 }
 type setUserProfileActionType = {
   type: typeof SET_USER_PROFILE,
-  userProfile: string
+  userProfile: profileType
 }
 type setFollowedUserActionType = {
   type: typeof SET_FOLLOWED_USER,
@@ -43,6 +45,9 @@ type uploadProfileInfoActionType = {
   dataInfo: string
 }
 
+type ProfileActionType = addPostActionType | addLikeActionType | setUserProfileActionType | setFollowedUserActionType | 
+followingInProgressActionType | setStatusActionType | uploadAnAvatarActionType | uploadProfileInfoActionType
+
 export const addPostActionCreator = (text: string): addPostActionType => {
   return {
     type: ADD_POST,
@@ -55,7 +60,7 @@ export const addLikeActionCreator = (clickPost: string): addLikeActionType => {
     clickPost,
   }
 }
-export const setUserProfileAC = (userProfile: string): setUserProfileActionType => {
+export const setUserProfileAC = (userProfile: profileType): setUserProfileActionType => {
   return {
     type: SET_USER_PROFILE,
     userProfile
@@ -216,19 +221,22 @@ const profileReducer = (state = initialState, action: any): initialStateType => 
   }
 }
 
-export const setProfileTC = (userId: number) => async (dispatch: any) => {
+type ThunkUsersType = ThunkAction<void, AppStateType, unknown, ProfileActionType>;
+
+export const setProfileTC = (userId: number):ThunkUsersType => async (dispatch) => {
   let response = await apiSetProfile(userId)
   if (response != undefined) {
+    debugger;
     dispatch(setUserProfileAC(response))
   }
 }
 
-export const getFollowUserTC = (userId: number) => async (dispatch: any) => {
+export const getFollowUserTC = (userId: number):ThunkUsersType  => async (dispatch) => {
   let response = await apiGetFollowUser(userId);
-  dispatch(setFollowedUserAC(response));
+  dispatch(setFollowedUserAC(response.data));
 }
 
-export const togglefollowUserTC = (id: number, followed:boolean) => async (dispatch: any) => {
+export const togglefollowUserTC = (id: number, followed:boolean):ThunkUsersType  => async (dispatch) => {
   dispatch(followingInProgressAC(true));
   let response = await apitogglefollowUser(id, followed);
   if (response.status === 200) {
@@ -237,27 +245,28 @@ export const togglefollowUserTC = (id: number, followed:boolean) => async (dispa
   }
 };
 
-export const getUserStatusTC = (userId: number) => async (dispatch: any) => {
+export const getUserStatusTC = (userId: number):ThunkUsersType  => async (dispatch) => {
   let response = await apiGetStatus(userId);
   if (response.status === 200) {
     dispatch(setStatusAC(response.data))
   }
 }
 
-export const getUpdateSatusTC = (status: string) => async () => {
+export const getUpdateSatusTC = (status: string):ThunkUsersType  => async () => {
   apiUpdateStatus(status);
 }
 
-export const putAvatarToServerTC = (photo: string) => async (dispatch: any) => {
+export const putAvatarToServerTC = (photo: string):ThunkUsersType  => async (dispatch) => {
   let response = await apiUploadAvatar(photo);
   dispatch(uploadAnAvatarAC(response.data.data.photos))
 }
 
-export const putProfileInfoTC = (dataInfo: string) => async (dispatch: any) => {
+export const putProfileInfoTC = (dataInfo: string):ThunkUsersType  => async (dispatch) => {
   let response = await apiEditProfile(dataInfo);
   if (response.data.resultCode === 0) {
     alert('Успешно отредактировано')
   } else {
+    //@ts-ignore
     dispatch(stopSubmit('editMode', { _error: response.data.messages[0] }))
     alert('Не все поля заполнены')
   }

@@ -8,7 +8,7 @@ type PropsType = {
     id: number,
     followed: boolean,
     avatar: string,
-    status: string,
+    status: string | null,
     isProgress: boolean,
     togglefollowUser: (id: number, followed: boolean) => void,
 }
