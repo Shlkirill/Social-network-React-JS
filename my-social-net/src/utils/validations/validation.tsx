@@ -1,10 +1,11 @@
+export type ValidatorType = (value: string) => string | undefined;
 
-export const required = (value:number) => {
+export const required: ValidatorType = (value) => {
     if (!value) return 'This field cannot be empty';
     return undefined;
 }
 
-export const maxLength = (max:number) => (value:string) => {
+export const maxLength = (max: number): ValidatorType => (value) => {
     if (value && value.length > max) {
         return `Must be ${max} characters or less`
     }
@@ -13,7 +14,7 @@ export const maxLength = (max:number) => (value:string) => {
     }
 };
 
-export const minLength = (min:number) => (value:string) => {
+export const minLength = (min: number): ValidatorType => (value) => {
     if (value && value.length < min) {
         return `Must be at least ${min} characters `
     } else {
@@ -21,7 +22,7 @@ export const minLength = (min:number) => (value:string) => {
     }
 };
 
-export const email = (value:string) => {
+export const email = (value: string) => {
     if (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
         return 'Invalid email address'
     } else {

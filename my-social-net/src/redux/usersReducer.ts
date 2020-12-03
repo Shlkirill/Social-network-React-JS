@@ -1,5 +1,5 @@
 import { ThunkAction } from "redux-thunk";
-import { apiGetUsers, apitogglefollowUser} from "../api/api"
+import { apiGetUsers, apitogglefollowUser } from "../api/api"
 import { AppStateType } from "./reduxStore";
 
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
@@ -37,46 +37,16 @@ type followingInProgressActionType = {
   value: boolean
 
 }
-type ActionUsersTypes = toogleFollowTActionType | setUsersActionType | setPageActionType | setCountUsersActionType | toggleIfFetchingActionType | followingInProgressActionType
+type ActionUsersTypes = any
 
-export const toggleFollowAC = (id: number, followed: boolean): toogleFollowTActionType => {
-  return {
-    type: TOGGLE_FOLLOW,
-    id,
-    followed,
-  }
-}
-export const setUsersAC = (users: Array<usersType>, totalCount: number): setUsersActionType => {
-  return {
-    type: SET_USERS,
-    users,
-    totalCount,
-  }
-}
-export const setPageAC = (clickPage: number): setPageActionType => {
-  return {
-    type: SET_PAGE,
-    clickPage,
-  }
-}
-export const setCountUsersAC = (count: number): setCountUsersActionType => {
-  return {
-    type: SET_COUNT_USERS,
-    count
-  }
-}
-export const toggleIfFetchingAC = (isFetching: boolean): toggleIfFetchingActionType => {
-  return {
-    type: TOGGLE_IS_FETCHING,
-    isFetching
-  }
-}
-export const followingInProgressAC = (id: number, value: boolean): followingInProgressActionType => {
-  return {
-    type: FOLLOWING_IN_PROGRESS,
-    id,
-    value
-  }
+
+const actions = {
+  toggleFollowAC: (id: number, followed: boolean) => ({ type: TOGGLE_FOLLOW, id, followed }),
+  setUsersAC: (users: Array<usersType>, totalCount: number) => ({ type: SET_USERS, users, totalCount }),
+  setPageAC: (clickPage: number) => ({ type: SET_PAGE, clickPage }),
+  setCountUsersAC: (count: number) => ({ type: SET_COUNT_USERS, count }),
+  toggleIfFetchingAC: (isFetching: boolean) => ({ type: TOGGLE_IS_FETCHING, isFetching }),
+  followingInProgressAC: (id: number, value: boolean) => ({ type: FOLLOWING_IN_PROGRESS, id, value }),
 }
 
 export type usersType = {
@@ -167,33 +137,33 @@ type ThunkUsersType = ThunkAction<void, AppStateType, unknown, ActionUsersTypes>
 export const getUsersTC = (pageSize: number, activePage: number): ThunkUsersType => {
   return (
     async (dispatch) => {
-      dispatch(toggleIfFetchingAC(true));
+      dispatch(actions.toggleIfFetchingAC(true));
       let response = await apiGetUsers(pageSize, activePage);
-      dispatch(setUsersAC(response.items, response.totalCount));
-      dispatch(toggleIfFetchingAC(false));
+      dispatch(actions.setUsersAC(response.items, response.totalCount));
+      dispatch(actions.toggleIfFetchingAC(false));
     }
   )
 }
 
 export const getActivePageTC = (pageSize: number, page: number): ThunkUsersType =>
   (dispatch) => {
-    dispatch(setPageAC(page));
+    dispatch(actions.setPageAC(page));
     dispatch(getUsersTC(pageSize, page));
   };
 
 export const setCountUserTC = (value: number, activePage: number): ThunkUsersType =>
   (dispatch) => {
-    dispatch(setCountUsersAC(value));
+    dispatch(actions.setCountUsersAC(value));
     dispatch(getUsersTC(value, activePage));
   };
 
 export const togglefollowUserTC = (id: number, followed: boolean): ThunkUsersType =>
   async (dispatch) => {
-    dispatch(followingInProgressAC(id, true));
+    dispatch(actions.followingInProgressAC(id, true));
     let response = await apitogglefollowUser(id, followed);
     if (response.status === 200) {
-      dispatch(toggleFollowAC(id, followed));
-      dispatch(followingInProgressAC(id, false));
+      dispatch(actions.toggleFollowAC(id, followed));
+      dispatch(actions.followingInProgressAC(id, false));
     }
   };
 

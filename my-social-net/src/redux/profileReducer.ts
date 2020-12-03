@@ -16,9 +16,15 @@ type addPostActionType = {
   type: typeof ADD_POST,
   text: string
 }
+type ClickPostType = {
+  addLike: () => void;
+  likes: number
+  profile: profileType
+  text: string
+}
 type addLikeActionType = {
   type: typeof ADD_LIKE,
-  clickPost: string
+  clickPost: ClickPostType
 }
 type setUserProfileActionType = {
   type: typeof SET_USER_PROFILE,
@@ -38,15 +44,15 @@ type setStatusActionType = {
 }
 type uploadAnAvatarActionType = {
   type: typeof UPLOAD_AVATAR,
-  photo: string
+  photo: photosProfileType
 }
 type uploadProfileInfoActionType = {
   type: typeof UPLOAD_PROFILE_INFO,
   dataInfo: string
 }
 
-type ProfileActionType = addPostActionType | addLikeActionType | setUserProfileActionType | setFollowedUserActionType | 
-followingInProgressActionType | setStatusActionType | uploadAnAvatarActionType | uploadProfileInfoActionType
+type ProfileActionType = addPostActionType | addLikeActionType | setUserProfileActionType | setFollowedUserActionType |
+  followingInProgressActionType | setStatusActionType | uploadAnAvatarActionType | uploadProfileInfoActionType
 
 export const addPostActionCreator = (text: string): addPostActionType => {
   return {
@@ -54,7 +60,7 @@ export const addPostActionCreator = (text: string): addPostActionType => {
     text,
   }
 }
-export const addLikeActionCreator = (clickPost: string): addLikeActionType => {
+export const addLikeActionCreator = (clickPost: ClickPostType): addLikeActionType => {
   return {
     type: ADD_LIKE,
     clickPost,
@@ -84,7 +90,7 @@ export const setStatusAC = (status: string): setStatusActionType => {
     status,
   }
 }
-export const uploadAnAvatarAC = (photo: string): uploadAnAvatarActionType => {
+export const uploadAnAvatarAC = (photo: photosProfileType): uploadAnAvatarActionType => {
   return {
     type: UPLOAD_AVATAR,
     photo
@@ -144,7 +150,7 @@ let initialState = {
 
 };
 
-const profileReducer = (state = initialState, action: any): initialStateType => {
+const profileReducer = (state = initialState, action: ProfileActionType): initialStateType => {
   let stateCopy;
 
   switch (action.type) {
@@ -223,7 +229,7 @@ const profileReducer = (state = initialState, action: any): initialStateType => 
 
 type ThunkUsersType = ThunkAction<void, AppStateType, unknown, ProfileActionType>;
 
-export const setProfileTC = (userId: number):ThunkUsersType => async (dispatch) => {
+export const setProfileTC = (userId: number): ThunkUsersType => async (dispatch) => {
   let response = await apiSetProfile(userId)
   if (response != undefined) {
     debugger;
@@ -231,12 +237,12 @@ export const setProfileTC = (userId: number):ThunkUsersType => async (dispatch) 
   }
 }
 
-export const getFollowUserTC = (userId: number):ThunkUsersType  => async (dispatch) => {
+export const getFollowUserTC = (userId: number): ThunkUsersType => async (dispatch) => {
   let response = await apiGetFollowUser(userId);
   dispatch(setFollowedUserAC(response.data));
 }
 
-export const togglefollowUserTC = (id: number, followed:boolean):ThunkUsersType  => async (dispatch) => {
+export const togglefollowUserTC = (id: number, followed: boolean): ThunkUsersType => async (dispatch) => {
   dispatch(followingInProgressAC(true));
   let response = await apitogglefollowUser(id, followed);
   if (response.status === 200) {
@@ -245,23 +251,24 @@ export const togglefollowUserTC = (id: number, followed:boolean):ThunkUsersType 
   }
 };
 
-export const getUserStatusTC = (userId: number):ThunkUsersType  => async (dispatch) => {
+export const getUserStatusTC = (userId: number): ThunkUsersType => async (dispatch) => {
   let response = await apiGetStatus(userId);
+  console.log(response)
   if (response.status === 200) {
     dispatch(setStatusAC(response.data))
   }
 }
 
-export const getUpdateSatusTC = (status: string):ThunkUsersType  => async () => {
+export const getUpdateSatusTC = (status: string): ThunkUsersType => async () => {
   apiUpdateStatus(status);
 }
 
-export const putAvatarToServerTC = (photo: string):ThunkUsersType  => async (dispatch) => {
+export const putAvatarToServerTC = (photo: string): ThunkUsersType => async (dispatch) => {
   let response = await apiUploadAvatar(photo);
   dispatch(uploadAnAvatarAC(response.data.data.photos))
 }
 
-export const putProfileInfoTC = (dataInfo: string):ThunkUsersType  => async (dispatch) => {
+export const putProfileInfoTC = (dataInfo: string): ThunkUsersType => async (dispatch) => {
   let response = await apiEditProfile(dataInfo);
   if (response.data.resultCode === 0) {
     alert('Успешно отредактировано')

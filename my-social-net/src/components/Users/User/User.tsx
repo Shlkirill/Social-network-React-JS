@@ -14,7 +14,6 @@ type PropsType = {
 }
 
 const User: React.FC<PropsType> = (props) => {
-    console.log(props)
     let onToggleFollow = () => {
         props.togglefollowUser(props.id, props.followed);
     }

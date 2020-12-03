@@ -13,7 +13,7 @@ const Posts: React.FC<PropsTypePosts> = React.memo((props) => {
     //@ts-ignore
   })(FormAddNewText);
 
-  const onSubmit = (value: any) => {
+  const onSubmit = (value: {newPost: string}) => {
     props.addPost(value.newPost)
   }
 

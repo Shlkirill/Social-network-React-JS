@@ -14,6 +14,8 @@ type addFriendActionType = {
   name: string
 }
 
+type friendsReducerType = addMessageActionType | addFriendActionType;
+
 export const addMessageActionCreator = (text:string, id:number):addMessageActionType => {
   return {
     type: ADD_MESSAGE,
@@ -57,7 +59,7 @@ let initialState = {
   }
 };
 
-const friendsReducer = (state = initialState, action:any ):initialStateFriendsType => {
+const friendsReducer = (state = initialState, action:friendsReducerType ):initialStateFriendsType => {
   let stateCopy;
 
   switch (action.type) {

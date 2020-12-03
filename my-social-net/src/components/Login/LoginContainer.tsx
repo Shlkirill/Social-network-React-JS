@@ -5,26 +5,27 @@ import { accountLoginTC, FormDataType } from '../../redux/authReducer';
 import { AppStateType } from '../../redux/reduxStore';
 import Login from "./Login";
 
-
-const ContactForm = reduxForm({
-    form: 'login',
-    //@ts-ignore
-})(Login);
-
-type PropsType = {
+type PropsTypeLoginContainer = {
     isAuth: boolean,
-    captcha: string,
-    accountLogin: (formData:FormDataType) => void,
-    onSubmit: (formData:FormDataType) => void
+    captcha: string | null,
+    accountLogin: (formData: FormDataType) => void
+}
+type PropsTypeLogin = {
+    isAuth: boolean,
+    captcha: string | null,
 }
 
-const LoginContainer: React.FC<PropsType> = ({ isAuth, captcha, accountLogin }) => {
-    const onSubmit = (formData:FormDataType) => {
+const ContactForm = reduxForm<FormDataType, PropsTypeLogin>({
+    form: 'login',
+})(Login);
+
+
+const LoginContainer: React.FC<PropsTypeLoginContainer> = ({ isAuth, captcha, accountLogin }) => {
+    const onSubmit = (formData: FormDataType) => {
         accountLogin(formData);
     }
     return (
-        //@ts-ignore
-        <ContactForm onSubmit={onSubmit} captcha={captcha} isAuth={isAuth} />
+        <ContactForm onSubmit={onSubmit} captcha={captcha} isAuth={isAuth}/>
     )
 }
 
@@ -38,6 +39,4 @@ let mapDispatchToProps = {
     accountLogin: accountLoginTC
 }
 
-
-//@ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

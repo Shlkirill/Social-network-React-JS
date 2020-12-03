@@ -1,24 +1,20 @@
 import React from 'react'
-import { Field } from 'redux-form';
+import { Field, InjectedFormProps } from 'redux-form';
 import styles from './Login.module.css'
 import { inputField } from '../../common/forms/formsControls/formsControls';
 import { minLength, maxLength, required, email } from '../../utils/validations/validation';
 import { Redirect } from 'react-router-dom';
+import { FormDataType } from '../../redux/authReducer';
 
 const minLength6 = minLength(6);
 const maxLength30 = maxLength(30);
 
 type PropsType = {
     isAuth: boolean,
-    handleSubmit: () => void,
-    error: string,
-    captcha: string,
-    pristine: boolean,
-    submitting: boolean,
-    invalid: boolean,
+    captcha: string | null,
 }
 
-const Login:React.FC<PropsType> = ({isAuth, handleSubmit, error, captcha, pristine, submitting, invalid}) => {
+const Login:React.FC<InjectedFormProps<FormDataType, PropsType> & PropsType> = ({isAuth, handleSubmit, error, captcha, pristine, submitting, invalid}) => {
     if (isAuth == false) {
         return (
             <div className={styles.container}>

@@ -27,6 +27,10 @@ type CaptchaType = {
 type followUserType = {
     data: boolean
 }
+type GetStatusType = {
+    data: string,
+    status: number
+}
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -58,7 +62,6 @@ export const apiSetProfile = async (userId: number) => {
 
 export const apiGetFollowUser = async (id: number) => {
     let response = await instance.get<followUserType>(`follow/${id}`);
-    console.log(response)
     return response.data
 };
 
@@ -66,16 +69,9 @@ export const apitogglefollowUser = (id: number, value: boolean) => {
     return value ? instance.delete(`/follow/${id}`) : instance.post(`follow/${id}`);
 }
 
-export const apiFollowUser = (id: number) => {
-    return instance.post(`follow/${id}`)
-};
-
-export const apiUnfollowUser = (id: number) => {
-    return instance.delete(`/follow/${id}`)
-};
-
-export const apiGetStatus = (userId: number) => {
-    return instance.get(`/profile/status/${userId}`)
+export const apiGetStatus = async (userId: number) => {
+    let response = await instance.get<GetStatusType>(`/profile/status/${userId}`);
+    return response.data
 };
 
 export const apiUpdateStatus = (status: string) => {

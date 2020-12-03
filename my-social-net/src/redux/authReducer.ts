@@ -82,7 +82,7 @@ let initialState: initalStateAuthType = {
   captchaUrl: null
 };
 
-const AuthReducer = (state = initialState, action:any): initalStateAuthType => {
+const AuthReducer = (state = initialState, action: authReducedActuonType): initalStateAuthType => {
   let stateCopy;
 
   switch (action.type) {

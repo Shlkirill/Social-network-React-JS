@@ -7,6 +7,13 @@ import { compose } from 'redux';
 import { withAuthRedirectComponent } from '../hoc/withAuthRedirect';
 import { AppStateType } from '../../redux/reduxStore';
 
+type MatchType = {
+  isExact: boolean,
+  params: {userId: number}
+  path: string,
+  url: string,
+}
+
 type PropsTypeProfile = {
   profile: profileType,
   followed: boolean,
@@ -22,11 +29,12 @@ type PropsTypeProfile = {
   getUpdateSatus: () => void,
   togglefollowUser: () => void,
   putAvatarToServer: () => void,
-  match: any
+  match: MatchType
 }
 
 const ProfileContainer: React.FC<PropsTypeProfile> = (props) => {
   useEffect(() => {
+    console.log(props)
     let userId = props.match.params.userId;
     if (!userId) {
       userId = props.authId;
