@@ -1,6 +1,6 @@
 import { ThunkAction } from "redux-thunk";
 import { apiGetUsers, apitogglefollowUser } from "../api/api"
-import { AppStateType } from "./reduxStore";
+import { AppStateType, InferActionsType } from "./reduxStore";
 
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
 const SET_USERS = 'SET_USER';
@@ -37,16 +37,16 @@ type followingInProgressActionType = {
   value: boolean
 
 }
-type ActionUsersTypes = any
+type ActionUsersTypes = InferActionsType<typeof actions>
 
 
 const actions = {
-  toggleFollowAC: (id: number, followed: boolean) => ({ type: TOGGLE_FOLLOW, id, followed }),
-  setUsersAC: (users: Array<usersType>, totalCount: number) => ({ type: SET_USERS, users, totalCount }),
-  setPageAC: (clickPage: number) => ({ type: SET_PAGE, clickPage }),
-  setCountUsersAC: (count: number) => ({ type: SET_COUNT_USERS, count }),
-  toggleIfFetchingAC: (isFetching: boolean) => ({ type: TOGGLE_IS_FETCHING, isFetching }),
-  followingInProgressAC: (id: number, value: boolean) => ({ type: FOLLOWING_IN_PROGRESS, id, value }),
+  toggleFollowAC: (id: number, followed: boolean) => ({ type: TOGGLE_FOLLOW, id, followed } as const),
+  setUsersAC: (users: Array<usersType>, totalCount: number) => ({ type: SET_USERS, users, totalCount } as const),
+  setPageAC: (clickPage: number) => ({ type: SET_PAGE, clickPage } as const),
+  setCountUsersAC: (count: number) => ({ type: SET_COUNT_USERS, count } as const),
+  toggleIfFetchingAC: (isFetching: boolean) => ({ type: TOGGLE_IS_FETCHING, isFetching } as const),
+  followingInProgressAC: (id: number, value: boolean) => ({ type: FOLLOWING_IN_PROGRESS, id, value } as const),
 }
 
 export type usersType = {
