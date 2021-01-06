@@ -12,7 +12,7 @@
     "@types/react-router-dom": "^5.1.6",
     "@types/react-slick": "^0.23.4",
     "@types/redux-form": "^8.3.0",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "react": "^16.13.1",
     "react-audio-player": "^0.14.0",
     "react-dom": "^16.13.1",
