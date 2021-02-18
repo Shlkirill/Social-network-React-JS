@@ -1,24 +1,26 @@
 {
   "files": {
-    "main.css": "/social-network-react-js/static/css/main.1823d33d.chunk.css",
-    "main.js": "/social-network-react-js/static/js/main.cb30ec9e.chunk.js",
-    "main.js.map": "/social-network-react-js/static/js/main.cb30ec9e.chunk.js.map",
+    "main.css": "/social-network-react-js/static/css/main.fb9d90f4.chunk.css",
+    "main.js": "/social-network-react-js/static/js/main.34b225d6.chunk.js",
+    "main.js.map": "/social-network-react-js/static/js/main.34b225d6.chunk.js.map",
     "runtime-main.js": "/social-network-react-js/static/js/runtime-main.f405e3aa.js",
     "runtime-main.js.map": "/social-network-react-js/static/js/runtime-main.f405e3aa.js.map",
-    "static/js/2.ffe110eb.chunk.js": "/social-network-react-js/static/js/2.ffe110eb.chunk.js",
-    "static/js/2.ffe110eb.chunk.js.map": "/social-network-react-js/static/js/2.ffe110eb.chunk.js.map",
+    "static/js/2.73196f58.chunk.js": "/social-network-react-js/static/js/2.73196f58.chunk.js",
+    "static/js/2.73196f58.chunk.js.map": "/social-network-react-js/static/js/2.73196f58.chunk.js.map",
     "index.html": "/social-network-react-js/index.html",
-    "precache-manifest.6022037fbdbe5bcde4a9969a969c7572.js": "/social-network-react-js/precache-manifest.6022037fbdbe5bcde4a9969a969c7572.js",
+    "precache-manifest.6a24e0589f596452709a840f731aad14.js": "/social-network-react-js/precache-manifest.6a24e0589f596452709a840f731aad14.js",
     "service-worker.js": "/social-network-react-js/service-worker.js",
-    "static/css/main.1823d33d.chunk.css.map": "/social-network-react-js/static/css/main.1823d33d.chunk.css.map",
-    "static/js/2.ffe110eb.chunk.js.LICENSE.txt": "/social-network-react-js/static/js/2.ffe110eb.chunk.js.LICENSE.txt",
+    "static/css/main.fb9d90f4.chunk.css.map": "/social-network-react-js/static/css/main.fb9d90f4.chunk.css.map",
+    "static/js/2.73196f58.chunk.js.LICENSE.txt": "/social-network-react-js/static/js/2.73196f58.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/social-network-react-js/static/media/Montserrat-Regular.ee653992.ttf",
     "static/media/empty-avatar.png": "/social-network-react-js/static/media/empty-avatar.8cb04c92.png",
-    "static/media/load-final.gif": "/social-network-react-js/static/media/load-final.bb4fdd52.gif"
+    "static/media/load-final.gif": "/social-network-react-js/static/media/load-final.bb4fdd52.gif",
+    "static/media/logo2.PNG": "/social-network-react-js/static/media/logo2.aeb25798.PNG"
   },
   "entrypoints": [
     "static/js/runtime-main.f405e3aa.js",
-    "static/js/2.ffe110eb.chunk.js",
-    "static/css/main.1823d33d.chunk.css",
-    "static/js/main.cb30ec9e.chunk.js"
+    "static/js/2.73196f58.chunk.js",
+    "static/css/main.fb9d90f4.chunk.css",
+    "static/js/main.34b225d6.chunk.js"
   ]
 }
